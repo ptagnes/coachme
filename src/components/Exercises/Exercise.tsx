@@ -59,7 +59,12 @@ const Exercise = ({
         </Grid>
         <Grid item xs zeroMinWidth className={classes.details}>
           <Typography noWrap className={classes.detailsp}>
-            <span>{title}</span>
+            <Link
+              to={`/exercisedetail/${id}`}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <span>{title}</span>
+            </Link>
             <IconButton aria-label="edit">
               <Link to={`/editexercise/${id}`} style={{ color: "#fff" }}>
                 <MoreVertIcon />

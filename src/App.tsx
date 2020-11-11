@@ -6,16 +6,12 @@ import firebase from "./firebase";
 import UserProvider from "./firebase/UserProvider";
 import ExercisesProvider from "./firebase/ExercisesProvider";
 import ExercisesContext from "./context/exercises-context";
-import exercisesReducer from "./context/reducers/exercisesReducer";
 import {
   MuiThemeProvider,
   createMuiTheme,
   makeStyles,
 } from "@material-ui/core/styles";
 import blueGrey from "@material-ui/core/colors/blueGrey";
-import lightGreen from "@material-ui/core/colors/lightGreen";
-// import Dashboard_Context from "./components/Dashboard_Context";
-// import Dashboard_API from "./components/Dashboard_API";
 import DashboardExercises from "./components/DashboardExercises";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -23,9 +19,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Badge from "@material-ui/core/Badge";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import EditExercise from "./components/Exercises/EditExercise";
+import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
 import { mainListItems, secondaryListItems } from "./components/listItems";
 import Divider from "@material-ui/core/Divider";
@@ -251,6 +246,10 @@ function App() {
                       <Route
                         path="/editexercise/:id"
                         component={EditExercise}
+                      />
+                      <Route
+                        path="/exercisedetail/:id"
+                        component={ExerciseDetail}
                       />
                       <Route path="/addexercise" component={AddExercise} />
                       {/* <Route path="/help" component={DashboardExercises} />
