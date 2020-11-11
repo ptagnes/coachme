@@ -1,23 +1,28 @@
 import React from "react";
 import ExercisesContext from "../../context/exercises-context";
-import { ExercisesContext2 } from "../../firebase/ExercisesProvider";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ExerciseDetail = (props: any) => {
   const id = props.match.params.id;
-  const [exercises, setExercises] = React.useState<{}[] | undefined>();
-  let exercise: {} | undefined;
-  if (exercises) {
-    exercise = exercises.find(
-      (exercise: any) => exercise.id === props.match.params.id
-    );
-  }
+  const [exercise, setExercise] = React.useState<{} | undefined>();
+  const [title, setTitle] = React.useState<string>();
+  const [description, setDescription] = React.useState<string>();
+  const [image, setImage] = React.useState<string>();
   const context = React.useContext(ExercisesContext);
-  const context2 = React.useContext(ExercisesContext2);
+
   React.useEffect(() => {
-    //@ts-ignore
-    setExercises(context.exercises);
+    if (context.exercises) {
+      const allExerc = context.exercises;
+      const exer = allExerc.find((exercise: any) => exercise.id === id);
+      console.log(exer);
+      setExercise(exer);
+      setTitle(exer.title);
+      setDescription(exer.description);
+      setImage(exer.image);
+    }
   }, [context]);
+
   const handleClick = () => {
     props.history.push("/");
   };
@@ -32,7 +37,25 @@ const ExerciseDetail = (props: any) => {
           </Button>
         </div>
       </div>
-      <div className="content-container">More details</div>
+      <div className="content-container">
+        {exercise ? (
+          <div>
+            {title && <p>{title}</p>}
+            {image && <img style={{ width: "100%" }} src={image} alt={image} />}
+            {description && <p>{description}</p>}
+          </div>
+        ) : (
+          <div
+            style={{
+              margin: "auto",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <CircularProgress />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
