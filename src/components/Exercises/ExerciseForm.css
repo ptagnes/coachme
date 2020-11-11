@@ -1,0 +1,8 @@
+.MuiFormControl-root,
+textarea {
+  width: 100%;
+  margin: 10px 0 !important;
+}
+textarea {
+  background-color: #868686;
+}
