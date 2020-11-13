@@ -61,8 +61,6 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
             // //context2.dispatch(removeExercise(props.match.params.id)); //{ id: exercise.id }
             // props.history.push("/");
           }}
-          variant="contained"
-          color="secondary"
           startIcon={<AddIcon />}
         >
           Add Tools

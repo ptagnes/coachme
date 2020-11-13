@@ -5,6 +5,7 @@ textarea {
 }
 textarea {
   background-color: #868686;
+  height: 100px !important;
 }
 .video-container {
   width: 533px;

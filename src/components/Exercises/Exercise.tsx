@@ -67,7 +67,12 @@ const Exercise = ({
           <Typography noWrap className={classes.detailsp}>
             <Link
               to={`/exercisedetail/${id}`}
-              style={{ color: "#fff", textDecoration: "none" }}
+              style={{
+                color: "#fff",
+                textDecoration: "none",
+                padding: "18px 0",
+                width: "100%",
+              }}
             >
               <span>{title}</span>
             </Link>

@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import ExercisesContext from "../../context/exercises-context";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const ExerciseDetail = (props: any) => {
   const id = props.match.params.id;
@@ -32,13 +33,26 @@ const ExerciseDetail = (props: any) => {
   };
 
   return (
-    <div style={{ backgroundColor: "#fff", height: "98vh" }}>
+    <div
+      style={{
+        backgroundColor: "#fff",
+        height: "98vh",
+        padding: "4rem 2rem",
+        color: "#000",
+      }}
+    >
       <div className="page-header">
         <div className="content-container">
-          <h1 className="page-header__title">Exercise details</h1>
-          <Button variant="contained" color="primary" onClick={handleClick}>
-            Go Back
-          </Button>
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <Button
+              style={{ marginRight: "10px", paddingLeft: "0" }}
+              color="primary"
+              onClick={handleClick}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <h1 className="page-header__title">Exercise details</h1>
+          </div>
         </div>
       </div>
       <div className="content-container video-container">

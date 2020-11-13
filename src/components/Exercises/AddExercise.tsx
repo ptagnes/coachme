@@ -5,6 +5,7 @@ import { Dispatch } from "redux";
 import { addExercise } from "../../redux/actions";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const AddExercise = (props: any) => {
   const handleClick = () => {
@@ -16,14 +17,21 @@ const AddExercise = (props: any) => {
     <div className="bp">
       <div className="page-header">
         <div className="content-container">
-          <h1 className="page-header__title">Add Exercise</h1>
-          <Button variant="contained" color="primary" onClick={handleClick}>
-            Go Back
-          </Button>
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <Button
+              style={{ marginRight: "10px", paddingLeft: "0", color: "#fff" }}
+              color="primary"
+              onClick={handleClick}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <h1 className="page-header__title">Add Exercise</h1>
+          </div>
         </div>
       </div>
       <div className="content-container">
         <ExerciseForm
+          action="add"
           onSubmit={(exercise: any) => {
             props.addExercise(exercise);
             props.history.push("/");

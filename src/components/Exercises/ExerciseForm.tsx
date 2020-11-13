@@ -10,6 +10,7 @@ import "./ExerciseForm.css";
 interface ExerciseFormProps {
   exercise?: any;
   onSubmit: any;
+  action: string;
 }
 interface ExerciseFormState {
   title: string;
@@ -115,7 +116,7 @@ export default class ExerciseForm extends React.Component<
 
           <TextareaAutosize
             placeholder="Add a description"
-            rowsMax={4}
+            rowsMax={10}
             aria-label="Description"
             value={this.state.description}
             name="description"
@@ -190,8 +191,13 @@ export default class ExerciseForm extends React.Component<
             </Select>
           </FormControl>
           {/**image upload, sets and reps */}
-          <Button variant="contained" color="primary" onClick={this.onSubmit}>
-            Send
+          <Button
+            style={{ marginTop: "20px", display: "flex", marginLeft: "auto" }}
+            variant="contained"
+            color="primary"
+            onClick={this.onSubmit}
+          >
+            {this.props.action}
           </Button>
         </form>
       </div>

@@ -5,9 +5,10 @@ import ExerciseForm from "./ExerciseForm";
 import { editExercise, removeExercise } from "../../redux/actions";
 import ExercisesContext from "../../context/exercises-context";
 import { ExercisesContext2 } from "../../firebase/ExercisesProvider";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import AlertDialog from "../AlertDialog";
 
 const EditExercise = (props: any) => {
   const id = props.match.params.id;
@@ -34,15 +35,22 @@ const EditExercise = (props: any) => {
     <div className="bp">
       <div className="page-header">
         <div className="content-container">
-          <h1 className="page-header__title">Edit Exercise</h1>
-          <Button variant="contained" color="primary" onClick={handleClick}>
-            Go Back
-          </Button>
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <Button
+              style={{ marginRight: "10px", paddingLeft: "0", color: "#fff" }}
+              color="primary"
+              onClick={handleClick}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <h1 className="page-header__title">Edit Exercise</h1>
+          </div>
         </div>
       </div>
       <div className="content-container">
         {exercise && (
           <ExerciseForm
+            action="edit"
             exercise={exercise}
             onSubmit={(exercise: any) => {
               props.editExercise(props.match.params.id, exercise);
@@ -50,18 +58,16 @@ const EditExercise = (props: any) => {
             }}
           />
         )}
-        <Button
-          onClick={() => {
+        <AlertDialog
+          buttonTitle="Delete"
+          title="Delete exercise..."
+          startIcon="delete"
+          confirmFunction={() => {
             props.removeExercise(props.match.params.id);
             //context2.dispatch(removeExercise(props.match.params.id)); //{ id: exercise.id }
             props.history.push("/");
           }}
-          variant="contained"
-          color="secondary"
-          startIcon={<DeleteIcon />}
-        >
-          Delete
-        </Button>
+        />
       </div>
     </div>
   );
