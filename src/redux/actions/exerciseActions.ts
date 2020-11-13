@@ -41,19 +41,11 @@ export const removeExercise = (id: string) => async (dispatch: Dispatch) => {
     const data = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log("id and data from removeExerciseAction:");
-    console.log(id);
-    console.log(data);
     const payload = data.filter((exercises: any) => exercises.id !== id);
-    console.log("payload from removeExerciseAction:");
-    console.log(payload);
     exerciseListRef
       .where("id", "==", id)
       .get()
       .then((querySnapshot) => {
-        console.log("querySnapshot:");
-        console.log(querySnapshot);
-        console.log(querySnapshot.docs[0]);
         if (querySnapshot.docs[0] !== undefined) {
           querySnapshot.docs[0].ref
             .delete()
@@ -72,10 +64,6 @@ export const removeExercise = (id: string) => async (dispatch: Dispatch) => {
     });
   }); //onSnapshot end
 };
-interface ExerciseUpdates {
-  id: string;
-  updates: any;
-}
 export const editExercise = (id: string, updates: any) => async (
   dispatch: Dispatch
 ) => {
@@ -84,10 +72,6 @@ export const editExercise = (id: string, updates: any) => async (
     const payload = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log("updates from exercise action : editExercises................");
-    console.log(updates);
-    console.log(payload); //**payload is for the global state to keep track of exercises
-    //***updating document in firestore at the specified id
     exerciseListRef
       .where("id", "==", id)
       .get()
@@ -123,8 +107,12 @@ export const editExercise = (id: string, updates: any) => async (
     });
   }); //onSnapshot end
 };
-export const editExerciseAction = (id: string, updates: any) => ({
-  type: "EDIT_EXERCISE",
-  id,
-  updates,
+
+export const filterExerciseByValue = (query: string) => ({
+  type: "FILTER_EXERCISES_BY_VALUE",
+  query,
+});
+
+export const clearFilters = () => ({
+  type: "CLEAR_FILTERS",
 });

@@ -7,11 +7,13 @@ import ExercisesContext from "../../context/exercises-context";
 import { ExercisesContext2 } from "../../firebase/ExercisesProvider";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router";
 
 const EditExercise = (props: any) => {
   const id = props.match.params.id;
   const [exercises, setExercises] = React.useState<{}[] | undefined>();
   let exercise: {} | undefined;
+  let history = useHistory();
   if (exercises) {
     exercise = exercises.find(
       (exercise: any) => exercise.id === props.match.params.id
@@ -23,12 +25,13 @@ const EditExercise = (props: any) => {
     //@ts-ignore
     setExercises(context.exercises);
   }, [context]);
+
   const handleClick = () => {
-    props.history.push("/");
+    history.goBack();
   };
 
   return (
-    <div>
+    <div className="bp">
       <div className="page-header">
         <div className="content-container">
           <h1 className="page-header__title">Edit Exercise</h1>

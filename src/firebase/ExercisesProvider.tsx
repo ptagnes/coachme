@@ -22,7 +22,6 @@ class ExercisesProvider extends Component {
   fetchData = async () => {
     exerciseListRef.onSnapshot((snapshot: any) => {
       const payload = snapshot.docs.map((doc: any) => {
-        console.log(doc.id, doc.data());
         return { id: doc.id, ...doc.data() };
       });
       this.setState({
@@ -34,8 +33,6 @@ class ExercisesProvider extends Component {
     this.fetchData();
   }
   render() {
-    console.log("state from ExercisesProvider");
-    console.log(this.state);
     return (
       <ExercisesContext2.Provider value={this.state}>
         {this.props.children}

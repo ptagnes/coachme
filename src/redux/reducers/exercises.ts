@@ -1,28 +1,40 @@
-const exercisesReducer = (state = {}, action: any) => {
+let initialState = {
+  exercisesState: [],
+  filteredExercises: [],
+};
+const exercisesReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "SORT_EXERCISES":
-      console.log("sorting ", action.payload);
       return state;
-    case "ADD_EXERCISE":
-      console.log("adding", action);
-      console.log(state);
-      return state;
-    case "REMOVE_EXERCISE":
-      // const newState = state.filter(({ id }) => id !== action.id);
-      // return newState;
-      console.log("removing", action);
-      return state;
-    case "EDIT_EXERCISE":
-      console.log("editing", action);
-      return state;
-    case "GET_EXERCISES":
-      // console.log("getting ", action.payload);
+
+    case "FILTER_EXERCISES_BY_VALUE":
+      const query = action.query.toLowerCase();
+      const matchedExercises = state.exercisesState.filter((exercise: any) => {
+        return exercise.musclegroup.toLowerCase().includes(query);
+      });
       return {
-        // keep the old state
         ...state,
-        // add all the exercises from the database
-        // they will come in a json format,
-        // so we need to convert them to array
+        filteredExercises: matchedExercises,
+      };
+
+    case "CLEAR_FILTERS":
+      return {
+        ...state,
+        filteredExercises: [],
+      };
+
+    case "ADD_EXERCISE":
+      return state;
+
+    case "REMOVE_EXERCISE":
+      return state;
+
+    case "EDIT_EXERCISE":
+      return state;
+
+    case "GET_EXERCISES":
+      return {
+        ...state,
         exercisesState: Object.values(action.payload),
       };
     default:

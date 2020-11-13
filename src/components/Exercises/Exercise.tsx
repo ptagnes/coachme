@@ -16,9 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 3),
     },
     paper: {
-      maxWidth: 500,
+      // maxWidth: 500,
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(1),
+      width: "100%",
     },
     avatar: {
       width: "90px",
@@ -51,7 +52,12 @@ const Exercise = ({
   // const trimmedId = id.replace(/\s/g, "");
   return (
     <Paper className={classes.paper}>
-      <Grid container wrap="nowrap" spacing={2}>
+      <Grid
+        container
+        wrap="nowrap"
+        spacing={2}
+        style={{ backgroundColor: "#565555" }}
+      >
         <Grid item>
           <Avatar className={classes.avatar}>
             <img style={{ width: "100%" }} src={image} alt={image} />

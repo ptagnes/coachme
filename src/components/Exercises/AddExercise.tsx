@@ -3,13 +3,23 @@ import ExerciseForm from "./ExerciseForm";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { addExercise } from "../../redux/actions";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router";
 
 const AddExercise = (props: any) => {
+  const handleClick = () => {
+    history.goBack();
+  };
+  let history = useHistory();
+
   return (
-    <div>
+    <div className="bp">
       <div className="page-header">
         <div className="content-container">
           <h1 className="page-header__title">Add Exercise</h1>
+          <Button variant="contained" color="primary" onClick={handleClick}>
+            Go Back
+          </Button>
         </div>
       </div>
       <div className="content-container">

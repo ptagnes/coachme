@@ -5,26 +5,27 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import Accessibility from "@material-ui/icons/Dashboard";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-// import PeopleIcon from "@material-ui/icons/People";
-// import LayersIcon from "@material-ui/icons/Layers";
+import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import DashboardExercises from "./DashboardExercises";
+import DashboardExerciseCategories from "./DashboardExerciseCategories";
 var routes = [
   {
-    path: "/index",
+    path: "/exerciselist",
     name: "Exercises",
-    icon: { DashboardIcon },
+    icon: { PeopleIcon },
     component: DashboardExercises,
-    layout: "/index",
+    layout: "/exerciselist",
   },
-  // {
-  //   path: "/redux",
-  //   name: "Demo with Redux",
-  //   icon: { LayersIcon },
-  //   component: Dashboard_Redux,
-  //   layout: "/redux",
-  // },
+  {
+    path: "/exercisecategories",
+    name: "Exercise categories",
+    icon: { Accessibility },
+    component: DashboardExerciseCategories,
+    layout: "/exercisecategories",
+  },
   // {
   //   path: "/api",
   //   name: "Demo api call",

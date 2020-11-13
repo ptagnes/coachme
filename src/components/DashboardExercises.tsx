@@ -21,7 +21,7 @@ class DashboardExercises extends Component<ExercisesProps> {
     const data =
       this.props.exercisesState && this.props.exercisesState.exercisesState;
     return (
-      <div>
+      <div className="bp">
         <h2>Exercises</h2>
         <Exercises data={data} />
       </div>

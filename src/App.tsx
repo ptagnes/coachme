@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core/styles";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
+import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,17 +23,17 @@ import Toolbar from "@material-ui/core/Toolbar";
 import EditExercise from "./components/Exercises/EditExercise";
 import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
-import { mainListItems, secondaryListItems } from "./components/listItems";
+// import { mainListItems, secondaryListItems } from "./components/listItems";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { NavLink, Link } from "react-router-dom";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -76,15 +77,14 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: "20px",
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
-    [theme.breakpoints.up("md")]: {
-      padding: "20px",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   padding: "20px",
+    // },
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -107,9 +107,7 @@ const useStyles = makeStyles((theme) => ({
 const theme = createMuiTheme({
   palette: {
     primary: {
-      // light: lightGreen[300],
       main: "#af00ff",
-      // dark: lightGreen[700],
     },
     secondary: {
       light: blueGrey[300],
@@ -144,10 +142,9 @@ function App() {
     }
     fetchData();
   }, [user]);
-  console.log(user);
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -184,7 +181,9 @@ function App() {
                         <MenuIcon />
                       </IconButton>
                       <Typography variant="h6" noWrap>
-                        Persistent drawer
+                        <Link to={`/`} style={{ color: "#fff", lineHeight: 1 }}>
+                          CoachMe
+                        </Link>
                       </Typography>
                     </Toolbar>
                   </AppBar>
@@ -207,40 +206,53 @@ function App() {
                       </IconButton>
                     </div>
                     <Divider />
+
                     <List>
-                      {["Inbox", "Starred", "Send email", "Drafts"].map(
-                        (text, index) => (
-                          <ListItem button key={text}>
-                            <ListItemIcon>
-                              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                          </ListItem>
-                        )
-                      )}
+                      <ListItem>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <NavLink
+                          style={{ color: "white", textDecoration: "none" }}
+                          to="/exercisecategories"
+                        >
+                          <ListItemText primary="Exercise categories" />
+                        </NavLink>
+                      </ListItem>
                     </List>
                     <Divider />
                     <List>
-                      {["All mail", "Trash", "Spam"].map((text, index) => (
-                        <ListItem button key={text}>
-                          <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                          </ListItemIcon>
-                          <ListItemText primary={text} />
-                        </ListItem>
-                      ))}
+                      <ListItem>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <NavLink
+                          style={{ color: "white", textDecoration: "none" }}
+                          to={`/addexercise`}
+                        >
+                          <ListItemText primary="Add exercise" />
+                        </NavLink>
+                      </ListItem>
                     </List>
+                    {/* <List>{mainListItems}</List>
+                    <Divider />
+                    <List>{secondaryListItems}</List> */}
                   </Drawer>
                   <main
                     className={clsx(classes.content, {
                       [classes.contentShift]: open,
                     })}
                   >
-                    <div className={classes.drawerHeader} />
+                    {/* <div className={classes.drawerHeader} /> */}
                     <Switch>
                       <Route
                         path="/"
                         component={DashboardExercises}
+                        exact={true}
+                      />
+                      <Route
+                        path="/exercisecategories"
+                        component={DashboardExerciseCategories}
                         exact={true}
                       />
                       <Route
@@ -252,8 +264,6 @@ function App() {
                         component={ExerciseDetail}
                       />
                       <Route path="/addexercise" component={AddExercise} />
-                      {/* <Route path="/help" component={DashboardExercises} />
-              <Route component={DashboardExercises} /> */}
                     </Switch>
                   </main>
                 </div>

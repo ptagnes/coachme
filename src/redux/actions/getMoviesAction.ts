@@ -11,7 +11,6 @@ const getMoviesAction = (page: number) => async (dispatch: Dispatch) => {
   );
   getUpcoming
     .then((response) => {
-      // console.log(response.data.results);
       const payload = response.data.results;
       dispatch({
         type: "GET_MOVIES",
