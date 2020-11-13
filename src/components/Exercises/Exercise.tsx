@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,7 +60,7 @@ const Exercise = ({
       >
         <Grid item>
           <Avatar className={classes.avatar}>
-            <img style={{ width: "100%" }} src={image} alt={image} />
+            <LazyLoadImage alt={image} src={image} width={100} />
           </Avatar>
         </Grid>
         <Grid item xs zeroMinWidth className={classes.details}>

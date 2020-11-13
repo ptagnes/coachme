@@ -10,7 +10,6 @@ textarea {
 .video-container {
   width: 533px;
   margin: 0 auto;
-  color: #000;
 }
 @media (max-width: 450px) {
   .video-container {

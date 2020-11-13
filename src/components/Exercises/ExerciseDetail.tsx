@@ -33,14 +33,7 @@ const ExerciseDetail = (props: any) => {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "#fff",
-        height: "98vh",
-        padding: "4rem 2rem",
-        color: "#000",
-      }}
-    >
+    <div className="bp">
       <div className="page-header">
         <div className="content-container">
           <div style={{ display: "flex", marginTop: "20px" }}>

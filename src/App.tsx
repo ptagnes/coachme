@@ -14,6 +14,8 @@ import {
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
+import Workouts from "./components/Workouts/Workouts";
+import Profile from "./components/Profile/Profile";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -46,6 +48,11 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+  },
+  bottomnav: {
+    position: "fixed",
+    bottom: "0",
+    width: "100%",
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -255,6 +262,32 @@ function App() {
                         </NavLink>
                       </ListItem>
                     </List>
+                    <List>
+                      <ListItem>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <NavLink
+                          style={{ color: "white", textDecoration: "none" }}
+                          to={`/workouts`}
+                        >
+                          <ListItemText primary="Workouts" />
+                        </NavLink>
+                      </ListItem>
+                    </List>
+                    <List>
+                      <ListItem>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <NavLink
+                          style={{ color: "white", textDecoration: "none" }}
+                          to={`/profile`}
+                        >
+                          <ListItemText primary="Profile" />
+                        </NavLink>
+                      </ListItem>
+                    </List>
                     {/* <List>{mainListItems}</List>
                     <Divider />
                     <List>{secondaryListItems}</List> */}
@@ -277,6 +310,12 @@ function App() {
                         exact={true}
                       />
                       <Route
+                        path="/workouts"
+                        component={Workouts}
+                        exact={true}
+                      />
+                      <Route path="/profile" component={Profile} />
+                      <Route
                         path="/editexercise/:id"
                         component={EditExercise}
                       />
@@ -290,7 +329,7 @@ function App() {
                     <BottomNavigation
                       value={value}
                       onChange={handleChange}
-                      className={classes.root}
+                      className={classes.bottomnav}
                     >
                       <BottomNavigationAction
                         label="Recents"
@@ -308,8 +347,8 @@ function App() {
                         icon={<ViewListIcon />}
                       />
                       <BottomNavigationAction
-                        label="Folder"
-                        value="folder"
+                        label="Profile"
+                        value="profile"
                         icon={<AccountCircleIcon />}
                       />
                     </BottomNavigation>
