@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 3),
     },
     paper: {
-      // maxWidth: 500,
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(1),
       width: "100%",

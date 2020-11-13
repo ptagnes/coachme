@@ -5,6 +5,7 @@ import getExercisesAction from "../redux/actions/getExercisesAction";
 import { filterExerciseByValue, clearFilters } from "../redux/actions";
 import { StoreState } from "../redux/reducers/index";
 import ExerciseCard from "./Exercises/ExerciseCard";
+import ExerciseCardTopCategories from "./Exercises/ExerciseCardTopCategories";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -22,7 +23,7 @@ interface ExercisesProps {
   exercisesState: any;
   getExercisesAction: () => void;
   clearFilters: () => void;
-  filterExerciseByValue: (query: string) => void;
+  filterExerciseByValue: (query: string, filter: string) => void;
 }
 class DashboardExerciseCategories extends Component<ExercisesProps> {
   componentDidMount() {
@@ -40,6 +41,7 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
           <ExerciseCard
             key={key}
             title={prop}
+            filter="musclegroup"
             filterExercise={this.props.filterExerciseByValue}
             clearFilters={this.props.clearFilters}
             data={this.props.exercisesState.filteredExercises}
@@ -47,9 +49,10 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
         ))}
         <p>Fitness Tools</p>
         {Equipment.map((prop: any, key: number) => (
-          <ExerciseCard
+          <ExerciseCardTopCategories
             key={key}
             title={prop}
+            filter="equipment"
             filterExercise={this.props.filterExerciseByValue}
             clearFilters={this.props.clearFilters}
             data={this.props.exercisesState.filteredExercises}
@@ -76,8 +79,8 @@ const mapStateToProps = (state: StoreState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getExercisesAction: () => dispatch<any>(getExercisesAction()),
   clearFilters: () => dispatch<any>(clearFilters()),
-  filterExerciseByValue: (query: string) =>
-    dispatch<any>(filterExerciseByValue(query)),
+  filterExerciseByValue: (query: string, filter: string) =>
+    dispatch<any>(filterExerciseByValue(query, filter)),
 });
 export default connect(
   mapStateToProps,

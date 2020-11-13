@@ -9,9 +9,17 @@ const exercisesReducer = (state = initialState, action: any) => {
 
     case "FILTER_EXERCISES_BY_VALUE":
       const query = action.query.toLowerCase();
-      const matchedExercises = state.exercisesState.filter((exercise: any) => {
-        return exercise.musclegroup.toLowerCase().includes(query);
+      const filter = action.filter.toLowerCase();
+      let filterTarget;
+      if (state.filteredExercises.length > 0) {
+        filterTarget = state.filteredExercises;
+      } else {
+        filterTarget = state.exercisesState;
+      }
+      const matchedExercises = filterTarget.filter((exercise: any) => {
+        return exercise[filter].toLowerCase().includes(query);
       });
+      console.log(matchedExercises);
       return {
         ...state,
         filteredExercises: matchedExercises,

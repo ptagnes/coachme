@@ -34,6 +34,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import RestoreIcon from "@material-ui/icons/Restore";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ViewListIcon from "@material-ui/icons/ViewList";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { useHistory } from "react-router";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -126,7 +133,12 @@ function App() {
   const [isUser, setIsUser] = React.useState<object>();
   const [exercises, setExercises] = React.useState<{}[]>();
   const user = useAuth();
-
+  const [value, setValue] = React.useState("recents");
+  let history = useHistory();
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+    setValue(newValue);
+    // history.push(`/${newValue}`);
+  };
   const fetchData = async () => {
     exerciseListRef.onSnapshot((snapshot: any) => {
       const payload = snapshot.docs.map((doc: any) => {
@@ -181,7 +193,16 @@ function App() {
                         <MenuIcon />
                       </IconButton>
                       <Typography variant="h6" noWrap>
-                        <Link to={`/`} style={{ color: "#fff", lineHeight: 1 }}>
+                        <Link
+                          to={`/`}
+                          style={{
+                            color: "#fff",
+                            lineHeight: 1,
+                            textDecoration: "none",
+                            fontFamily: "Lobster",
+                            fontSize: "2rem",
+                          }}
+                        >
                           CoachMe
                         </Link>
                       </Typography>
@@ -265,6 +286,33 @@ function App() {
                       />
                       <Route path="/addexercise" component={AddExercise} />
                     </Switch>
+
+                    <BottomNavigation
+                      value={value}
+                      onChange={handleChange}
+                      className={classes.root}
+                    >
+                      <BottomNavigationAction
+                        label="Recents"
+                        value="recents"
+                        icon={<RestoreIcon />}
+                      />
+                      <BottomNavigationAction
+                        label="Favorites"
+                        value="favorites"
+                        icon={<FavoriteIcon />}
+                      />
+                      <BottomNavigationAction
+                        label="Nearby"
+                        value="hearby"
+                        icon={<ViewListIcon />}
+                      />
+                      <BottomNavigationAction
+                        label="Folder"
+                        value="folder"
+                        icon={<AccountCircleIcon />}
+                      />
+                    </BottomNavigation>
                   </main>
                 </div>
               </MuiThemeProvider>

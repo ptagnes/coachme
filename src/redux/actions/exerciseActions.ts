@@ -108,9 +108,10 @@ export const editExercise = (id: string, updates: any) => async (
   }); //onSnapshot end
 };
 
-export const filterExerciseByValue = (query: string) => ({
+export const filterExerciseByValue = (query: string, filter: string) => ({
   type: "FILTER_EXERCISES_BY_VALUE",
   query,
+  filter,
 });
 
 export const clearFilters = () => ({

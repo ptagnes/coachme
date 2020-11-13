@@ -16,8 +16,17 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
-import Exercise from "./Exercise";
+import ExerciseCard from "./ExerciseCard";
 
+const Musclegroups = [
+  "Upper body",
+  "Lower body",
+  "Abs & Core",
+  "Back",
+  "Glutes",
+  "Wholebody",
+  "Cardio",
+];
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -29,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(1),
       cursor: "pointer",
+      width: "100%",
       // backgroundColor: "#af00ff",
       background:
         "linear-gradient(90deg, rgba(128,0,255,1) 0%, rgba(175,0,255,1) 35%, rgba(145,0,255,1) 100%)",
@@ -60,7 +70,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ExerciseCard = ({
+const ExerciseCardTopCategories = ({
   title,
   filter,
   filterExercise,
@@ -74,18 +84,18 @@ const ExerciseCard = ({
   data: any;
 }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [opencat, setOpenCat] = React.useState(false);
+  const handleClickOpenCat = () => {
+    setOpenCat(true);
     filterExercise(title, filter);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseCat = () => {
+    setOpenCat(false);
     clearFilters();
   };
   return (
     <>
-      <Paper className={classes.paper} onClick={handleClickOpen}>
+      <Paper className={classes.paper} onClick={handleClickOpenCat}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
             <Avatar>
@@ -101,8 +111,8 @@ const ExerciseCard = ({
       </Paper>
       <Dialog
         fullScreen
-        open={open}
-        onClose={handleClose}
+        open={opencat}
+        onClose={handleCloseCat}
         TransitionComponent={Transition}
       >
         <AppBar className={classes.appBar}>
@@ -110,34 +120,35 @@ const ExerciseCard = ({
             <IconButton
               edge="start"
               color="inherit"
-              onClick={handleClose}
+              onClick={handleCloseCat}
               aria-label="close"
             >
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Exercises in category
+              Select musclegroup with {title}
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={handleCloseCat}>
               Close
             </Button>
           </Toolbar>
         </AppBar>
         <div className="bp">
-          {data &&
-            data.map((prop: any, key: number) => (
-              <Exercise
-                key={key}
-                title={prop.title}
-                image={prop.image}
-                id={prop.id}
-              />
-            ))}
+          {Musclegroups.map((prop: any, key: number) => (
+            <ExerciseCard
+              key={key}
+              title={prop}
+              filter="musclegroup"
+              filterExercise={filterExercise}
+              clearFilters={clearFilters}
+              data={data}
+            />
+          ))}
           <List>
             <ListItem button>
               <ListItemText
-                primary="Default notification ringtone"
-                secondary="Tethys"
+                primary="Default notification"
+                secondary="Lorem ipsum"
               />
             </ListItem>
           </List>
@@ -147,4 +158,4 @@ const ExerciseCard = ({
   );
 };
 
-export default ExerciseCard;
+export default ExerciseCardTopCategories;
