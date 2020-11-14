@@ -19,10 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 0,
     },
     container: {
-      width: "400px",
+      maxWidth: "400px",
       height: "500px",
       margin: "3rem auto",
       textAlign: "center",
+      background: "#dddddd7d",
+      padding: "1rem",
+      borderRadius: "20px",
     },
     user: {
       width: "110px",
@@ -49,6 +52,14 @@ export default function Profile() {
           <h4 className="name">Agnes Cort</h4>
           <h4 className="work">Coach | Grupp trainer | PT</h4>
           <h4 className="social">lkjl</h4>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>
+              <small>Las summit</small> <p>Basecamp</p>
+            </div>
+            <div>
+              <small>Next challenge</small> <p>Kirkjufell</p>
+            </div>
+          </div>
         </div>
         <div className="middle"></div>
       </div>

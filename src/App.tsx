@@ -15,6 +15,7 @@ import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
 import Workouts from "./components/Workouts/Workouts";
+import WorkoutCategories from "./components/Workouts/WorkoutCategories";
 import Profile from "./components/Profile/Profile";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -321,6 +322,11 @@ function App() {
                         component={Workouts}
                         exact={true}
                       />
+                      <Route
+                        path="/workoutcategories"
+                        component={WorkoutCategories}
+                        exact={true}
+                      />
                       <Route path="/profile" component={Profile} />
                       <Route
                         path="/editexercise/:id"
@@ -339,21 +345,29 @@ function App() {
                       className={classes.bottomnav}
                     >
                       <BottomNavigationAction
-                        label="Recents"
-                        value="recents"
+                        component={Link}
+                        to="/signal"
+                        label="Another"
+                        value="Another"
                         icon={<RestoreIcon />}
                       />
                       <BottomNavigationAction
-                        label="Favorites"
-                        value="favorites"
+                        component={Link}
+                        to="/lkj"
+                        label="Something"
+                        value="Something"
                         icon={<FavoriteIcon />}
                       />
                       <BottomNavigationAction
-                        label="Nearby"
-                        value="hearby"
+                        component={Link}
+                        to="/workouts"
+                        label="Workouts"
+                        value="Workouts"
                         icon={<ViewListIcon />}
                       />
                       <BottomNavigationAction
+                        component={Link}
+                        to="/profile"
                         label="Profile"
                         value="profile"
                         icon={<AccountCircleIcon />}

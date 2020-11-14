@@ -73,16 +73,6 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
           />
         ))}
         <p>Fitness Tools</p>
-        {/* {Equipment.map((prop: any, key: number) => (
-          <ExerciseCardTopCategories
-            key={key}
-            title={prop}
-            filter="equipment"
-            filterExercise={this.props.filterExerciseByValue}
-            clearFilters={this.props.clearFilters}
-            data={this.props.exercisesState.filteredExercises}
-          />
-        ))} */}
         {state.map((prop: any, key: number) => (
           <ExerciseCardTopCategories
             key={key}
