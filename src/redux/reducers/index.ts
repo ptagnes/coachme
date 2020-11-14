@@ -1,11 +1,8 @@
 import { combineReducers } from "redux";
 import moviesReducer from "./movies";
 import exercisesReducer from "./exercises";
+import fitnessToolsReducer from "./fitnesstools";
 
-// export interface Movies {
-//   title: string,
-//   ....
-// }
 // export interface Exercises {
 //   title: string,
 //   ....
@@ -13,9 +10,11 @@ import exercisesReducer from "./exercises";
 export interface StoreState {
   moviesState: any;
   exercisesState: any;
+  fitnessToolsState: any;
 }
 
 export const reducers = combineReducers<StoreState>({
   moviesState: moviesReducer,
   exercisesState: exercisesReducer,
+  fitnessToolsState: fitnessToolsReducer,
 });

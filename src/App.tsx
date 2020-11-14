@@ -154,14 +154,21 @@ function App() {
       setExercises(payload);
     });
   };
-
   React.useEffect(() => {
     if (user) {
       setIsUser(user);
     }
     fetchData();
   }, [user]);
-
+  const FitnessTools = [
+    "Bosu",
+    "Barbell",
+    "Dumbbell",
+    "Kettlebell",
+    "Medicine Ball",
+    "Pull Up Bar",
+    "Resistance Band",
+  ];
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -175,7 +182,7 @@ function App() {
     <BrowserRouter>
       <UserProvider>
         <ExercisesProvider>
-          <ExercisesContext.Provider value={{ exercises }}>
+          <ExercisesContext.Provider value={{ exercises, FitnessTools }}>
             <FirebaseContext.Provider value={{ user, firebase }}>
               <MuiThemeProvider theme={theme}>
                 <div className={classes.root}>

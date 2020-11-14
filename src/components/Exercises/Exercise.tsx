@@ -54,7 +54,7 @@ const Exercise = ({
     <Paper className={classes.paper}>
       <Grid
         container
-        wrap="nowrap"
+        // wrap="nowrap"
         spacing={2}
         style={{ backgroundColor: "#565555" }}
       >
@@ -71,12 +71,13 @@ const Exercise = ({
                 color: "#fff",
                 textDecoration: "none",
                 padding: "18px 0",
-                width: "100%",
+                width: "95%",
+                overflow: "hidden",
               }}
             >
               <span>{title}</span>
             </Link>
-            <IconButton aria-label="edit">
+            <IconButton aria-label="edit" style={{ padding: "7px" }}>
               <Link to={`/editexercise/${id}`} style={{ color: "#fff" }}>
                 <MoreVertIcon />
               </Link>

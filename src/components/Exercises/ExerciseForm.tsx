@@ -93,7 +93,6 @@ export default class ExerciseForm extends React.Component<
             id="title"
             label="Title"
             onChange={this.handleOnChange}
-            autoFocus
             value={this.state.title}
             name="title"
           />

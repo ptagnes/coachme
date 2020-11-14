@@ -8,6 +8,7 @@ import ExerciseCard from "./Exercises/ExerciseCard";
 import ExerciseCardTopCategories from "./Exercises/ExerciseCardTopCategories";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
+import FitnessToolsDialog from "./FitnessToolsDialog";
 
 const Musclegroups = [
   "Upper body",
@@ -18,7 +19,15 @@ const Musclegroups = [
   "Wholebody",
   "Cardio",
 ];
-const Equipment = ["Barbell", "Dumbbell", "Kettlebell"];
+const Equipment = [
+  "Bosu",
+  "Barbell",
+  "Dumbbell",
+  "Kettlebell",
+  "Medicine Ball",
+  "Pull Up Bar",
+  "Resistance Band",
+];
 interface ExercisesProps {
   exercisesState: any;
   getExercisesAction: () => void;
@@ -26,6 +35,9 @@ interface ExercisesProps {
   filterExerciseByValue: (query: string, filter: string) => void;
 }
 class DashboardExerciseCategories extends Component<ExercisesProps> {
+  state = {
+    open: false,
+  };
   componentDidMount() {
     if (this.props.getExercisesAction !== undefined) {
       this.props.getExercisesAction();
@@ -68,6 +80,19 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
         >
           Add Tools
         </Button>
+
+        <FitnessToolsDialog
+          buttonTitle="Add Tools"
+          title="Add Fitness Tools"
+          startIcon="add"
+          open={this.state.open}
+          handleClickOpen={() => {
+            this.setState({ open: true });
+          }}
+          handleClickClose={() => {
+            this.setState({ open: false });
+          }}
+        />
       </div>
     );
   }
