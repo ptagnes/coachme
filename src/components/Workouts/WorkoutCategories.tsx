@@ -10,6 +10,7 @@ import {
   makeStyles,
   useTheme,
 } from "@material-ui/core/styles";
+import useProgressiveImg from "../useProgressiveImg ";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,6 +46,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Workouts() {
   const classes = useStyles();
   const theme = useTheme();
+  const [src, { blur }] = useProgressiveImg(
+    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
+    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
+  );
 
   return (
     <div className="bp">
@@ -67,15 +72,19 @@ export default function Workouts() {
               component="img"
               alt="training"
               height="230"
+              style={{
+                width: "40vw",
+                filter: blur ? "blur(20px)" : "none",
+                transition: blur ? "none" : "filter 0.3s ease-out",
+              }}
               image={process.env.PUBLIC_URL + "/images/utfall.png"}
               title="training"
-              style={{ width: "40vw" }}
             />
             {/* <LazyLoadImage
               alt="training"
               src={process.env.PUBLIC_URL + "/images/utfall.png"}
             //   width={100}
-              style={{ width: "40vw" }}
+              
             /> */}
           </Card>
         </Grid>
@@ -97,9 +106,13 @@ export default function Workouts() {
               component="img"
               alt="training"
               height="230"
+              style={{
+                width: "40vw",
+                filter: blur ? "blur(20px)" : "none",
+                transition: blur ? "none" : "filter 0.3s ease-out",
+              }}
               image={process.env.PUBLIC_URL + "/images/img5.jpg"}
               title="training"
-              style={{ width: "40vw" }}
             />
           </Card>
         </Grid>
@@ -120,9 +133,13 @@ export default function Workouts() {
               component="img"
               alt="training"
               height="230"
+              style={{
+                width: "40vw",
+                filter: blur ? "blur(20px)" : "none",
+                transition: blur ? "none" : "filter 0.3s ease-out",
+              }}
               image={process.env.PUBLIC_URL + "/images/img3.jpg"}
               title="training"
-              style={{ width: "40vw" }}
             />
           </Card>
         </Grid>
@@ -143,9 +160,13 @@ export default function Workouts() {
               component="img"
               alt="training"
               height="230"
+              style={{
+                width: "40vw",
+                filter: blur ? "blur(20px)" : "none",
+                transition: blur ? "none" : "filter 0.3s ease-out",
+              }}
               image={process.env.PUBLIC_URL + "/images/img8.jpg"}
               title="training"
-              style={{ width: "40vw" }}
             />
           </Card>
         </Grid>
@@ -166,9 +187,13 @@ export default function Workouts() {
               component="img"
               alt="training"
               height="230"
+              style={{
+                width: "40vw",
+                filter: blur ? "blur(20px)" : "none",
+                transition: blur ? "none" : "filter 0.3s ease-out",
+              }}
               image={process.env.PUBLIC_URL + "/images/img9.jpg"}
               title="training"
-              style={{ width: "40vw" }}
             />
           </Card>
         </Grid>
