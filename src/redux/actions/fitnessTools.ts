@@ -8,6 +8,8 @@ export const getFitnessTools = () => async (dispatch: Dispatch) => {
     const payload = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
+    console.log("getting fitnesstools");
+    console.log(payload);
     dispatch({
       type: "GET_FITNESS_TOOLS",
       payload: payload,
@@ -15,9 +17,7 @@ export const getFitnessTools = () => async (dispatch: Dispatch) => {
   });
 };
 
-export const addFitnessTool = ({ name = "" } = {}) => async (
-  dispatch: Dispatch
-) => {
+export const addFitnessTool = (name: string) => async (dispatch: Dispatch) => {
   fitnessToolsRef
     .add({
       name: name,
@@ -29,16 +29,22 @@ export const addFitnessTool = ({ name = "" } = {}) => async (
     });
 };
 
-export const removeExercise = (id: string) => async (dispatch: Dispatch) => {
+export const removeFitnessTool = (id: string, name: string) => async (
+  dispatch: Dispatch
+) => {
   fitnessToolsRef.onSnapshot((snapshot: any) => {
     const data = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
-    const payload = data.filter((exercises: any) => exercises.id !== id);
+    // console.log("data");
+    // console.log(data);
+    const payload = data.filter((fitnesstools: any) => fitnesstools.id !== id);
+    // console.log(payload);
     fitnessToolsRef
-      .where("id", "==", id)
+      .where("name", "==", name)
       .get()
       .then((querySnapshot) => {
+        // console.log(querySnapshot.size);
         if (querySnapshot.docs[0] !== undefined) {
           querySnapshot.docs[0].ref
             .delete()
