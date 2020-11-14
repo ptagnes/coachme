@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import getExercisesAction from "../redux/actions/getExercisesAction";
-import { filterExerciseByValue, clearFilters } from "../redux/actions";
+import {
+  filterExerciseByValue,
+  clearFilters,
+  getFitnessTools,
+} from "../redux/actions";
 import { StoreState } from "../redux/reducers/index";
 import ExerciseCard from "./Exercises/ExerciseCard";
 import ExerciseCardTopCategories from "./Exercises/ExerciseCardTopCategories";
@@ -33,6 +37,8 @@ interface ExercisesProps {
   getExercisesAction: () => void;
   clearFilters: () => void;
   filterExerciseByValue: (query: string, filter: string) => void;
+  fitnessToolsState?: any;
+  getFitnessTools?: () => void;
 }
 class DashboardExerciseCategories extends Component<ExercisesProps> {
   state = {
@@ -42,8 +48,15 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
     if (this.props.getExercisesAction !== undefined) {
       this.props.getExercisesAction();
     }
+    if (this.props.getFitnessTools !== undefined) {
+      this.props.getFitnessTools();
+    }
   }
   render() {
+    const state =
+      this.props.fitnessToolsState &&
+      this.props.fitnessToolsState.fitnessToolsState;
+    console.log(state);
     const data =
       this.props.exercisesState && this.props.exercisesState.exercisesState;
     return (
@@ -60,7 +73,7 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
           />
         ))}
         <p>Fitness Tools</p>
-        {Equipment.map((prop: any, key: number) => (
+        {/* {Equipment.map((prop: any, key: number) => (
           <ExerciseCardTopCategories
             key={key}
             title={prop}
@@ -69,17 +82,17 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
             clearFilters={this.props.clearFilters}
             data={this.props.exercisesState.filteredExercises}
           />
+        ))} */}
+        {state.map((prop: any, key: number) => (
+          <ExerciseCardTopCategories
+            key={key}
+            title={prop.name}
+            filter="equipment"
+            filterExercise={this.props.filterExerciseByValue}
+            clearFilters={this.props.clearFilters}
+            data={this.props.exercisesState.filteredExercises}
+          />
         ))}
-        <Button
-          onClick={() => {
-            // props.removeExercise(props.match.params.id);
-            // //context2.dispatch(removeExercise(props.match.params.id)); //{ id: exercise.id }
-            // props.history.push("/");
-          }}
-          startIcon={<AddIcon />}
-        >
-          Add Tools
-        </Button>
 
         <FitnessToolsDialog
           buttonTitle="Add Tools"
@@ -106,6 +119,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   clearFilters: () => dispatch<any>(clearFilters()),
   filterExerciseByValue: (query: string, filter: string) =>
     dispatch<any>(filterExerciseByValue(query, filter)),
+  getFitnessTools: () => dispatch<any>(getFitnessTools()),
 });
 export default connect(
   mapStateToProps,

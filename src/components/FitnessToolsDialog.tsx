@@ -19,6 +19,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import FolderIcon from "@material-ui/icons/Folder";
 import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 import {
   addFitnessTool,
   removeFitnessTool,
@@ -61,7 +62,7 @@ const Transition = React.forwardRef(function Transition(
 });
 class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
   state = {
-    tools: [],
+    rerendered: false,
   };
   componentDidMount() {
     if (this.props.getFitnessTools !== undefined) {
@@ -88,6 +89,8 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
         return item.name === name;
       });
       const id = toolObj[0].id;
+      this.setState({ rerendered: true });
+      this.forceUpdate(); //fix bug with reload
       if (removeFitnessTool) {
         removeFitnessTool(id, name);
       }
@@ -96,7 +99,9 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
       <div>
         <Button
           onClick={handleClickOpen}
-          startIcon={startIcon && startIcon === "delete" ? <DeleteIcon /> : ""}
+          startIcon={
+            startIcon && startIcon === "delete" ? <DeleteIcon /> : <AddIcon />
+          }
         >
           {buttonTitle}
         </Button>
