@@ -9,9 +9,9 @@ export class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
 
-    /*this.storage = app.storage();
-    this.auth = app.auth();
-    this.db = app.firestore();*/
+    // this.storage = app.storage();
+    // this.auth = app.auth();
+    // this.db = app.firestore();
   }
 
   firebaseStorage() {
@@ -40,7 +40,7 @@ export class Firebase {
   }
 
   async login(email: string, password: string) {
-    //return await this.auth.signInWithEmailAndPassword(email, password);
+    // return await this.auth.signInWithEmailAndPassword(email, password);
     return await app.auth().signInWithEmailAndPassword(email, password);
   }
 

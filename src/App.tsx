@@ -3,7 +3,9 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import clsx from "clsx";
 import useAuth from "./Auth/useAuth";
 import firebase from "./firebase";
-import UserProvider from "./firebase/UserProvider";
+// import UserProvider from "./firebase/UserProvider";
+import PrivateRoute from "./Auth/PrivateRoute";
+import { AuthProvider } from "./firebase/Authentication";
 import ExercisesProvider from "./firebase/ExercisesProvider";
 import ExercisesContext from "./context/exercises-context";
 import {
@@ -16,6 +18,8 @@ import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
 import Workouts from "./components/Workouts/Workouts";
 import WorkoutCategories from "./components/Workouts/WorkoutCategories";
+import Login from "./components/Auth/Login";
+import Signup from "./components/Auth/Signup";
 import Profile from "./components/Profile/Profile";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -179,9 +183,10 @@ function App() {
     setOpen(false);
   };
   const FirebaseContext = React.createContext<any | null>(null);
+  //UserProvider was earlier
   return (
     <BrowserRouter>
-      <UserProvider>
+      <AuthProvider>
         <ExercisesProvider>
           <ExercisesContext.Provider value={{ exercises, FitnessTools }}>
             <FirebaseContext.Provider value={{ user, firebase }}>
@@ -307,11 +312,18 @@ function App() {
                   >
                     {/* <div className={classes.drawerHeader} /> */}
                     <Switch>
-                      <Route
+                      {/* <Route
                         path="/"
                         component={DashboardExercises}
                         exact={true}
+                      /> */}
+                      <PrivateRoute
+                        exact
+                        path="/"
+                        component={DashboardExercises}
                       />
+                      <Route exact path="/login" component={Login} />
+                      <Route exact path="/signup" component={Signup} />
                       <Route
                         path="/exercisecategories"
                         component={DashboardExerciseCategories}
@@ -379,7 +391,7 @@ function App() {
             </FirebaseContext.Provider>
           </ExercisesContext.Provider>
         </ExercisesProvider>
-      </UserProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
