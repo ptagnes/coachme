@@ -55,24 +55,24 @@ export const mainListItems = <div>{createLinks(routes)}</div>;
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Profile links</ListSubheader>
+    <ListSubheader inset>Public links</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Favorite workouts" />
+      <ListItemText primary="Lorem ipsum" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Tracking" />
+      <ListItemText primary="Public workouts" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Connected apps" />
+      <ListItemText primary="About this app" />
     </ListItem>
   </div>
 );

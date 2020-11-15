@@ -19,6 +19,7 @@ import Workouts from "./components/Workouts/Workouts";
 import WorkoutCategories from "./components/Workouts/WorkoutCategories";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
+import Forgot from "./components/Auth/Forgot";
 import Profile from "./components/Profile/Profile";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -46,6 +47,7 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ListSubheader from "@material-ui/core/ListSubheader";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -242,27 +244,32 @@ function App() {
                     </div>
                     <Divider />
 
-                    <List>{mainListItems}</List>
-                    <Divider />
                     <List>{secondaryListItems}</List>
                     <Divider />
 
                     {user ? (
                       <>
-                        <ListItem button onClick={() => firebase.logout()}>
+                        <ListSubheader inset>User links</ListSubheader>
+                        <List>{mainListItems}</List>
+                        <Divider />
+                        <List>
+                          <ListItem button onClick={() => firebase.logout()}>
+                            <ListItemIcon>
+                              <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Logout" />
+                          </ListItem>
+                        </List>
+                      </>
+                    ) : (
+                      <List>
+                        <ListItem button component={NavLink} to="/login">
                           <ListItemIcon>
                             <InboxIcon />
                           </ListItemIcon>
-                          <ListItemText primary="Logout" />
+                          <ListItemText primary="Login" />
                         </ListItem>
-                      </>
-                    ) : (
-                      <ListItem button component={NavLink} to="login">
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Logout" />
-                      </ListItem>
+                      </List>
                     )}
 
                     <Divider />
@@ -281,6 +288,7 @@ function App() {
                       />
                       <Route exact path="/login" component={Login} />
                       <Route exact path="/signup" component={Signup} />
+                      <Route exact path="/forgot" component={Forgot} />
                       <Route
                         path="/exercisecategories"
                         component={DashboardExerciseCategories}

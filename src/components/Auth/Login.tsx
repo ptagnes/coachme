@@ -114,10 +114,10 @@ export default function Login({ history }: { history: any }) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="#">Forgot password?</Link>
+              <Link to="/forgot">Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link to="#">{"Don't have an account? Sign Up"}</Link>
+              <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </form>
