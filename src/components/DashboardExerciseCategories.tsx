@@ -10,8 +10,6 @@ import {
 import { StoreState } from "../redux/reducers/index";
 import ExerciseCard from "./Exercises/ExerciseCard";
 import ExerciseCardTopCategories from "./Exercises/ExerciseCardTopCategories";
-import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
 import FitnessToolsDialog from "./FitnessToolsDialog";
 
 const Musclegroups = [
@@ -22,15 +20,6 @@ const Musclegroups = [
   "Glutes",
   "Wholebody",
   "Cardio",
-];
-const Equipment = [
-  "Bosu",
-  "Barbell",
-  "Dumbbell",
-  "Kettlebell",
-  "Medicine Ball",
-  "Pull Up Bar",
-  "Resistance Band",
 ];
 interface ExercisesProps {
   exercisesState: any;
@@ -56,9 +45,9 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
     const state =
       this.props.fitnessToolsState &&
       this.props.fitnessToolsState.fitnessToolsState;
-    console.log(state);
-    const data =
-      this.props.exercisesState && this.props.exercisesState.exercisesState;
+    // console.log(state);
+    // const data =
+    //   this.props.exercisesState && this.props.exercisesState.exercisesState;
     return (
       <div className="bp">
         <h2>Exercise categories</h2>

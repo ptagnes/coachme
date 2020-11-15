@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import ExerciseForm from "./ExerciseForm";
 import { editExercise, removeExercise } from "../../redux/actions";
 import ExercisesContext from "../../context/exercises-context";
-import { ExercisesContext2 } from "../../firebase/ExercisesProvider";
+// import { ExercisesContext2 } from "../../firebase/ExercisesProvider";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -16,12 +16,10 @@ const EditExercise = (props: any) => {
   let exercise: {} | undefined;
   let history = useHistory();
   if (exercises) {
-    exercise = exercises.find(
-      (exercise: any) => exercise.id === props.match.params.id
-    );
+    exercise = exercises.find((exercise: any) => exercise.id === id);
   }
   const context = React.useContext(ExercisesContext);
-  const context2 = React.useContext(ExercisesContext2);
+  // const context2 = React.useContext(ExercisesContext2);
   React.useEffect(() => {
     //@ts-ignore
     setExercises(context.exercises);
@@ -53,7 +51,7 @@ const EditExercise = (props: any) => {
             action="edit"
             exercise={exercise}
             onSubmit={(exercise: any) => {
-              props.editExercise(props.match.params.id, exercise);
+              props.editExercise(id, exercise);
               props.history.push("/");
             }}
           />
@@ -63,7 +61,7 @@ const EditExercise = (props: any) => {
           title="Delete exercise..."
           startIcon="delete"
           confirmFunction={() => {
-            props.removeExercise(props.match.params.id);
+            props.removeExercise(id);
             //context2.dispatch(removeExercise(props.match.params.id)); //{ id: exercise.id }
             props.history.push("/");
           }}

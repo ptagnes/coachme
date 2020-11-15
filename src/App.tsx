@@ -1,9 +1,8 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import clsx from "clsx";
 import useAuth from "./Auth/useAuth";
 import firebase from "./firebase";
-// import UserProvider from "./firebase/UserProvider";
 import PrivateRoute from "./Auth/PrivateRoute";
 import { AuthProvider } from "./firebase/Authentication";
 import ExercisesProvider from "./firebase/ExercisesProvider";
@@ -30,7 +29,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import EditExercise from "./components/Exercises/EditExercise";
 import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
-// import { mainListItems, secondaryListItems } from "./components/listItems";
+import { mainListItems, secondaryListItems } from "./components/listItems";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -47,7 +46,6 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useHistory } from "react-router";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -142,15 +140,11 @@ const exerciseListRef = firebase
   .orderBy("createdAt", "desc");
 
 function App() {
+  /* eslint-disable */
   const [isUser, setIsUser] = React.useState<object>();
+  /* eslint-enable */
   const [exercises, setExercises] = React.useState<{}[]>();
   const user = useAuth();
-  const [value, setValue] = React.useState("recents");
-  let history = useHistory();
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-    setValue(newValue);
-    // history.push(`/${newValue}`);
-  };
   const fetchData = async () => {
     exerciseListRef.onSnapshot((snapshot: any) => {
       const payload = snapshot.docs.map((doc: any) => {
@@ -183,7 +177,7 @@ function App() {
     setOpen(false);
   };
   const FirebaseContext = React.createContext<any | null>(null);
-  //UserProvider was earlier
+  console.log(user);
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -248,62 +242,30 @@ function App() {
                     </div>
                     <Divider />
 
-                    <List>
-                      <ListItem>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        <NavLink
-                          style={{ color: "white", textDecoration: "none" }}
-                          to="/exercisecategories"
-                        >
-                          <ListItemText primary="Exercise categories" />
-                        </NavLink>
-                      </ListItem>
-                    </List>
+                    <List>{mainListItems}</List>
                     <Divider />
-                    <List>
-                      <ListItem>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        <NavLink
-                          style={{ color: "white", textDecoration: "none" }}
-                          to={`/addexercise`}
-                        >
-                          <ListItemText primary="Add exercise" />
-                        </NavLink>
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        <NavLink
-                          style={{ color: "white", textDecoration: "none" }}
-                          to={`/workouts`}
-                        >
-                          <ListItemText primary="Workouts" />
-                        </NavLink>
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem>
-                        <ListItemIcon>
-                          <InboxIcon />
-                        </ListItemIcon>
-                        <NavLink
-                          style={{ color: "white", textDecoration: "none" }}
-                          to={`/profile`}
-                        >
-                          <ListItemText primary="Profile" />
-                        </NavLink>
-                      </ListItem>
-                    </List>
-                    {/* <List>{mainListItems}</List>
+                    <List>{secondaryListItems}</List>
                     <Divider />
-                    <List>{secondaryListItems}</List> */}
+
+                    {user ? (
+                      <>
+                        <ListItem button onClick={() => firebase.logout()}>
+                          <ListItemIcon>
+                            <InboxIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Logout" />
+                        </ListItem>
+                      </>
+                    ) : (
+                      <ListItem button component={NavLink} to="login">
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                      </ListItem>
+                    )}
+
+                    <Divider />
                   </Drawer>
                   <main
                     className={clsx(classes.content, {
@@ -312,11 +274,6 @@ function App() {
                   >
                     {/* <div className={classes.drawerHeader} /> */}
                     <Switch>
-                      {/* <Route
-                        path="/"
-                        component={DashboardExercises}
-                        exact={true}
-                      /> */}
                       <PrivateRoute
                         exact
                         path="/"
@@ -351,37 +308,29 @@ function App() {
                       <Route path="/addexercise" component={AddExercise} />
                     </Switch>
 
-                    <BottomNavigation
-                      value={value}
-                      onChange={handleChange}
-                      className={classes.bottomnav}
-                    >
+                    <BottomNavigation className={classes.bottomnav}>
                       <BottomNavigationAction
                         component={Link}
                         to="/signal"
                         label="Another"
-                        value="Another"
                         icon={<RestoreIcon />}
                       />
                       <BottomNavigationAction
                         component={Link}
                         to="/lkj"
                         label="Something"
-                        value="Something"
                         icon={<FavoriteIcon />}
                       />
                       <BottomNavigationAction
                         component={Link}
                         to="/workouts"
                         label="Workouts"
-                        value="Workouts"
                         icon={<ViewListIcon />}
                       />
                       <BottomNavigationAction
                         component={Link}
                         to="/profile"
                         label="Profile"
-                        value="profile"
                         icon={<AccountCircleIcon />}
                       />
                     </BottomNavigation>

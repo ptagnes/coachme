@@ -6,44 +6,43 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Accessibility from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import DashboardExercises from "./DashboardExercises";
 import DashboardExerciseCategories from "./DashboardExerciseCategories";
+import AddExercise from "./Exercises/AddExercise";
+import Workouts from "./Workouts/Workouts";
+import Profile from "./Profile/Profile";
 var routes = [
   {
-    path: "/exerciselist",
-    name: "Exercises",
+    path: "/exercisecategories",
+    name: "ExerciseCategories",
     icon: { PeopleIcon },
-    component: DashboardExercises,
-    layout: "/exerciselist",
+    component: DashboardExerciseCategories,
   },
   {
-    path: "/exercisecategories",
-    name: "Exercise categories",
+    path: "/addexercise",
+    name: "Add exercise",
     icon: { Accessibility },
-    component: DashboardExerciseCategories,
-    layout: "/exercisecategories",
+    component: AddExercise,
   },
-  // {
-  //   path: "/api",
-  //   name: "Demo api call",
-  //   icon: { PeopleIcon },
-  //   component: Dashboard_API,
-  //   layout: "/api",
-  // },
+  {
+    path: "/workouts",
+    name: "Workouts",
+    icon: { PeopleIcon },
+    component: Workouts,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    icon: { PeopleIcon },
+    component: Profile,
+  },
 ];
 
 const createLinks = (routes: any) => {
   return routes.map((prop: any, key: any) => {
     return (
-      <ListItem
-        key={key}
-        button
-        component={NavLink}
-        to={prop.layout + prop.path}
-      >
+      <ListItem key={key} button component={NavLink} to={prop.path}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
@@ -52,44 +51,28 @@ const createLinks = (routes: any) => {
     );
   });
 };
-export const mainListItems = (
-  <div>
-    {createLinks(routes)}
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Search Movies" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Trending" />
-    </ListItem>
-  </div>
-);
+export const mainListItems = <div>{createLinks(routes)}</div>;
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved searches</ListSubheader>
+    <ListSubheader inset>Profile links</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Favorite movies" />
+      <ListItemText primary="Favorite workouts" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Best of 2020" />
+      <ListItemText primary="Tracking" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Best of 2019" />
+      <ListItemText primary="Connected apps" />
     </ListItem>
   </div>
 );

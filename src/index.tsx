@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import * as serviceWorker from "./serviceWorker";
+// import * as serviceWorker from "./serviceWorker";
 import { reducers } from "./redux/reducers";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";

@@ -1,4 +1,4 @@
-import React, { Component, createContext } from "react";
+import React, { Component } from "react";
 import "firebase/auth";
 import firebase from "./firebase";
 import exercisesReducer from "../context/reducers/exercisesReducer";

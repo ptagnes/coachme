@@ -26,7 +26,7 @@ const ExerciseDetail = (props: any) => {
       setImage(exer.image);
       setVideoUrl(exer.videourl);
     }
-  }, [context]);
+  }, [context, id]);
 
   const handleClick = () => {
     history.goBack();
