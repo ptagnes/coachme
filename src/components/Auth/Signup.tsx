@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import app from "../../firebase/firebase";
+import { AuthContext } from "../../firebase/Authentication";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,10 +37,12 @@ export default function SignUp({ history }: { history: any }) {
     code: string;
     message: string;
   }>();
+  const { currentUser } = React.useContext(AuthContext);
   const handleSignUp = useCallback(
     async (event) => {
       event.preventDefault();
-      const { email, password } = event.target.elements;
+      const { email, password, firstname } = event.target.elements;
+      const displayName = "somename";
       try {
         await app
           .firebaseAuth()
@@ -48,6 +51,8 @@ export default function SignUp({ history }: { history: any }) {
       } catch (error) {
         setErrors(error);
       }
+      console.log(currentUser);
+      await app.createUserProfileDocument(currentUser, { displayName }); //TODO chain after creating user
     },
     [history]
   );

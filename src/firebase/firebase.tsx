@@ -4,16 +4,13 @@ import "firebase/firestore";
 import "firebase/storage";
 import "firebase/database";
 import firebaseConfig from "./config";
-
 export class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
-
     // this.storage = app.storage();
     // this.auth = app.auth();
     // this.db = app.firestore();
   }
-
   firebaseStorage() {
     return app.storage();
   }
@@ -26,7 +23,32 @@ export class Firebase {
   ref() {
     return app.database().ref();
   }
-
+  createUserProfileDocument = async (userAuth: any, additionalData: any) => {
+    console.log("userAuth");
+    console.log(userAuth);
+    if (!userAuth) return;
+    const userRef = app.firestore().doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+    if (!snapShot.exists) {
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
+      console.log("createuser");
+      console.log("userRef");
+      console.log(userRef);
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData,
+        });
+        console.log("user added?");
+      } catch (error) {
+        console.log("error creating user", error.message);
+      }
+    }
+    return userRef;
+  };
   async register(name: string, email: string, password: string) {
     //const newUser = await this.auth.createUserWithEmailAndPassword(
     const newUser = await app
@@ -38,17 +60,14 @@ export class Firebase {
       });
     }
   }
-
   async login(email: string, password: string) {
     // return await this.auth.signInWithEmailAndPassword(email, password);
     return await app.auth().signInWithEmailAndPassword(email, password);
   }
-
   async logout() {
     //await this.auth.signOut();
     await app.auth().signOut();
   }
-
   async resetPassword(email: string) {
     //await this.auth.sendPasswordResetEmail(email);
     await app.auth().sendPasswordResetEmail(email);
