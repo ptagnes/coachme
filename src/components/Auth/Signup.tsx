@@ -41,8 +41,9 @@ export default function SignUp({ history }: { history: any }) {
   const handleSignUp = useCallback(
     async (event) => {
       event.preventDefault();
-      const { email, password, firstname } = event.target.elements;
-      const displayName = "somename";
+      const { email, password } = event.target.elements;
+      const displayName = "coachmeUser";
+      const role = 10; //user
       try {
         await app
           .firebaseAuth()
@@ -52,9 +53,9 @@ export default function SignUp({ history }: { history: any }) {
         setErrors(error);
       }
       console.log(currentUser);
-      await app.createUserProfileDocument(currentUser, { displayName }); //TODO chain after creating user
+      await app.createUserProfileDocument(currentUser, { displayName, role }); //TODO chain after creating user
     },
-    [history]
+    [history, currentUser]
   );
 
   return (

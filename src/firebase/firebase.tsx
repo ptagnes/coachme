@@ -30,15 +30,16 @@ export class Firebase {
     const userRef = app.firestore().doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
     if (!snapShot.exists) {
-      const { displayName, email } = userAuth;
+      const { displayName, email, role } = userAuth;
       const createdAt = new Date();
       console.log("createuser");
-      console.log("userRef");
       console.log(userRef);
+      console.log(additionalData);
       try {
         await userRef.set({
           displayName,
           email,
+          role,
           createdAt,
           ...additionalData,
         });

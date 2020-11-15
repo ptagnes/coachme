@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import useProgressiveImg from "../useProgressiveImg ";
+import { AuthContext } from "../../firebase/Authentication";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,8 +26,14 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "3rem auto",
       textAlign: "center",
       background: "#dddddd7d",
+      color: "#141447",
       padding: "1rem",
       borderRadius: "20px",
+    },
+    header: {
+      fontFamily: "Lobster",
+      fontSize: "1.2rem",
+      lineHeight: "1",
     },
     user: {
       width: "110px",
@@ -37,16 +44,32 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export default function Profile() {
+  const { currentUser, isAdmin } = React.useContext(AuthContext);
+  // const [admin, setAdmin] = React.useState<boolean>(false);
+  // const [user, setUser] = React.useState<object>();
   const [src, { blur }] = useProgressiveImg(
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
   );
   const classes = useStyles();
+  // React.useEffect(() => {
+  //   const unsubscribe = () => {
+  //     // if (currentUser) {
+  //     //   console.log(currentUser.displayName);
+  //     //   setUser(currentUser);
+  //     // }
+  //     // if (isAdmin) {
+  //     //   console.log(isAdmin);
+  //     //   setAdmin(admin);
+  //     // }
+  //   };
+  //   return () => unsubscribe();
+  // }, []); //isAdmin, admin, currentUser
   return (
     <div className={`${classes.root} bp`}>
       <div className={classes.cover}></div>
       <div className={classes.container}>
-        <div className="header">
+        <div>
           <img
             src={src}
             className={classes.user}
@@ -57,9 +80,13 @@ export default function Profile() {
             }}
           />
 
-          <h4 className="name">Agnes Cort</h4>
+          <h4 className={classes.header}>
+            {currentUser && currentUser.displayName}
+          </h4>
+          <h4 className={classes.header}>{currentUser && currentUser.email}</h4>
+          {isAdmin && <h4>Admin</h4>}
           <h4 className="work">Coach | Grupp trainer | PT</h4>
-          <h4 className="social">Instagram</h4>
+
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <small>Las summit</small> <p>Basecamp</p>

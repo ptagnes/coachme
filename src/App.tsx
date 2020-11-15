@@ -142,9 +142,6 @@ const exerciseListRef = firebase
   .orderBy("createdAt", "desc");
 
 function App() {
-  /* eslint-disable */
-  const [isUser, setIsUser] = React.useState<object>();
-  /* eslint-enable */
   const [exercises, setExercises] = React.useState<{}[]>();
   const user = useAuth();
   const fetchData = async () => {
@@ -156,11 +153,8 @@ function App() {
     });
   };
   React.useEffect(() => {
-    if (user) {
-      setIsUser(user);
-    }
     fetchData();
-  }, [user]);
+  }, []);
   const FitnessTools = [
     "Bosu",
     "Barbell",
@@ -179,7 +173,11 @@ function App() {
     setOpen(false);
   };
   const FirebaseContext = React.createContext<any | null>(null);
-  console.log(user);
+  let admin: boolean = false;
+  if (user) {
+    //@ts-ignore
+    admin = user.uid === "2xT2T9CqfjgU5TQGn06VL920Tkp2";
+  }
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -246,7 +244,31 @@ function App() {
 
                     <List>{secondaryListItems}</List>
                     <Divider />
-
+                    {admin && (
+                      <>
+                        <ListSubheader inset>Admin links</ListSubheader>
+                        <List>
+                          <ListItem>
+                            <ListItemIcon></ListItemIcon>
+                            <ListItemText primary="Hi admin!" />
+                          </ListItem>
+                        </List>
+                        <Divider />
+                        <List>
+                          <ListItem
+                            button
+                            component={NavLink}
+                            to="/addexercise"
+                          >
+                            <ListItemIcon>
+                              <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Add Exercise" />
+                          </ListItem>
+                        </List>
+                      </>
+                    )}
+                    <Divider />
                     {user ? (
                       <>
                         <ListSubheader inset>User links</ListSubheader>

@@ -5,11 +5,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import Accessibility from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import DashboardExerciseCategories from "./DashboardExerciseCategories";
-import AddExercise from "./Exercises/AddExercise";
 import Workouts from "./Workouts/Workouts";
 import Profile from "./Profile/Profile";
 var routes = [
@@ -18,12 +16,6 @@ var routes = [
     name: "ExerciseCategories",
     icon: { PeopleIcon },
     component: DashboardExerciseCategories,
-  },
-  {
-    path: "/addexercise",
-    name: "Add exercise",
-    icon: { Accessibility },
-    component: AddExercise,
   },
   {
     path: "/workouts",
@@ -61,12 +53,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Lorem ipsum" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Public workouts" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
