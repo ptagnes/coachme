@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#141447",
       padding: "1rem",
       borderRadius: "20px",
+      zIndex: 0,
+      position: "relative",
     },
     header: {
       fontFamily: "Lobster",
@@ -45,26 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function Profile() {
   const { currentUser, isAdmin } = React.useContext(AuthContext);
-  // const [admin, setAdmin] = React.useState<boolean>(false);
-  // const [user, setUser] = React.useState<object>();
   const [src, { blur }] = useProgressiveImg(
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
   );
   const classes = useStyles();
-  // React.useEffect(() => {
-  //   const unsubscribe = () => {
-  //     // if (currentUser) {
-  //     //   console.log(currentUser.displayName);
-  //     //   setUser(currentUser);
-  //     // }
-  //     // if (isAdmin) {
-  //     //   console.log(isAdmin);
-  //     //   setAdmin(admin);
-  //     // }
-  //   };
-  //   return () => unsubscribe();
-  // }, []); //isAdmin, admin, currentUser
   return (
     <div className={`${classes.root} bp`}>
       <div className={classes.cover}></div>
@@ -89,14 +76,16 @@ export default function Profile() {
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <small>Las summit</small> <p>Basecamp</p>
+              <small>Last summit</small> <p>Basecamp</p>
             </div>
             <div>
               <small>Next challenge</small> <p>Kirkjufell</p>
             </div>
           </div>
         </div>
-        <div className="middle"></div>
+        <div className="middle">
+          <div>Profile information</div>
+        </div>
       </div>
     </div>
   );

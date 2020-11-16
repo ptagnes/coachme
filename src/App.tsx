@@ -22,6 +22,8 @@ import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Forgot from "./components/Auth/Forgot";
 import Profile from "./components/Profile/Profile";
+import ProfileSettings from "./components/Profile/ProfileSettings";
+import ProfileAnimateIn from "./components/Profile/ProfileAnimateIn";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
@@ -29,16 +31,18 @@ import AppBarNav from "./components/AppBar/AppBarNav";
 import EditExercise from "./components/Exercises/EditExercise";
 import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
-import { mainListItems, secondaryListItems } from "./components/listItems";
+import {
+  mainListItems,
+  secondaryListItems,
+  adminListItems,
+  logoutListItems,
+  loginListItems,
+} from "./components/listItems";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { NavLink, Link } from "react-router-dom";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import { Link } from "react-router-dom";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import RestoreIcon from "@material-ui/icons/Restore";
@@ -159,6 +163,10 @@ function App() {
     //@ts-ignore
     admin = user.uid === "2xT2T9CqfjgU5TQGn06VL920Tkp2";
   }
+  const [value, setValue] = React.useState("recents");
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+    setValue(newValue);
+  };
   const AppBarWithRouter = withRouter(({ location }) => (
     <AppBarNav
       location={location}
@@ -166,6 +174,7 @@ function App() {
       isOpen={open}
     />
   ));
+
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -201,25 +210,7 @@ function App() {
                     {admin && (
                       <>
                         <ListSubheader inset>Admin links</ListSubheader>
-                        <List>
-                          <ListItem>
-                            <ListItemIcon></ListItemIcon>
-                            <ListItemText primary="Hi admin!" />
-                          </ListItem>
-                        </List>
-                        <Divider />
-                        <List>
-                          <ListItem
-                            button
-                            component={NavLink}
-                            to="/addexercise"
-                          >
-                            <ListItemIcon>
-                              <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Add Exercise" />
-                          </ListItem>
-                        </List>
+                        <List>{adminListItems}</List>
                       </>
                     )}
                     <Divider />
@@ -228,24 +219,10 @@ function App() {
                         <ListSubheader inset>User links</ListSubheader>
                         <List>{mainListItems}</List>
                         <Divider />
-                        <List>
-                          <ListItem button onClick={() => firebase.logout()}>
-                            <ListItemIcon>
-                              <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Logout" />
-                          </ListItem>
-                        </List>
+                        <List>{logoutListItems}</List>
                       </>
                     ) : (
-                      <List>
-                        <ListItem button component={NavLink} to="/login">
-                          <ListItemIcon>
-                            <InboxIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Login" />
-                        </ListItem>
-                      </List>
+                      <List>{loginListItems}</List>
                     )}
 
                     <Divider />
@@ -256,6 +233,7 @@ function App() {
                     })}
                   >
                     {/* <div className={classes.drawerHeader} /> */}
+
                     <Switch>
                       <PrivateRoute
                         exact
@@ -291,29 +269,54 @@ function App() {
                         component={ExerciseDetail}
                       />
                       <Route path="/addexercise" component={AddExercise} />
+                      <Route
+                        path="/profilesettings"
+                        component={ProfileSettings}
+                      />
+                      <Route
+                        path="/profiletoanimatein"
+                        component={ProfileAnimateIn}
+                      />
+                      <Route
+                        path="/editexercise/:id"
+                        component={EditExercise}
+                      />
+                      <Route
+                        path="/exercisedetail/:id"
+                        component={ExerciseDetail}
+                      />
+                      <Route path="/addexercise" component={AddExercise} />
                     </Switch>
 
-                    <BottomNavigation className={classes.bottomnav}>
+                    <BottomNavigation
+                      className={classes.bottomnav}
+                      value={value}
+                      onChange={handleChange}
+                    >
                       <BottomNavigationAction
                         component={Link}
+                        value="signal"
                         to="/signal"
                         label="Another"
                         icon={<RestoreIcon />}
                       />
                       <BottomNavigationAction
                         component={Link}
-                        to="/lkj"
-                        label="Something"
+                        value="exercisecategories"
+                        to="/exercisecategories"
+                        label="Exercises"
                         icon={<FavoriteIcon />}
                       />
                       <BottomNavigationAction
                         component={Link}
+                        value="workouts"
                         to="/workouts"
                         label="Workouts"
                         icon={<ViewListIcon />}
                       />
                       <BottomNavigationAction
                         component={Link}
+                        value="profile"
                         to="/profile"
                         label="Profile"
                         icon={<AccountCircleIcon />}

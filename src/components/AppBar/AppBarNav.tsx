@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import SearchIcon from "@material-ui/icons/Search";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { BrowserRouter as Router } from "react-router-dom";
+import ProfileAction from "../Profile/ProfileAction";
+import ProfileSettings from "../Profile/ProfileSettings";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -133,7 +135,10 @@ function AppBarNav({
         )}
         {route === "/profile" && (
           <div className={classes.appBarTools}>
-            <SettingsIcon style={{ width: "50px", cursor: "pointer" }} />
+            <Router>
+              <ProfileAction />
+              <ProfileSettings />
+            </Router>
           </div>
         )}
       </Toolbar>
