@@ -16,6 +16,7 @@ import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
 import Workouts from "./components/Workouts/Workouts";
+import Workout from "./components/Workouts/Workout";
 import WorkoutCategories from "./components/Workouts/WorkoutCategories";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
@@ -326,6 +327,7 @@ function App() {
                         component={WorkoutCategories}
                         exact={true}
                       />
+                      <Route path="/workout" component={Workout} exact={true} />
                       <Route path="/profile" component={Profile} />
                       <Route
                         path="/editexercise/:id"

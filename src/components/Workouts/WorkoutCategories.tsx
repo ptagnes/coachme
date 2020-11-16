@@ -4,14 +4,10 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import {
-  Theme,
-  createStyles,
-  makeStyles,
-  // useTheme,
-} from "@material-ui/core/styles";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import useProgressiveImg from "../useProgressiveImg ";
-// import { LazyLoadImage } from "react-lazy-load-image-component";
+import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,30 +18,29 @@ const useStyles = makeStyles((theme: Theme) =>
     details: {
       display: "flex",
       flexDirection: "column",
-      width: "80%",
+      width: "88%",
     },
     content: {
       flex: "1 0 auto",
     },
-    cover: {
-      width: 151,
+    header: {
+      fontSize: "1.2rem",
     },
-    controls: {
-      display: "flex",
-      alignItems: "center",
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
+    media: {
+      width: "120px",
+      height: "auto",
+      alignSelf: "center",
+      marginRight: "0.7rem",
     },
-    playIcon: {
-      height: 38,
-      width: 38,
+    divider: {
+      height: "5px",
+      background: "#303030",
     },
   })
 );
 
 export default function Workouts() {
   const classes = useStyles();
-  // const theme = useTheme();
   /* eslint-disable */
   const [src, { blur }] = useProgressiveImg(
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
@@ -58,146 +53,258 @@ export default function Workouts() {
       <Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <h2>Full body</h2>
-          <Card className={classes.root}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  Full Body
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  Mac Miller
-                </Typography>
-              </CardContent>
-            </div>
-            <CardMedia
-              component="img"
-              alt="training"
-              height="230"
-              style={{
-                width: "40vw",
-                filter: blur ? "blur(20px)" : "none",
-                transition: blur ? "none" : "filter 0.3s ease-out",
-              }}
-              image={process.env.PUBLIC_URL + "/images/utfall.png"}
-              title="training"
-            />
-            {/* <LazyLoadImage
-              alt="training"
-              src={process.env.PUBLIC_URL + "/images/utfall.png"}
-            //   width={100}
-              
-            /> */}
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Full Body
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/utfall.png"}
+                title="training"
+              />
+            </Link>
           </Card>
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <h2>Abs & Core: #1</h2>
-          <Card className={classes.root}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  Insane Six Pack
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  Mac Miller
-                </Typography>
-              </CardContent>
-            </div>
-            <CardMedia
-              component="img"
-              alt="training"
-              height="230"
-              style={{
-                width: "40vw",
-                filter: blur ? "blur(20px)" : "none",
-                transition: blur ? "none" : "filter 0.3s ease-out",
-              }}
-              image={process.env.PUBLIC_URL + "/images/img5.jpg"}
-              title="training"
-            />
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Insane Six Pack
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/img5.jpg"}
+                title="training"
+              />
+            </Link>
           </Card>
         </Grid>
+        <Divider className={classes.divider} />
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <h2>Abs & Core: #2</h2>
-          <Card className={classes.root}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  Complex Core
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  Mac Miller
-                </Typography>
-              </CardContent>
-            </div>
-            <CardMedia
-              component="img"
-              alt="training"
-              height="230"
-              style={{
-                width: "40vw",
-                filter: blur ? "blur(20px)" : "none",
-                transition: blur ? "none" : "filter 0.3s ease-out",
-              }}
-              image={process.env.PUBLIC_URL + "/images/img3.jpg"}
-              title="training"
-            />
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Complex Core
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/img3.jpg"}
+                title="training"
+              />
+            </Link>
           </Card>
         </Grid>
+        <Divider className={classes.divider} />
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <h2>Abs & Core: #3</h2>
-          <Card className={classes.root}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  Strong Back
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  Mac Miller
-                </Typography>
-              </CardContent>
-            </div>
-            <CardMedia
-              component="img"
-              alt="training"
-              height="230"
-              style={{
-                width: "40vw",
-                filter: blur ? "blur(20px)" : "none",
-                transition: blur ? "none" : "filter 0.3s ease-out",
-              }}
-              image={process.env.PUBLIC_URL + "/images/img8.jpg"}
-              title="training"
-            />
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Strong Back
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/img8.jpg"}
+                title="training"
+              />
+            </Link>
           </Card>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <h2>Lower Body: #1</h2>
-          <Card className={classes.root}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  Complex Lower Body
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  Mac Miller
-                </Typography>
-              </CardContent>
-            </div>
-            <CardMedia
-              component="img"
-              alt="training"
-              height="230"
-              style={{
-                width: "40vw",
-                filter: blur ? "blur(20px)" : "none",
-                transition: blur ? "none" : "filter 0.3s ease-out",
-              }}
-              image={process.env.PUBLIC_URL + "/images/img9.jpg"}
-              title="training"
-            />
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Complex Lower Body
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/img9.jpg"}
+                title="training"
+              />
+            </Link>
           </Card>
         </Grid>
+        <Divider className={classes.divider} />
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Complex Lower Body
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/img9.jpg"}
+                title="training"
+              />
+            </Link>
+          </Card>
+        </Grid>
+        <Divider className={classes.divider} />
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Card>
+            <Link
+              className={classes.root}
+              to={`/workout/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    className={classes.header}
+                  >
+                    Complex Lower Body
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Mac Miller
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                component="img"
+                alt="training"
+                className={classes.media}
+                style={{
+                  filter: blur ? "blur(20px)" : "none",
+                  transition: blur ? "none" : "filter 0.3s ease-out",
+                }}
+                image={process.env.PUBLIC_URL + "/images/img9.jpg"}
+                title="training"
+              />
+            </Link>
+          </Card>
+        </Grid>
+        <Divider className={classes.divider} />
       </Grid>
     </div>
   );

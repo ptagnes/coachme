@@ -130,7 +130,7 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
           <div className="bp">
             {FitnessTools &&
               FitnessTools.map((prop: any, key: number) => (
-                <List>
+                <List key={key}>
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>

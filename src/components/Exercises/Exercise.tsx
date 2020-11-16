@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { AuthContext } from "../../firebase/Authentication";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,7 +50,7 @@ const Exercise = ({
   id: string;
 }) => {
   const classes = useStyles();
-  // const trimmedId = id.replace(/\s/g, "");
+  const { currentUser } = React.useContext(AuthContext);
   return (
     <Paper className={classes.paper}>
       <Grid
@@ -77,11 +78,13 @@ const Exercise = ({
             >
               <span>{title}</span>
             </Link>
-            <IconButton aria-label="edit" style={{ padding: "7px" }}>
-              <Link to={`/editexercise/${id}`} style={{ color: "#fff" }}>
-                <MoreVertIcon />
-              </Link>
-            </IconButton>
+            {currentUser && currentUser.uid === "2xT2T9CqfjgU5TQGn06VL920Tkp2" && (
+              <IconButton aria-label="edit" style={{ padding: "7px" }}>
+                <Link to={`/editexercise/${id}`} style={{ color: "#fff" }}>
+                  <MoreVertIcon />
+                </Link>
+              </IconButton>
+            )}
           </Typography>
         </Grid>
       </Grid>

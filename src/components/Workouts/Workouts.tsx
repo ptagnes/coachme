@@ -29,137 +29,137 @@ export default function Workouts() {
       <Grid className={classes.root} container spacing={3}>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="training"
-                height="180"
-                style={{
-                  filter: blur ? "blur(20px)" : "none",
-                  transition: blur ? "none" : "filter 0.3s ease-out",
-                }}
-                image={process.env.PUBLIC_URL + "/images/img10.jpg"}
-                title="training"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  <Link
-                    to={`/workoutcategories/`} //${id}
-                    style={{ color: "#fff", textDecoration: "none" }}
-                  >
+            <Link
+              to={`/workoutcategories/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="training"
+                  height="180"
+                  style={{
+                    filter: blur ? "blur(20px)" : "none",
+                    transition: blur ? "none" : "filter 0.3s ease-out",
+                  }}
+                  image={process.env.PUBLIC_URL + "/images/img10.jpg"}
+                  title="training"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
                     Strength
-                  </Link>
-                </Typography>
-              </CardContent>
-            </CardActionArea>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
           </Card>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="HIIT"
-                height="180"
-                style={{
-                  filter: blur ? "blur(20px)" : "none",
-                  transition: blur ? "none" : "filter 0.3s ease-out",
-                }}
-                image={process.env.PUBLIC_URL + "/images/img1.jpg"}
-                title="HIIT"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  <Link
-                    to={`/workoutcategories/`} //${id}
-                    style={{ color: "#fff", textDecoration: "none" }}
-                  >
+            <Link
+              to={`/workoutcategories/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="HIIT"
+                  height="180"
+                  style={{
+                    filter: blur ? "blur(20px)" : "none",
+                    transition: blur ? "none" : "filter 0.3s ease-out",
+                  }}
+                  image={process.env.PUBLIC_URL + "/images/img1.jpg"}
+                  title="HIIT"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
                     HIIT & Cardio
-                  </Link>
-                </Typography>
-              </CardContent>
-            </CardActionArea>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
           </Card>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="training"
-                height="180"
-                style={{
-                  filter: blur ? "blur(20px)" : "none",
-                  transition: blur ? "none" : "filter 0.3s ease-out",
-                }}
-                image={process.env.PUBLIC_URL + "/images/img3.jpg"}
-                title="training"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  <Link
-                    to={`/workoutcategories/`} //${id}
-                    style={{ color: "#fff", textDecoration: "none" }}
-                  >
+            <Link
+              to={`/workoutcategories/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="training"
+                  height="180"
+                  style={{
+                    filter: blur ? "blur(20px)" : "none",
+                    transition: blur ? "none" : "filter 0.3s ease-out",
+                  }}
+                  image={process.env.PUBLIC_URL + "/images/img3.jpg"}
+                  title="training"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
                     Yoga & Stretching
-                  </Link>
-                </Typography>
-              </CardContent>
-            </CardActionArea>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
           </Card>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="training"
-                height="180"
-                style={{
-                  filter: blur ? "blur(20px)" : "none",
-                  transition: blur ? "none" : "filter 0.3s ease-out",
-                }}
-                image={process.env.PUBLIC_URL + "/images/img8.jpg"}
-                title="training"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  <Link
-                    to={`/workoutcategories/`} //${id}
-                    style={{ color: "#fff", textDecoration: "none" }}
-                  >
+            <Link
+              to={`/workoutcategories/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="training"
+                  height="180"
+                  style={{
+                    filter: blur ? "blur(20px)" : "none",
+                    transition: blur ? "none" : "filter 0.3s ease-out",
+                  }}
+                  image={process.env.PUBLIC_URL + "/images/img8.jpg"}
+                  title="training"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
                     Special
-                  </Link>
-                </Typography>
-              </CardContent>
-            </CardActionArea>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
           </Card>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="training"
-                height="180"
-                style={{
-                  filter: blur ? "blur(20px)" : "none",
-                  transition: blur ? "none" : "filter 0.3s ease-out",
-                }}
-                image={process.env.PUBLIC_URL + "/images/img11.jpg"}
-                title="training"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  <Link
-                    to={`/workoutcategories/`} //${id}
-                    style={{ color: "#fff", textDecoration: "none" }}
-                  >
+            <Link
+              to={`/workoutcategories/`} //${id}
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="training"
+                  height="180"
+                  style={{
+                    filter: blur ? "blur(20px)" : "none",
+                    transition: blur ? "none" : "filter 0.3s ease-out",
+                  }}
+                  image={process.env.PUBLIC_URL + "/images/img11.jpg"}
+                  title="training"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
                     Custom Workouts
-                  </Link>
-                </Typography>
-              </CardContent>
-            </CardActionArea>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
           </Card>
         </Grid>
       </Grid>
