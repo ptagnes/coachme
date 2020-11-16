@@ -1,0 +1,8 @@
+.backBtn {
+  display: flex;
+}
+.backLink {
+  color: #fff;
+  padding: 0 2rem 0 0;
+  cursor: pointer;
+}

@@ -12,7 +12,7 @@ function Container({ location }: { location: any }) {
         <TransitionGroup className="transition-group">
           <CSSTransition
             key={location.key}
-            timeout={{ enter: 200, exit: 300 }}
+            timeout={{ enter: 100, exit: 300 }}
             classNames="slide"
           >
             <section className="route-section">
@@ -44,12 +44,11 @@ const Wrapper = styled.div`
   .slide-enter {
     opacity: 0.9;
     transform: translateY(100%);
-    position: absolute;
   }
   .slide-enter-active {
     transition: opacity 300ms ease-in;
     transform: translateY(0%);
-    transition: transform 1000ms linear;
+    transition: transform;
     transition-duration: 0.5s;
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
   }
