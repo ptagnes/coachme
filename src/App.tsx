@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import clsx from "clsx";
 import useAuth from "./Auth/useAuth";
 import firebase from "./firebase";
@@ -23,18 +23,15 @@ import Signup from "./components/Auth/Signup";
 import Forgot from "./components/Auth/Forgot";
 import Profile from "./components/Profile/Profile";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import AppBarNav from "./components/AppBar/AppBarNav";
 import EditExercise from "./components/Exercises/EditExercise";
 import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
 import { mainListItems, secondaryListItems } from "./components/listItems";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { NavLink, Link } from "react-router-dom";
@@ -59,23 +56,6 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     bottom: "0",
     width: "100%",
-  },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   hide: {
     display: "none",
@@ -179,6 +159,13 @@ function App() {
     //@ts-ignore
     admin = user.uid === "2xT2T9CqfjgU5TQGn06VL920Tkp2";
   }
+  const AppBarWithRouter = withRouter(({ location }) => (
+    <AppBarNav
+      location={location}
+      handleDrawerOpen={handleDrawerOpen}
+      isOpen={open}
+    />
+  ));
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -188,41 +175,7 @@ function App() {
               <MuiThemeProvider theme={theme}>
                 <div className={classes.root}>
                   <CssBaseline />
-                  <AppBar
-                    position="fixed"
-                    className={clsx(classes.appBar, {
-                      [classes.appBarShift]: open,
-                    })}
-                  >
-                    <Toolbar>
-                      <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(
-                          classes.menuButton,
-                          open && classes.hide
-                        )}
-                      >
-                        <MenuIcon />
-                      </IconButton>
-                      <Typography variant="h6" noWrap>
-                        <Link
-                          to={`/`}
-                          style={{
-                            color: "#fff",
-                            lineHeight: 1,
-                            textDecoration: "none",
-                            fontFamily: "Lobster",
-                            fontSize: "2rem",
-                          }}
-                        >
-                          CoachMe
-                        </Link>
-                      </Typography>
-                    </Toolbar>
-                  </AppBar>
+                  <AppBarWithRouter />
                   <Drawer
                     className={classes.drawer}
                     variant="persistent"
