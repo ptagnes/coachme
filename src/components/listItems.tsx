@@ -33,7 +33,7 @@ var routes = [
     icon: { PeopleIcon },
     component: Profile,
   },
-];
+]; //workoutpage
 
 const createLinks = (routes: any) => {
   return routes.map((prop: any, key: any) => {

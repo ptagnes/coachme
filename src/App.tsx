@@ -290,7 +290,7 @@ function App() {
                       <Route path="/addexercise" component={AddExercise} />
                       <Route
                         exact
-                        path="/workouts/strength"
+                        path="/workoutpage"
                         component={WorkoutsOverview}
                       />
                       <Route

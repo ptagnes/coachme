@@ -3,6 +3,7 @@ const WORKOUT_DATA = {
     id: 17,
     title: "Strength",
     routeName: "strength",
+    imageUrl: "https://i.ibb.co/0s3pdnc/adidas-nmd.png",
     items: [
       {
         id: 1341,
@@ -48,6 +49,7 @@ const WORKOUT_DATA = {
         id: 136641,
         title: "Iron butt workout",
         routeName: "ironbutt",
+        imageUrl: "https://i.ibb.co/0s3pdnc/adidas-nmd.png",
         exerciseitems: [
           {
             id: 18540008,
@@ -88,6 +90,7 @@ const WORKOUT_DATA = {
     id: 11241,
     title: "HIIT",
     routeName: "hiit",
+    imageUrl: "https://i.ibb.co/0s3pdnc/adidas-nmd.png",
     items: [
       {
         id: 112,
@@ -133,6 +136,7 @@ const WORKOUT_DATA = {
     id: 34234234,
     title: "Special",
     routeName: "special",
+    imageUrl: "https://i.ibb.co/0s3pdnc/adidas-nmd.png",
     items: [
       {
         id: 1112212,
