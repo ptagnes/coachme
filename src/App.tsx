@@ -294,7 +294,7 @@ function App() {
                         component={WorkoutsOverview}
                       />
                       <Route
-                        path="/workouts/hiit"
+                        path="/workouts/:collectionId"
                         component={WorkoutPageCollection}
                       />
                     </Switch>
