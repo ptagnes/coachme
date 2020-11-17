@@ -50,6 +50,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import WorkoutsOverview from "./components/Workouts/WorkoutsOverview";
+import WorkoutPageCollection from "./components/Workouts/workoutPageCollection";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -286,6 +288,15 @@ function App() {
                         component={ExerciseDetail}
                       />
                       <Route path="/addexercise" component={AddExercise} />
+                      <Route
+                        exact
+                        path="/workouts/strength"
+                        component={WorkoutsOverview}
+                      />
+                      <Route
+                        path="/workouts/hiit"
+                        component={WorkoutPageCollection}
+                      />
                     </Switch>
 
                     <BottomNavigation

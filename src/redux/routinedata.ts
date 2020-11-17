@@ -3,7 +3,7 @@ const WORKOUT_DATA = {
     id: 17,
     title: "Strength",
     routeName: "strength",
-    upperbody: [
+    items: [
       {
         id: 1341,
         title: "Iron back workout",
@@ -88,7 +88,7 @@ const WORKOUT_DATA = {
     id: 11241,
     title: "HIIT",
     routeName: "hiit",
-    fatburning: [
+    items: [
       {
         id: 112,
         title: "Light cardio",
@@ -133,7 +133,7 @@ const WORKOUT_DATA = {
     id: 34234234,
     title: "Special",
     routeName: "special",
-    fatburning: [
+    items: [
       {
         id: 1112212,
         title: "Rehab routine",
