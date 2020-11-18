@@ -2,35 +2,39 @@ import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import useProgressiveImg from "../useProgressiveImg ";
 import { AuthContext } from "../../firebase/Authentication";
+import ProfileContent from "./ProfileContent";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background:
-        "url(https://newevolutiondesigns.com/images/freebies/city-wallpaper-18.jpg)",
+      background: `url(${process.env.PUBLIC_URL}/images/profilebg.png)`,
       backgroundSize: "cover",
-      height: "100vh",
+      // minHeight: "100%",
+      // height: "100vh",
     },
     cover: {
       position: "fixed",
       top: "0",
       left: "0",
       width: "100%",
-      height: "100%",
-      background: "rgba(0, 0, 255, 0.2)",
+      height: "100vh",
+      // background: "rgba(0, 0, 255, 0.1)",
+      background: "rgb(27 27 64 / 52%)",
       zIndex: 0,
     },
     container: {
-      maxWidth: "400px",
-      height: "500px",
-      margin: "3rem auto",
       textAlign: "center",
-      background: "#dddddd7d",
-      color: "#141447",
+      background: "#dddddd4a",
+      // color: "#141447",
       padding: "1rem",
       borderRadius: "20px",
       zIndex: 0,
       position: "relative",
+      width: "89vw",
+      [theme.breakpoints.up("sm")]: {
+        maxWidth: "500px",
+        margin: "0 auto",
+      },
     },
     header: {
       fontFamily: "Lobster",
@@ -74,7 +78,15 @@ export default function Profile() {
           {isAdmin && <h4>Admin</h4>}
           <h4 className="work">Coach | Grupp trainer | PT</h4>
 
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              background: "#fff",
+              color: "#333",
+              padding: "0.6rem 1rem 0px",
+            }}
+          >
             <div>
               <small>Last summit</small> <p>Basecamp</p>
             </div>
@@ -84,7 +96,7 @@ export default function Profile() {
           </div>
         </div>
         <div className="middle">
-          <div>Profile information</div>
+          <ProfileContent />
         </div>
       </div>
     </div>
