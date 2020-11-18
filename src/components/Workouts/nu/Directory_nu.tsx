@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectDirectorySections } from "../../redux/selectors/directoryselectors";
+import { selectDirectorySections } from "../../../redux/selectors/directoryselectors";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,7 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
-import useProgressiveImg from "../useProgressiveImg ";
+import useProgressiveImg from "../../useProgressiveImg ";
 
 const Directory = ({ sections }: { sections: any }) => {
   /* eslint-disable */

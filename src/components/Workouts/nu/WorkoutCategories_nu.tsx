@@ -5,7 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-import useProgressiveImg from "../useProgressiveImg ";
+import useProgressiveImg from "../../useProgressiveImg ";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
 

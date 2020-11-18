@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCollectionsForPreview } from "../../redux/selectors/workoutSelectors";
+import { selectCollectionsForTopWorkoutCategories } from "../../redux/selectors/workoutSelectors";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 
 const WorkoutOverview = ({ collections }: { collections: any }) => {
   const classes = useStyles();
+  console.log("collections from workout page");
   console.log(collections);
   /* eslint-disable */
   const [src, { blur }] = useProgressiveImg(
@@ -29,7 +30,7 @@ const WorkoutOverview = ({ collections }: { collections: any }) => {
   /* eslint-enable */
   return (
     <div className="bp">
-      <h1>These are the titles of the workout routine top categories</h1>
+      <h1>Workout routines</h1>
       <Grid className={classes.root} container spacing={3}>
         {collections.map(
           ({
@@ -49,7 +50,6 @@ const WorkoutOverview = ({ collections }: { collections: any }) => {
             <Grid item xs={12} sm={12} md={6} lg={4} key={id}>
               <Card>
                 <Link
-                  //   to={`/${linkUrl}`}
                   to={`/workouts/${routeName}`}
                   style={{ color: "#fff", textDecoration: "none" }}
                 >
@@ -62,8 +62,7 @@ const WorkoutOverview = ({ collections }: { collections: any }) => {
                         filter: blur ? "blur(20px)" : "none",
                         transition: blur ? "none" : "filter 0.3s ease-out",
                       }}
-                      //   image={`${process.env.PUBLIC_URL}/images/${imageUrl}`}
-                      image={imageUrl}
+                      image={`${process.env.PUBLIC_URL}/images/${imageUrl}`}
                       title={title}
                     />
                     <CardContent>
@@ -83,7 +82,7 @@ const WorkoutOverview = ({ collections }: { collections: any }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  collections: selectCollectionsForPreview,
+  collections: selectCollectionsForTopWorkoutCategories,
 });
 
 export default connect(mapStateToProps)(WorkoutOverview);

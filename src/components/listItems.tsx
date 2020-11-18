@@ -7,7 +7,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import DashboardExerciseCategories from "./DashboardExerciseCategories";
-import Workouts from "./Workouts/Workouts";
+import WorkoutsOverview from "./Workouts/WorkoutsOverview";
 import Profile from "./Profile/Profile";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import firebase from "../firebase";
@@ -17,15 +17,15 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 var routes = [
   {
     path: "/exercisecategories",
-    name: "ExerciseCategories",
+    name: "Exercises",
     icon: { PeopleIcon },
     component: DashboardExerciseCategories,
   },
   {
-    path: "/workouts",
+    path: "/workoutpage",
     name: "Workouts",
     icon: { PeopleIcon },
-    component: Workouts,
+    component: WorkoutsOverview,
   },
   {
     path: "/profile",

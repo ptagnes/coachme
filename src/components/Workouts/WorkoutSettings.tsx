@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,7 +14,8 @@ import WifiTetheringIcon from "@material-ui/icons/WifiTethering";
 import OpacityIcon from "@material-ui/icons/Opacity";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
-
+import { selectCollection } from "../../redux/selectors/workoutSelectors";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -26,6 +28,10 @@ interface Props {
    */
   window?: () => Window;
   children: React.ReactElement;
+  collection: {};
+  workoutItem: any;
+  route: string;
+  itemKey: string;
 }
 
 function HideOnScroll(props: Props) {
@@ -55,7 +61,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Workout(props: Props) {
+function WorkoutSettings(props: Props) {
+  const { workoutItem, route, itemKey } = props;
+  console.log(props);
   const classes = useStyles();
   const [checked, setChecked] = React.useState(["wifi"]);
 
@@ -80,13 +88,13 @@ export default function Workout(props: Props) {
           style={{
             flexDirection: "column",
             padding: "2rem",
-            backgroundImage: "url(https://ptagnes.web.app/images/img10.jpg)",
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${workoutItem.imageUrl})`,
           }}
         >
-          <Typography variant="h6">Insane Six Pack</Typography>
-          <Typography variant="body1">
+          <Typography variant="h6">{workoutItem.title}</Typography>
+          {/* <Typography variant="body1">
             Ab workout that will get you a shredded six pack in no time
-          </Typography>
+          </Typography> */}
         </div>
       </HideOnScroll>
       <div>
@@ -105,12 +113,6 @@ export default function Workout(props: Props) {
             />
             <ListItemSecondaryAction>
               <span>60 min</span>
-              {/* <Switch
-                edge="end"
-                onChange={handleToggle("wifi")}
-                checked={checked.indexOf("wifi") !== -1}
-                inputProps={{ "aria-labelledby": "switch-list-label-wifi" }}
-              /> */}
             </ListItemSecondaryAction>
           </ListItem>
           <Divider />
@@ -204,6 +206,19 @@ export default function Workout(props: Props) {
                   />
                 </ListItemSecondaryAction>
               </ListItem>
+              <ListItem>
+                <Link
+                  style={{
+                    color: "white",
+                    border: "1px solid white",
+                    padding: "1rem",
+                    textDecoration: "none",
+                  }}
+                  to={`/workoutdetails/${route}/${itemKey}`}
+                >
+                  Go to Workout
+                </Link>
+              </ListItem>
             </Grid>
           </Grid>
         </List>
@@ -211,3 +226,15 @@ export default function Workout(props: Props) {
     </div>
   );
 }
+
+const mapStateToProps = (state: any, ownProps: any) => ({
+  collection: selectCollection(ownProps.match.params.route)(state),
+  route: ownProps.match.params.route,
+  itemKey: ownProps.match.params.id,
+  items: state.workoutState.collections[ownProps.match.params.route].items,
+  workoutItem: state.workoutState.collections[
+    ownProps.match.params.route
+  ].items.find((x: any) => x.id === parseInt(ownProps.match.params.id)),
+});
+
+export default connect(mapStateToProps)(WorkoutSettings);

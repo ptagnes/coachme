@@ -15,9 +15,10 @@ import {
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
-import Workouts from "./components/Workouts/Workouts";
-import Workout from "./components/Workouts/Workout";
-import WorkoutCategories from "./components/Workouts/WorkoutCategories";
+// import Workouts from "./components/Workouts/Workouts";
+import WorkoutSettings from "./components/Workouts/WorkoutSettings";
+import WorkoutDetails from "./components/Workouts/WorkoutDetails";
+// import WorkoutCategories from "./components/Workouts/nu/WorkoutCategories_nu";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Forgot from "./components/Auth/Forgot";
@@ -51,7 +52,7 @@ import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import WorkoutsOverview from "./components/Workouts/WorkoutsOverview";
-import WorkoutPageCollection from "./components/Workouts/workoutPageCollection";
+import WorkoutPageCollection from "./components/Workouts/WorkoutPageCollection";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -250,17 +251,27 @@ function App() {
                         component={DashboardExerciseCategories}
                         exact={true}
                       />
-                      <Route
+                      {/* <Route
                         path="/workouts"
                         component={Workouts}
                         exact={true}
-                      />
-                      <Route
+                      /> */}
+                      {/* Using <Directory> selector */}
+                      {/* <Route
                         path="/workoutcategories"
                         component={WorkoutCategories}
                         exact={true}
+                      /> */}
+                      <Route
+                        path="/workoutsettings/:route/:id"
+                        component={WorkoutSettings}
+                        exact={true}
                       />
-                      <Route path="/workout" component={Workout} exact={true} />
+                      <Route
+                        path="/workoutdetails/:route/:id"
+                        component={WorkoutDetails}
+                        exact={true}
+                      />
                       <Route path="/profile" component={Profile} />
                       <Route
                         path="/editexercise/:id"
@@ -320,8 +331,8 @@ function App() {
                       />
                       <BottomNavigationAction
                         component={Link}
-                        value="workouts"
-                        to="/workouts"
+                        value="workoutpage"
+                        to="/workoutpage"
                         label="Workouts"
                         icon={<ViewListIcon />}
                       />

@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Directory from "./Directory";
+import Directory from "./Directory_nu";
 
 const useStyles = makeStyles({
   root: {
