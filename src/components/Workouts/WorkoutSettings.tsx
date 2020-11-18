@@ -20,6 +20,9 @@ import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
+import Button from "@material-ui/core/Button";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { useHistory } from "react-router";
 
 interface Props {
   /**
@@ -57,6 +60,22 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     wrapper: {
       padding: "3rem 0",
+      boxSizing: "border-box",
+    },
+    fixedDiv: {
+      position: "fixed",
+      width: "100%",
+      height: "100%",
+      background: "black",
+      left: "0",
+      top: "0",
+      zIndex: 0,
+      opacity: "0.5",
+    },
+    textOnTop: {
+      position: "relative",
+      zIndex: 1,
+      padding: "2rem 1rem",
     },
   })
 );
@@ -66,6 +85,10 @@ function WorkoutSettings(props: Props) {
   console.log(props);
   const classes = useStyles();
   const [checked, setChecked] = React.useState(["wifi"]);
+  let history = useHistory();
+  const handleClick = () => {
+    history.goBack();
+  };
 
   const handleToggle = (value: string) => () => {
     const currentIndex = checked.indexOf(value);
@@ -87,14 +110,22 @@ function WorkoutSettings(props: Props) {
         <div
           style={{
             flexDirection: "column",
-            padding: "2rem",
+            height: "30vh",
+            backgroundSize: "cover",
             backgroundImage: `url(${process.env.PUBLIC_URL}/images/${workoutItem.imageUrl})`,
           }}
         >
-          <Typography variant="h6">{workoutItem.title}</Typography>
-          {/* <Typography variant="body1">
-            Ab workout that will get you a shredded six pack in no time
-          </Typography> */}
+          <div className={classes.fixedDiv}></div>
+          <div className={classes.textOnTop}>
+            <Button
+              style={{ marginRight: "10px", paddingLeft: "0", color: "#fff" }}
+              color="primary"
+              onClick={handleClick}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <Typography variant="h6">{workoutItem.title}</Typography>
+          </div>
         </div>
       </HideOnScroll>
       <div>
@@ -145,7 +176,11 @@ function WorkoutSettings(props: Props) {
               secondary="Set up your fitness tools"
             />
           </ListItem>
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+            style={{ margin: "-12px -24px -12px -24px" }}
+          >
             <Grid item xs={11} style={{ marginLeft: "auto" }}>
               <ListItem>
                 <ListItemIcon

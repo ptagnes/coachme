@@ -5,8 +5,8 @@ import ExerciseForm from "./ExerciseForm";
 import { editExercise, removeExercise } from "../../redux/actions";
 import ExercisesContext from "../../context/exercises-context";
 // import { ExercisesContext2 } from "../../firebase/ExercisesProvider";
-import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
+import Button from "@material-ui/core/Button";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AlertDialog from "../AlertDialog";
 
