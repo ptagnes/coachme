@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       cursor: "pointer",
       width: "100%",
-      // backgroundColor: "#af00ff",
       background:
         "linear-gradient(90deg, rgba(128,0,255,1) 0%, rgba(175,0,255,1) 35%, rgba(145,0,255,1) 100%)",
     },
@@ -74,14 +73,20 @@ const ExerciseCardTopCategories = ({
   title,
   filter,
   filterExercise,
+  filterFilteredExercise,
   clearFilters,
+  clearFilteredFilters,
   data,
+  filteredData,
 }: {
   title: string;
   filter: string;
   filterExercise: (query: string, filter: string) => void;
+  filterFilteredExercise: (query: string, filter: string) => void;
   clearFilters: () => void;
+  clearFilteredFilters: () => void;
   data: any;
+  filteredData: any;
 }) => {
   const classes = useStyles();
   const [opencat, setOpenCat] = React.useState(false);
@@ -126,7 +131,7 @@ const ExerciseCardTopCategories = ({
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Select musclegroup with {title}
+              Select muscles worked with {title}
             </Typography>
             <Button autoFocus color="inherit" onClick={handleCloseCat}>
               Close
@@ -139,9 +144,9 @@ const ExerciseCardTopCategories = ({
               key={key}
               title={prop}
               filter="musclegroup"
-              filterExercise={filterExercise}
-              clearFilters={clearFilters}
-              data={data}
+              filterExercise={filterFilteredExercise}
+              clearFilters={clearFilteredFilters}
+              data={filteredData}
             />
           ))}
           <List>

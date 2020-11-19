@@ -30,7 +30,7 @@ class DashboardExercises extends Component<ExercisesProps> {
 }
 
 const mapStateToProps = (state: StoreState) => ({
-  ...state,
+  exercisesState: state.exercisesState,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getExercisesAction: () => dispatch<any>(getExercisesAction()),

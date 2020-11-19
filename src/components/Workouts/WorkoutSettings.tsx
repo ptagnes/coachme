@@ -82,7 +82,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function WorkoutSettings(props: Props) {
   const { workoutItem, route, itemKey } = props;
-  console.log(props);
   const classes = useStyles();
   const [checked, setChecked] = React.useState(["wifi"]);
   let history = useHistory();

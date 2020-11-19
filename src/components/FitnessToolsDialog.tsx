@@ -168,7 +168,7 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
 }
 
 const mapStateToProps = (state: any) => ({
-  ...state,
+  fitnessToolsState: state.fitnessToolsState,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addFitnessTool: (name: string) => dispatch<any>(addFitnessTool(name)),

@@ -17,9 +17,3 @@ export const selectCollection = (collectionUrlParam: any) =>
     [selectCollections],
     (collections) => collections[collectionUrlParam]
   );
-//TODO
-export const selectSpecificWorkout = (collectionUrlParam: any) =>
-  createSelector(
-    [selectCollectionsForTopWorkoutCategories],
-    (collections) => collections[collectionUrlParam]
-  );

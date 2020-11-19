@@ -4,13 +4,17 @@ import { Dispatch } from "redux";
 import getExercisesAction from "../redux/actions/getExercisesAction";
 import {
   filterExerciseByValue,
+  filterFilteredExerciseByValue,
   clearFilters,
+  clearFilteredFilters,
   getFitnessTools,
 } from "../redux/actions";
 import { StoreState } from "../redux/reducers/index";
 import ExerciseCard from "./Exercises/ExerciseCard";
 import ExerciseCardTopCategories from "./Exercises/ExerciseCardTopCategories";
 import FitnessToolsDialog from "./FitnessToolsDialog";
+
+// import { selectCollection } from "../redux/selectors/exerciseSelectors";
 
 const Musclegroups = [
   "Upper body",
@@ -25,9 +29,12 @@ interface ExercisesProps {
   exercisesState: any;
   getExercisesAction: () => void;
   clearFilters: () => void;
+  clearFilteredFilters: () => void;
   filterExerciseByValue: (query: string, filter: string) => void;
+  filterFilteredExerciseByValue: (query: string, filter: string) => void;
   fitnessToolsState?: any;
   getFitnessTools?: () => void;
+  collections?: any;
 }
 class DashboardExerciseCategories extends Component<ExercisesProps> {
   state = {
@@ -45,12 +52,9 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
     const state =
       this.props.fitnessToolsState &&
       this.props.fitnessToolsState.fitnessToolsState;
-    // console.log(state);
-    // const data =
-    //   this.props.exercisesState && this.props.exercisesState.exercisesState;
     return (
       <div className="bp">
-        <h2>Exercise categories</h2>
+        <h2>Exercise categories by musclegroup</h2>
         {Musclegroups.map((prop: any, key: number) => (
           <ExerciseCard
             key={key}
@@ -61,18 +65,20 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
             data={this.props.exercisesState.filteredExercises}
           />
         ))}
-        <p>Fitness Tools</p>
+        <p>Filter By Fitness Tools</p>
         {state.map((prop: any, key: number) => (
           <ExerciseCardTopCategories
             key={key}
             title={prop.name}
             filter="equipment"
             filterExercise={this.props.filterExerciseByValue}
+            filterFilteredExercise={this.props.filterFilteredExerciseByValue}
             clearFilters={this.props.clearFilters}
+            clearFilteredFilters={this.props.clearFilteredFilters}
             data={this.props.exercisesState.filteredExercises}
+            filteredData={this.props.exercisesState.nFilteredExercises}
           />
         ))}
-
         <FitnessToolsDialog
           buttonTitle="Add Tools"
           title="Add Fitness Tools"
@@ -91,13 +97,18 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
 }
 
 const mapStateToProps = (state: StoreState) => ({
-  ...state,
+  exercisesState: state.exercisesState,
+  fitnessToolsState: state.fitnessToolsState,
+  // collection: selectCollection("musclegroup")(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getExercisesAction: () => dispatch<any>(getExercisesAction()),
   clearFilters: () => dispatch<any>(clearFilters()),
+  clearFilteredFilters: () => dispatch<any>(clearFilteredFilters()),
   filterExerciseByValue: (query: string, filter: string) =>
     dispatch<any>(filterExerciseByValue(query, filter)),
+  filterFilteredExerciseByValue: (query: string, filter: string) =>
+    dispatch<any>(filterFilteredExerciseByValue(query, filter)),
   getFitnessTools: () => dispatch<any>(getFitnessTools()),
 });
 export default connect(

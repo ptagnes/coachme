@@ -38,7 +38,6 @@ import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
 import {
   mainListItems,
-  secondaryListItems,
   adminListItems,
   logoutListItems,
   loginListItems,
@@ -212,12 +211,9 @@ function App() {
                         )}
                       </IconButton>
                     </div>
-                    <Divider />
-
-                    <List>{secondaryListItems}</List>
-                    <Divider />
                     {admin && (
                       <>
+                        <Divider />
                         <ListSubheader inset>Admin links</ListSubheader>
                         <List>{adminListItems}</List>
                       </>

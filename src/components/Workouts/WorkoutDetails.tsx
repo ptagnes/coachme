@@ -37,8 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
   const classes = useStyles();
-  console.log(workoutItem);
-  console.log(otherProps);
   const { exerciseitems, imageUrl } = workoutItem;
   let history = useHistory();
   const handleClick = () => {

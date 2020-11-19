@@ -4,6 +4,8 @@ const exercisesReducer = (state = {}, action: any) => {
       return state;
     case "FILTER_EXERCISES_BY_VALUE":
       return state;
+    case "FILTER_FILTERED_EXERCISES_BY_VALUE":
+      return state;
     case "ADD_EXERCISE":
       return state;
     case "REMOVE_EXERCISE":

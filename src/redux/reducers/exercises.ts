@@ -1,6 +1,7 @@
 let initialState = {
   exercisesState: [],
   filteredExercises: [],
+  nFilteredExercises: [],
 };
 const exercisesReducer = (state = initialState, action: any) => {
   switch (action.type) {
@@ -28,7 +29,6 @@ const exercisesReducer = (state = initialState, action: any) => {
       const matchedExercises = filterTarget.filter((exercise: any) => {
         return exercise[filter].toLowerCase().includes(query);
       });
-      console.log(matchedExercises);
       return {
         ...state,
         filteredExercises: matchedExercises,
@@ -38,6 +38,29 @@ const exercisesReducer = (state = initialState, action: any) => {
       return {
         ...state,
         filteredExercises: [],
+      };
+
+    case "FILTER_FILTERED_EXERCISES_BY_VALUE":
+      const filteredQuery = action.query.toLowerCase();
+      const newfilter = action.filter.toLowerCase();
+      let dataToFilter;
+      if (state.nFilteredExercises.length > 0) {
+        dataToFilter = state.nFilteredExercises;
+      } else {
+        dataToFilter = state.filteredExercises;
+      }
+      const nMatchedExercises = dataToFilter.filter((exercise: any) => {
+        return exercise[newfilter].toLowerCase().includes(filteredQuery);
+      });
+      return {
+        ...state,
+        nFilteredExercises: nMatchedExercises,
+      };
+
+    case "CLEAR_FILTERED_FILTERS":
+      return {
+        ...state,
+        nFilteredExercises: [],
       };
 
     case "ADD_EXERCISE":

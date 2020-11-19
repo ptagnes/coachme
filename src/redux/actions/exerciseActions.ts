@@ -114,6 +114,19 @@ export const filterExerciseByValue = (query: string, filter: string) => ({
   filter,
 });
 
+export const filterFilteredExerciseByValue = (
+  query: string,
+  filter: string
+) => ({
+  type: "FILTER_FILTERED_EXERCISES_BY_VALUE",
+  query,
+  filter,
+});
+
 export const clearFilters = () => ({
   type: "CLEAR_FILTERS",
+});
+
+export const clearFilteredFilters = () => ({
+  type: "CLEAR_FILTERED_FILTERS",
 });

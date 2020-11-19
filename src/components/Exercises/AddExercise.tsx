@@ -34,7 +34,7 @@ const AddExercise = (props: any) => {
           action="add"
           onSubmit={(exercise: any) => {
             props.addExercise(exercise);
-            props.history.push("/");
+            history.push("/");
           }}
         />
       </div>
@@ -54,10 +54,7 @@ export interface Exercise {
   videourl: string;
   createdAt: Date;
 }
-const mapStateToProps = (state: any) => ({
-  ...state,
-});
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addExercise: (exercise: Exercise) => dispatch<any>(addExercise(exercise)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(AddExercise);
+export default connect(null, mapDispatchToProps)(AddExercise);
