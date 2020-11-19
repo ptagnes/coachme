@@ -308,6 +308,13 @@ function App() {
                         path="/workoutdetails/:route/:id"
                         component={WorkoutDetails}
                       />
+                      <Route
+                        exakt
+                        path="/addexercise"
+                        render={() =>
+                          admin ? <AddExercise /> : <Redirect to="/" />
+                        }
+                      />
                       {admin && (
                         <>
                           <Route
