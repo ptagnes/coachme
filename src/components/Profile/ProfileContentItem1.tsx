@@ -2,9 +2,9 @@ import React from "react";
 
 export default function ProfileContentItem1() {
   return (
-    <div>
-      <h2>ProfileContent1</h2>
-      <div>
+    <>
+      <span>ProfileContent1</span>
+      <span>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -15,15 +15,15 @@ export default function ProfileContentItem1() {
         adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
         laboris nisi ut aliquip ex ea commodo consequat.
-      </div>
-    </div>
+      </span>
+    </>
   );
 }
 
 export const secondaryListItems = (
-  <div>
-    <h2>ProfileContent1</h2>
-    <div>
+  <>
+    <span>ProfileContent1</span>
+    <span>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -34,6 +34,6 @@ export const secondaryListItems = (
       do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
       minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
       ea commodo consequat.
-    </div>
-  </div>
+    </span>
+  </>
 );

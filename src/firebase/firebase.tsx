@@ -4,6 +4,9 @@ import "firebase/firestore";
 import "firebase/storage";
 import "firebase/database";
 import firebaseConfig from "./config";
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
 export class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
@@ -68,6 +71,7 @@ export class Firebase {
   async logout() {
     //await this.auth.signOut();
     await app.auth().signOut();
+    history.push("/");
   }
   async resetPassword(email: string) {
     //await this.auth.sendPasswordResetEmail(email);

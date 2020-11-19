@@ -72,12 +72,9 @@ function AppBarNav({
   };
   const [transparent, setTransparent] = React.useState(false);
   const route = location.pathname;
-  console.log(location.pathname);
   React.useEffect(() => {
-    console.log(route);
     if (route === "/profile") {
       setTransparent(true);
-      console.log("profile from useeffect");
     } else {
       setTransparent(false);
     }

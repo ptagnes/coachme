@@ -1,9 +1,14 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  withRouter,
+  Redirect,
+} from "react-router-dom";
 import clsx from "clsx";
 import useAuth from "./Auth/useAuth";
 import firebase from "./firebase";
-import PrivateRoute from "./Auth/PrivateRoute";
 import { AuthProvider } from "./firebase/Authentication";
 import ExercisesProvider from "./firebase/ExercisesProvider";
 import ExercisesContext from "./context/exercises-context";
@@ -12,13 +17,12 @@ import {
   createMuiTheme,
   makeStyles,
 } from "@material-ui/core/styles";
+import PrivateRoute from "./Auth/PrivateRoute";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
-// import Workouts from "./components/Workouts/Workouts";
 import WorkoutSettings from "./components/Workouts/WorkoutSettings";
 import WorkoutDetails from "./components/Workouts/WorkoutDetails";
-// import WorkoutCategories from "./components/Workouts/nu/WorkoutCategories_nu";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Forgot from "./components/Auth/Forgot";
@@ -110,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
 }));
-// const muiTheme = getMuiTheme(DarkBaseTheme);
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -140,9 +144,11 @@ function App() {
       setExercises(payload);
     });
   };
+
   React.useEffect(() => {
     fetchData();
   }, []);
+
   const FitnessTools = [
     "Bosu",
     "Barbell",
@@ -236,7 +242,6 @@ function App() {
                     })}
                   >
                     {/* <div className={classes.drawerHeader} /> */}
-
                     <Switch>
                       <PrivateRoute
                         exact
@@ -247,103 +252,111 @@ function App() {
                       <Route exact path="/signup" component={Signup} />
                       <Route exact path="/forgot" component={Forgot} />
                       <Route
-                        path="/exercisecategories"
-                        component={DashboardExerciseCategories}
-                        exact={true}
-                      />
-                      {/* <Route
-                        path="/workouts"
-                        component={Workouts}
-                        exact={true}
-                      /> */}
-                      {/* Using <Directory> selector */}
-                      {/* <Route
-                        path="/workoutcategories"
-                        component={WorkoutCategories}
-                        exact={true}
-                      /> */}
-                      <Route
-                        path="/workoutsettings/:route/:id"
-                        component={WorkoutSettings}
-                        exact={true}
+                        exact
+                        path="/profile"
+                        render={() =>
+                          user ? <Profile /> : <Redirect to="/" />
+                        }
                       />
                       <Route
-                        path="/workoutdetails/:route/:id"
-                        component={WorkoutDetails}
-                        exact={true}
-                      />
-                      <Route path="/profile" component={Profile} />
-                      <Route
-                        path="/editexercise/:id"
-                        component={EditExercise}
-                      />
-                      <Route
-                        path="/exercisedetail/:id"
-                        component={ExerciseDetail}
-                      />
-                      <Route path="/addexercise" component={AddExercise} />
-                      <Route
+                        exact
                         path="/profilesettings"
-                        component={ProfileSettings}
+                        render={() =>
+                          user ? <ProfileSettings /> : <Redirect to="/" />
+                        }
                       />
                       <Route
+                        exact
                         path="/profiletoanimatein"
-                        component={ProfileAnimateIn}
+                        render={() =>
+                          user ? <ProfileAnimateIn /> : <Redirect to="/" />
+                        }
                       />
                       <Route
-                        path="/editexercise/:id"
-                        component={EditExercise}
+                        exact={true}
+                        path="/exercisecategories"
+                        render={() =>
+                          user ? (
+                            <DashboardExerciseCategories />
+                          ) : (
+                            <Redirect to="/" />
+                          )
+                        }
                       />
                       <Route
                         path="/exercisedetail/:id"
                         component={ExerciseDetail}
                       />
-                      <Route path="/addexercise" component={AddExercise} />
                       <Route
                         exact
                         path="/workoutpage"
-                        component={WorkoutsOverview}
+                        render={() =>
+                          user ? <WorkoutsOverview /> : <Redirect to="/" />
+                        }
                       />
                       <Route
                         path="/workouts/:collectionId"
                         component={WorkoutPageCollection}
                       />
+                      <Route
+                        exact={true}
+                        path="/workoutsettings/:route/:id"
+                        component={WorkoutSettings}
+                      />
+                      <Route
+                        exact={true}
+                        path="/workoutdetails/:route/:id"
+                        component={WorkoutDetails}
+                      />
+                      {admin && (
+                        <>
+                          <Route
+                            exakt
+                            path="/editexercise/:id"
+                            component={EditExercise}
+                          />
+                        </>
+                      )}
                     </Switch>
 
-                    <BottomNavigation
-                      className={classes.bottomnav}
-                      value={value}
-                      onChange={handleChange}
-                    >
-                      <BottomNavigationAction
-                        component={Link}
-                        value="signal"
-                        to="/signal"
-                        label="Another"
-                        icon={<RestoreIcon />}
-                      />
-                      <BottomNavigationAction
-                        component={Link}
-                        value="exercisecategories"
-                        to="/exercisecategories"
-                        label="Exercises"
-                        icon={<FavoriteIcon />}
-                      />
-                      <BottomNavigationAction
-                        component={Link}
-                        value="workoutpage"
-                        to="/workoutpage"
-                        label="Workouts"
-                        icon={<ViewListIcon />}
-                      />
-                      <BottomNavigationAction
-                        component={Link}
-                        value="profile"
-                        to="/profile"
-                        label="Profile"
-                        icon={<AccountCircleIcon />}
-                      />
-                    </BottomNavigation>
+                    {user ? (
+                      <BottomNavigation
+                        className={classes.bottomnav}
+                        value={value}
+                        onChange={handleChange}
+                      >
+                        <BottomNavigationAction
+                          component={Link}
+                          value="signal"
+                          to="/signal"
+                          label="Another"
+                          icon={<RestoreIcon />}
+                        />
+                        <BottomNavigationAction
+                          component={Link}
+                          value="exercisecategories"
+                          to="/exercisecategories"
+                          label="Exercises"
+                          icon={<FavoriteIcon />}
+                        />
+                        <BottomNavigationAction
+                          component={Link}
+                          value="workoutpage"
+                          to="/workoutpage"
+                          label="Workouts"
+                          icon={<ViewListIcon />}
+                        />
+                        <BottomNavigationAction
+                          component={Link}
+                          value="profile"
+                          to="/profile"
+                          label="Profile"
+                          icon={<AccountCircleIcon />}
+                        />
+                      </BottomNavigation>
+                    ) : (
+                      <div></div>
+                    )}
                   </main>
                 </div>
               </MuiThemeProvider>

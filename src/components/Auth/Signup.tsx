@@ -43,7 +43,7 @@ export default function SignUp({ history }: { history: any }) {
       event.preventDefault();
       const { email, password } = event.target.elements;
       const displayName = "coachmeUser";
-      const role = 10; //user
+      const role = 10;
       try {
         await app
           .firebaseAuth()
