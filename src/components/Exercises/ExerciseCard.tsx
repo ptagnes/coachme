@@ -130,6 +130,9 @@ const ExerciseCard = ({
                 id={prop.id}
               />
             ))}
+          {data.length === 0 && (
+            <h2>There are no exercises yet in this category yet...</h2>
+          )}
         </div>
       </Dialog>
     </>
