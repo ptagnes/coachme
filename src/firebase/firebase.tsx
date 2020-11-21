@@ -53,6 +53,22 @@ export class Firebase {
     }
     return userRef;
   };
+  convertWorkoutsSnapshotToMap = (collections: any) => {
+    const transformedCollection = collections.docs.map((doc: any) => {
+      const { title, items, imageUrl } = doc.data();
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items,
+        imageUrl,
+      };
+    });
+    return transformedCollection.reduce((accumulator: any, collection: any) => {
+      accumulator[collection.title.toLowerCase()] = collection;
+      return accumulator;
+    }, {});
+  };
   async register(name: string, email: string, password: string) {
     //const newUser = await this.auth.createUserWithEmailAndPassword(
     const newUser = await app

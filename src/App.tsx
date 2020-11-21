@@ -56,6 +56,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import WorkoutsOverview from "./components/Workouts/WorkoutsOverview";
 import WorkoutPageCollection from "./components/Workouts/WorkoutPageCollection";
+import WorkoutsPage from "./components/Workouts/WorkoutsPage";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -287,7 +288,11 @@ function App() {
                         exact
                         path="/workoutpage"
                         render={() =>
-                          user ? <WorkoutsOverview /> : <Redirect to="/" />
+                          user ? (
+                            <WorkoutsOverview /> //WorkoutsPage
+                          ) : (
+                            <Redirect to="/" />
+                          )
                         }
                       />
                       <Route

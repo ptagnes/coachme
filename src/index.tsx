@@ -4,17 +4,29 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+
 // import * as serviceWorker from "./serviceWorker";
-import { reducers } from "./redux/reducers";
+import reducers from "./redux/reducers";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+// import logger from "redux-logger";
+// const middlewares = [thunk];
+// if (process.env.NODE_ENV === "development") {
+//   middlewares.push(logger);
+// }
+
 const store = createStore(reducers, applyMiddleware(thunk));
+export const persistor = persistStore(store);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

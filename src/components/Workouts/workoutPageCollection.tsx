@@ -12,6 +12,7 @@ const WorkoutPageCollection = ({
   route: string;
 }) => {
   const { title, items } = collection;
+  console.log(collection);
   return (
     <div className="bp">
       <h2>{title}</h2>
