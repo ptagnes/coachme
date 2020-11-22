@@ -8,6 +8,7 @@ import exercisesReducer from "./exercises";
 import fitnessToolsReducer from "./fitnesstools";
 import workoutReducer from "./workouts";
 import directoryReducer from "./directory";
+import usersReducer from "./users";
 
 // export interface Exercises {
 //   title: string,
@@ -25,6 +26,7 @@ export interface StoreState {
   fitnessToolsState: any;
   workoutState: any;
   directoryState: any;
+  usersState: any;
 }
 
 const reducers = combineReducers<StoreState>({
@@ -33,6 +35,7 @@ const reducers = combineReducers<StoreState>({
   fitnessToolsState: fitnessToolsReducer,
   workoutState: workoutReducer,
   directoryState: directoryReducer,
+  usersState: usersReducer,
 });
 
 export default persistReducer(persistConfig, reducers);
