@@ -1,16 +1,15 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import app from "../../firebase/firebase";
-import { AuthContext } from "../../firebase/Authentication";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,26 +36,43 @@ export default function SignUp({ history }: { history: any }) {
     code: string;
     message: string;
   }>();
-  const { currentUser } = React.useContext(AuthContext);
-  const handleSignUp = useCallback(
-    async (event) => {
-      event.preventDefault();
-      const { email, password } = event.target.elements;
-      const displayName = "coachmeUser";
-      const role = 10;
+  const [displayName, setDisplayName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleNameChange = (event: any) => {
+    setDisplayName(event.target.value);
+  };
+  const handleLastNameChange = (event: any) => {
+    setLastName(event.target.value);
+  };
+  const handleEmailChange = (event: any) => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event: any) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const role = 10;
+    if (
+      displayName !== "" &&
+      lastName !== "" &&
+      email !== "" &&
+      password !== ""
+    ) {
       try {
-        await app
-          .firebaseAuth()
-          .createUserWithEmailAndPassword(email.value, password.value);
+        app.register(displayName, lastName, email, password, role);
         history.push("/");
       } catch (error) {
         setErrors(error);
       }
-      console.log(currentUser);
-      await app.createUserProfileDocument(currentUser, { displayName, role }); //TODO chain after creating user
-    },
-    [history, currentUser]
-  );
+    } else {
+      alert("Please fill out all fields!");
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs" className="bp">
@@ -77,6 +93,7 @@ export default function SignUp({ history }: { history: any }) {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={(e) => handleNameChange(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -88,6 +105,7 @@ export default function SignUp({ history }: { history: any }) {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={(e) => handleLastNameChange(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -99,6 +117,7 @@ export default function SignUp({ history }: { history: any }) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={(e) => handleEmailChange(e)}
               />
               {errors !== undefined &&
                 errors!.code === "auth/invalid-email" && (
@@ -115,18 +134,19 @@ export default function SignUp({ history }: { history: any }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => handlePasswordChange(e)}
               />
               {errors !== undefined &&
                 errors!.code === "auth/weak-password" && (
                   <p className="error-text">{errors.message}</p>
                 )}
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree to the terms and conditions."
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"

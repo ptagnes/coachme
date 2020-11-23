@@ -41,11 +41,12 @@ function ProfileSettingsItem({
     setOpen(false);
   };
   React.useEffect(() => {
-    fetchUserStartAsync(currentUser.uid);
-  }, []);
+    if (currentUser) {
+      fetchUserStartAsync(currentUser.uid);
+    }
+  }, [currentUser, fetchUserStartAsync]);
 
   const { users } = userData;
-  console.log(users);
   return (
     <>
       <ListItem onClick={handleClickOpen} style={{ cursor: "pointer" }}>
@@ -57,7 +58,6 @@ function ProfileSettingsItem({
         <ListItemText primary={text} />
       </ListItem>
       <Divider />
-
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -73,95 +73,61 @@ function ProfileSettingsItem({
           </span>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>Settings text...</DialogContentText>
+          <DialogContentText>Update your settings bellow.</DialogContentText>
           <List>
             <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Name" />
               <ProfileSettingItemToEdit
-                itemToEdit="name"
+                itemToEdit="displayName"
                 itemType="text"
-                placeholderText="Update name"
+                placeholderText="Update display name"
               />
-              {users && users.name}
+              {users && users.displayName}
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Gender" />
               <ProfileSettingItemToEdit
                 itemToEdit="gender"
-                itemType="text"
+                itemType="radio"
                 placeholderText="Update gender"
               />
               {users && users.gender}
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Birthday" />
+              <ProfileSettingItemToEdit
+                itemToEdit="birthday"
+                itemType="timePicker"
+                placeholderText="Update birthday"
+              />
               {users && users.birthday}
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Units" />
-              {users && users.units}
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Height" />
               <ProfileSettingItemToEdit
                 itemToEdit="height"
                 itemType="text"
                 placeholderText="Update height"
               />
               {users && users.height}
+              <span>cm</span>
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Weight" />
               <ProfileSettingItemToEdit
                 itemToEdit="weight"
                 itemType="text"
-                placeholderText={users && users.weight}
+                placeholderText="Update weight"
               />
               {users && users.weight}
+              <span>kg</span>
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <EditIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Goal" />
+              <ProfileSettingItemToEdit
+                itemToEdit="goal"
+                itemType="radio"
+                placeholderText={users && users.goal}
+              />
               {users && users.goal}
             </ListItem>
             <Divider />

@@ -10,9 +10,6 @@ export const history = createBrowserHistory();
 export class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
-    // this.storage = app.storage();
-    // this.auth = app.auth();
-    // this.db = app.firestore();
   }
   firebaseStorage() {
     return app.storage();
@@ -26,27 +23,36 @@ export class Firebase {
   ref() {
     return app.database().ref();
   }
-  createUserProfileDocument = async (userAuth: any, additionalData: any) => {
-    console.log("userAuth");
-    console.log(userAuth);
+  createUserProfileDocument = async (
+    userAuth: any,
+    displayName: string,
+    lastName: string,
+    email: string,
+    role: number
+  ) => {
+    console.log("userAuth from createUserProfileDocument");
+    console.log(userAuth.user.uid);
     if (!userAuth) return;
-    const userRef = app.firestore().doc(`users/${userAuth.uid}`);
+    const userRef = app.firestore().doc(`users/${userAuth.user.uid}`);
+    console.log("userRef");
+    console.log(userRef);
     const snapShot = await userRef.get();
+    console.log("snapShot");
+    console.log(snapShot);
     if (!snapShot.exists) {
-      const { displayName, email, role } = userAuth;
+      // const { displayName, email, role } = userAuth;
       const createdAt = new Date();
       console.log("createuser");
       console.log(userRef);
-      console.log(additionalData);
       try {
         await userRef.set({
           displayName,
+          lastName,
           email,
           role,
           createdAt,
-          ...additionalData,
         });
-        console.log("user added?");
+        console.log("user added successfully!");
       } catch (error) {
         console.log("error creating user", error.message);
       }
@@ -69,14 +75,21 @@ export class Firebase {
       return accumulator;
     }, {});
   };
-  async register(name: string, email: string, password: string) {
-    //const newUser = await this.auth.createUserWithEmailAndPassword(
+  async register(
+    name: string,
+    lastName: string,
+    email: string,
+    password: string,
+    role: number
+  ) {
     const newUser = await app
       .auth()
       .createUserWithEmailAndPassword(email, password);
     if (newUser.user !== null) {
+      this.createUserProfileDocument(newUser, name, lastName, email, role);
       return await newUser.user.updateProfile({
         displayName: name,
+        //photoUrl
       });
     }
   }
