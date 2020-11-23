@@ -1,9 +1,12 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import ProfileContent from "./ProfileContent";
-
+import ImageUpload from "../ImageUpload";
 import { AuthContext } from "../../firebase/Authentication";
+import { editUser } from "../../redux/actions/usersActions";
+import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,20 +50,47 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function Profile() {
+function Profile({
+  editUser,
+  fetchUserStartAsync,
+  userData,
+}: {
+  editUser: (id: string, updates: any) => void;
+  fetchUserStartAsync: (id: string) => void;
+  userData?: any;
+}) {
   const { currentUser, isAdmin } = React.useContext(AuthContext);
-
+  const [file, setImgFile] = useState<File | null>(null);
+  const [fileUrl, setFileUrl] = useState<string | null>();
+  const id = currentUser.uid;
   const src =
-    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38";
+    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
   const classes = useStyles();
+  const { users } = userData;
+  console.log(users);
+
+  React.useEffect(() => {
+    fetchUserStartAsync(id);
+    if (fileUrl) {
+      console.log("the uploaded file:");
+      console.log(fileUrl);
+      const update = { userImage: fileUrl };
+      editUser(id, update);
+      fetchUserStartAsync(id);
+    }
+  }, [fileUrl, fetchUserStartAsync]);
 
   return (
     <div className={`${classes.root} bp`}>
       <div className={classes.cover}></div>
       <div className={classes.container}>
         <div>
-          <img src={src} className={classes.user} alt="user" />
-
+          <img
+            src={users ? users.userImage : src}
+            className={classes.user}
+            alt="user"
+          />
+          <ImageUpload setImgFile={setImgFile} setFileUrl={setFileUrl} />
           <h4 className={classes.header}>
             {currentUser && currentUser.displayName}
           </h4>
@@ -93,4 +123,11 @@ function Profile() {
   );
 }
 
-export default Profile;
+const mapStateToProps = (state: any) => ({
+  userData: state.usersState,
+});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  editUser: (id: string, updates: any) => dispatch<any>(editUser(id, updates)),
+  fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
