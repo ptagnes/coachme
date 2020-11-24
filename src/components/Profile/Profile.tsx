@@ -7,11 +7,12 @@ import ImageUpload from "../ImageUpload";
 import { AuthContext } from "../../firebase/Authentication";
 import { editUser } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: `url(${process.env.PUBLIC_URL}/images/profilebg.png)`,
+      background: `url(${process.env.PUBLIC_URL}/images/bg/bg3.jpg)`,
       backgroundSize: "cover",
     },
     cover: {
@@ -38,14 +39,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     header: {
       fontFamily: "Lobster",
-      fontSize: "1.2rem",
+      fontSize: "1.9rem",
       lineHeight: "1",
+      marginTop: "0.5rem",
     },
     user: {
       width: "110px",
       height: "110px",
       borderRadius: "100%",
       border: "5px solid white",
+      backgroundSize: "cover",
+      margin: "0 auto",
     },
   })
 );
@@ -62,7 +66,10 @@ function Profile({
   const { currentUser, isAdmin } = React.useContext(AuthContext);
   const [file, setImgFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>();
-  const id = currentUser.uid;
+  let id: string;
+  if (currentUser) {
+    id = currentUser.uid;
+  }
   const src =
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
   const classes = useStyles();
@@ -85,20 +92,22 @@ function Profile({
       <div className={classes.cover}></div>
       <div className={classes.container}>
         <div>
-          <img
-            src={users ? users.userImage : src}
-            className={classes.user}
-            alt="user"
-          />
+          {users && users.userImage ? (
+            <div
+              className={classes.user}
+              style={{ backgroundImage: `url(${users.userImage})` }}
+            ></div>
+          ) : (
+            <AccountCircleIcon style={{ fontSize: "90px" }} />
+          )}
+
           <ImageUpload setImgFile={setImgFile} setFileUrl={setFileUrl} />
           <h4 className={classes.header}>
             {currentUser && currentUser.displayName}
           </h4>
-          <h4 className={classes.header}>{currentUser && currentUser.email}</h4>
           {isAdmin && <h4>Admin</h4>}
-          <h4 className="work">Coach | Grupp trainer | PT</h4>
 
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -113,7 +122,7 @@ function Profile({
             <div>
               <small>Next challenge</small> <p>Kirkjufell</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="middle">
           <ProfileContent />

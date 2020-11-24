@@ -57,7 +57,7 @@ const Exercise = ({
         container
         // wrap="nowrap"
         spacing={2}
-        style={{ backgroundColor: "#565555" }}
+        style={{ backgroundColor: "#3a3c6d" }}
       >
         <Grid item>
           <Avatar className={classes.avatar}>

@@ -16,6 +16,8 @@ import ProfileSettings from "../Profile/ProfileSettings";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   appBar: {
+    backgroundColor: "transparent",
+    boxShadow: "none",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -84,7 +86,7 @@ function AppBarNav({
       case "/":
         return "Welcome!";
       case "/profile":
-        return "Hi User!";
+        return "CoachMe";
       case "/exercisecategories":
         return "CoachMe";
       default:

@@ -122,8 +122,12 @@ const theme = createMuiTheme({
     },
     secondary: {
       light: blueGrey[300],
-      main: blueGrey[500],
+      // main: blueGrey[500],
+      main: "#28294a",
       dark: blueGrey[700],
+    },
+    background: {
+      paper: "#32335b",
     },
     type: "dark",
   },

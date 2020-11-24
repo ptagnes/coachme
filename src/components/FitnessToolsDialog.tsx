@@ -112,16 +112,18 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
           TransitionComponent={Transition}
         >
           <AppBar>
-            <Toolbar>
+            <Toolbar style={{ backgroundColor: "#2e2f52" }}>
               <IconButton
                 edge="start"
-                color="inherit"
+                color="secondary"
                 onClick={handleClickClose}
                 aria-label="close"
               >
                 <CloseIcon />
               </IconButton>
-              <Typography variant="h6">Exercises in category</Typography>
+              <Typography variant="h6" style={{ fontSize: "0.9rem" }}>
+                Exercises in category
+              </Typography>
               <Button autoFocus color="inherit" onClick={handleClickClose}>
                 Close
               </Button>

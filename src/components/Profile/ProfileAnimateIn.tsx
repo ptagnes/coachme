@@ -8,16 +8,16 @@ import "./Profile.css";
 
 const settingsItems = [
   "Edit Profile",
-  "Reminders",
-  "Integrations",
-  "About CoachMe",
+  // "Reminders",
+  // "Integrations",
+  // "About CoachMe",
 ];
 class ProfileAnimateIn extends Component {
   render() {
     return (
       <div
         className="page-container page"
-        style={{ height: "100vh", background: "#424242", padding: "1rem" }}
+        style={{ height: "100vh", background: "#33345d", padding: "1rem" }}
       >
         <div className="backBtn">
           <Link

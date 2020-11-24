@@ -36,8 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       cursor: "pointer",
       width: "100%",
-      background:
-        "linear-gradient(90deg, rgba(128,0,255,1) 0%, rgba(175,0,255,1) 35%, rgba(145,0,255,1) 100%)",
+      background: "#3a3c6d",
+      // background:
+      //   "linear-gradient(90deg, rgba(128,0,255,1) 0%, rgba(175,0,255,1) 35%, rgba(145,0,255,1) 100%)",
     },
     details: {
       alignSelf: "center",
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       marginLeft: theme.spacing(2),
+      fontSize: "0.9rem",
       flex: 1,
     },
   })
@@ -118,7 +120,7 @@ const ExerciseCardTopCategories = ({
         TransitionComponent={Transition}
       >
         <AppBar className={classes.appBar}>
-          <Toolbar>
+          <Toolbar style={{ backgroundColor: "#2e2f52" }}>
             <IconButton
               edge="start"
               color="inherit"
