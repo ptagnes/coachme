@@ -12,6 +12,7 @@ import firebase from "../firebase";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import WorkoutTracker from "./WorkoutTracker/WorkoutTracker";
 var routes = [
   {
     path: "/exercisecategories",
@@ -30,6 +31,12 @@ var routes = [
     name: "Profile",
     icon: { PeopleIcon },
     component: Profile,
+  },
+  {
+    path: "/workouttracker",
+    name: "Workout Tracker",
+    icon: { PeopleIcon },
+    component: WorkoutTracker,
   },
 ]; //workoutpage
 

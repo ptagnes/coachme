@@ -56,7 +56,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import WorkoutsOverview from "./components/Workouts/WorkoutsOverview";
 import WorkoutPageCollection from "./components/Workouts/WorkoutPageCollection";
-import WorkoutsPage from "./components/Workouts/WorkoutsPage";
+// import WorkoutsPage from "./components/Workouts/WorkoutsPage";
+import WorkoutTracker from "./components/WorkoutTracker/WorkoutTracker";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -287,6 +288,10 @@ function App() {
                       <Route
                         path="/exercisedetail/:id"
                         component={ExerciseDetail}
+                      />
+                      <Route
+                        path="/workouttracker"
+                        component={WorkoutTracker}
                       />
                       <Route
                         exact
