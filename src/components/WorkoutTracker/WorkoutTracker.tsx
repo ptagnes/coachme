@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthContext } from "../../firebase/Authentication";
 import useStyles from "./theme.dashboard";
-import Calendar from "../Calendar";
+import Calendar from "../Calendar/index";
 
 function WorkoutTracker(props: any) {
   const classes = useStyles();

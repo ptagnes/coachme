@@ -16,7 +16,7 @@ import ProfileSettings from "../Profile/ProfileSettings";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: "transparent",
+    backgroundColor: "#292b4f",
     boxShadow: "none",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,

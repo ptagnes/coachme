@@ -29,6 +29,10 @@ const usersReducer = (state = INITIAL_STATE, action: any) => {
       console.log("users reducer EDIT_USERS action.payload");
       console.log(action.payload);
       return state;
+    case UsersActionTypes.ADD_USER_ACTIVITY:
+      console.log("add user activity");
+      console.log(action.payload);
+      return state;
     default:
       return state;
   }
