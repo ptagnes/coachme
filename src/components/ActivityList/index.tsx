@@ -27,14 +27,18 @@ function ActivityList(props: any) {
     setEditing,
     id,
   } = props;
-  console.log("activities from ActivityList");
-  console.log(activities);
+
+  //   console.log("activities from ActivityList");
+  //   console.log(activities);
+  /////////////////////////////////////////////////////////////////////////////////////
 
   const deleteActivity = (i: any) => {
     // Get key of activity in firebase
     const activityKey = Object.keys(activities)[i];
     console.log("activityKey");
     console.log(activityKey);
+    ///////////////////////////////////////////////////////////////////////////
+
     // Connect to our firebase API
     const emptyActivity = {
       date: null,

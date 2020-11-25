@@ -1,15 +1,38 @@
 .calendar {
   overflow: hidden;
 }
-
+.calendarWrapper {
+  padding: 0 1rem;
+}
+.calendarGrid {
+  padding-top: 4rem;
+}
 .calendar th,
 .calendar td {
-  padding: 1em 2em;
+  padding: 1em 0;
+  text-align: center;
+}
+@media (min-width: 769px) {
+  .calendar th,
+  .calendar td {
+    width: 100px;
+  }
 }
 @media all and (max-width: 768px) {
   .calendar th,
   .calendar td {
     padding: 5px;
+  }
+  .calendar th {
+    font-size: 0.5rem;
+  }
+  .calendarWrapper {
+    padding: 0 20px;
+  }
+  .calendarGrid {
+    margin: 0;
+    padding: 4rem 0 0 0;
+    width: 100%;
   }
 }
 
@@ -19,13 +42,13 @@
 
 .calendar .today {
   font-weight: bold;
-  background-image: linear-gradient(to top, #af00ff 0%, #af00ffad 100%);
+  background-image: linear-gradient(to top, #393a67 0%, #3f4275 100%);
 }
 
 .calendar .active {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-image: linear-gradient(120deg, #70718f 0%, #6465a4 100%);
   color: white;
-  padding: 5px;
+  padding: 6px;
   border-radius: 50%;
 }
 
@@ -63,7 +86,7 @@
 .calendar .selected-day {
   color: white;
   font-weight: bold;
-  background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  background-image: linear-gradient(120deg, #af00ff 0%, #8a0ac4 100%);
 }
 
 .paper {

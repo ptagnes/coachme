@@ -39,6 +39,7 @@ function AddActivity(props: any) {
   // Set query date for updating database
   selectedDay.year = new Date().getFullYear();
   let queryDate = `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`;
+
   const defaultActivity = {
     name: "",
     type: 1,
@@ -77,19 +78,18 @@ function AddActivity(props: any) {
   };
   const handleSlider = (e: any) => {
     const duration = e.target.getAttribute("aria-valuenow");
-    setActivity({ ...activity, duration: duration });
+    if (duration !== null) {
+      setActivity({ ...activity, duration: duration });
+    } else {
+      setActivity({ ...activity, duration: 60 }); //TODO: fix null values
+    }
   };
   const isValid = activity.name === "";
   const handleSubmit = () => {
     if (currentUser) {
-      console.log("activities from state");
-      console.log(activitiesState);
-      console.log(activity);
       const mergedActivities = [...activitiesState, activity];
-      console.log(mergedActivities);
       addUserActivity(uid, mergedActivities);
-      fetchUserStartAsync(uid);
-
+      fetchUserStartAsync(uid); //TODO see if this updates global state in parent/related components
       setActivity(defaultActivity);
       setOpenSnackbar(true);
       setSnackbarMsg("Added activity");
@@ -125,8 +125,8 @@ function AddActivity(props: any) {
             onChange={handleChange}
           >
             <MenuItem value={1}>Lifting Weights</MenuItem>
-            <MenuItem value={2}>Running</MenuItem>
-            <MenuItem value={3}>Cycling</MenuItem>
+            <MenuItem value={2}>Cardio</MenuItem>
+            <MenuItem value={3}>Weights/Cardio</MenuItem>
           </Select>
         </div>
         <Typography id="discrete-slider" gutterBottom>

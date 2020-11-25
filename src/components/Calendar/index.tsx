@@ -68,6 +68,7 @@ function Calendar(props: any) {
       fetchUserStartAsync(currentUser.uid);
     }
   }, []);
+
   useEffect(() => {
     if (currentUser) {
       const user = userData.users;
@@ -83,20 +84,20 @@ function Calendar(props: any) {
           // setEditing(false); Add later
           // Update active days
           retrieveActiveDays(activities);
+          ///////////////////////////////////////////////////////////////////
+          console.log("activities from Calendar useEffect"); //TODO see that this updates after AddActivity action
+          console.log(activities);
         }
       }
     }
   }, [currentUser, queryDate, userData]);
 
   const retrieveActiveDays = (activities: any) => {
-    console.log("activities from retrieveActiveDays");
-    console.log(activities);
     const arr = activities.map((obj: any) => {
       return obj.date.length === 8
         ? obj.date.slice(0, 3)
-        : obj.date.slice(0, 4);
+        : obj.date.slice(0, 5); //was 0, 4
     });
-    console.log(arr);
     setActiveDays(arr);
   };
 
@@ -112,88 +113,90 @@ function Calendar(props: any) {
   };
 
   return (
-    <Grid container spacing={0} style={{ paddingTop: "4rem" }}>
-      <Grid item xs={12} md={8} lg={9}>
-        <CalendarHead
-          allMonths={allMonths}
-          currentMonth={currentMonth}
-          currentYear={currentYear}
-          setMonth={setMonth}
-          showMonthTable={showMonthTable}
-          toggleMonthSelect={toggleMonthSelect}
-        />
-        <CalendarBody
-          firstDayOfMonth={firstDayOfMonth}
-          daysInMonth={daysInMonth}
-          currentDay={currentDay}
-          currentMonth={currentMonth}
-          currentMonthNum={currentMonthNum}
-          actualMonth={actualMonth}
-          setSelectedDay={setSelectedDay}
-          selectedDay={selectedDay}
-          weekdays={moment.weekdays()}
-          activeDays={activeDays}
-        />
-      </Grid>
-      <Grid item xs={12} md={4} lg={3}>
-        <Paper className="paper">
-          {editing ? (
-            <>
-              <h3>
-                Edit activity on {selectedDay.day}-{selectedDay.month + 1}{" "}
-              </h3>
-              <EditActivity
-                activity={activity}
-                activityKey={activityKey}
-                selectedDay={selectedDay}
-                authUser={props.authUser}
-                setEditing={setEditing}
-                setOpenSnackbar={setOpenSnackbar}
-                setSnackbarMsg={setSnackbarMsg}
-                id={uid}
-              />
-            </>
-          ) : (
-            <>
-              <h3>
-                Add activity on {selectedDay.day}-{selectedDay.month + 1}{" "}
-              </h3>
-              <AddActivity
-                selectedDay={selectedDay}
-                authUser={props.authUser}
-                setOpenSnackbar={setOpenSnackbar}
-                setSnackbarMsg={setSnackbarMsg}
-              />
-            </>
-          )}
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={7} style={{ paddingBottom: "4rem" }}>
-        <Paper className="paper">
-          <h3>
-            Activities on {selectedDay.day}-{selectedDay.month + 1}
-          </h3>
-          <ActivityList
-            loading={loading}
-            activities={activities}
-            authUser={props.authUser}
-            setOpenSnackbar={setOpenSnackbar}
-            setSnackbarMsg={setSnackbarMsg}
-            editActivity={editActivity}
-            setEditing={setEditing}
-            id={uid}
+    <div className="calendarWrapper">
+      <Grid container spacing={3} className="calendarGrid">
+        <Grid item xs={12} md={8} lg={9}>
+          <CalendarHead
+            allMonths={allMonths}
+            currentMonth={currentMonth}
+            currentYear={currentYear}
+            setMonth={setMonth}
+            showMonthTable={showMonthTable}
+            toggleMonthSelect={toggleMonthSelect}
           />
-        </Paper>
+          <CalendarBody
+            firstDayOfMonth={firstDayOfMonth}
+            daysInMonth={daysInMonth}
+            currentDay={currentDay}
+            currentMonth={currentMonth}
+            currentMonthNum={currentMonthNum}
+            actualMonth={actualMonth}
+            setSelectedDay={setSelectedDay}
+            selectedDay={selectedDay}
+            weekdays={moment.weekdays()}
+            activeDays={activeDays}
+          />
+        </Grid>
+        <Grid item xs={12} md={4} lg={3}>
+          <Paper className="paper">
+            {editing ? (
+              <>
+                <h3>
+                  Edit activity on {selectedDay.day}-{selectedDay.month + 1}{" "}
+                </h3>
+                <EditActivity
+                  activity={activity}
+                  activityKey={activityKey}
+                  selectedDay={selectedDay}
+                  authUser={props.authUser}
+                  setEditing={setEditing}
+                  setOpenSnackbar={setOpenSnackbar}
+                  setSnackbarMsg={setSnackbarMsg}
+                  id={uid}
+                />
+              </>
+            ) : (
+              <>
+                <h3 style={{ marginBottom: "0" }}>
+                  Add activity on {selectedDay.day}-{selectedDay.month + 1}{" "}
+                </h3>
+                <AddActivity
+                  selectedDay={selectedDay}
+                  authUser={props.authUser}
+                  setOpenSnackbar={setOpenSnackbar}
+                  setSnackbarMsg={setSnackbarMsg}
+                />
+              </>
+            )}
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={7} style={{ paddingBottom: "4rem" }}>
+          <Paper className="paper">
+            <h3>
+              Activities on {selectedDay.day}-{selectedDay.month + 1}
+            </h3>
+            <ActivityList
+              loading={loading}
+              activities={activities}
+              authUser={props.authUser}
+              setOpenSnackbar={setOpenSnackbar}
+              setSnackbarMsg={setSnackbarMsg}
+              editActivity={editActivity}
+              setEditing={setEditing}
+              id={uid}
+            />
+          </Paper>
+        </Grid>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          open={openSnackbar}
+          message={snackbarMsg}
+        />
       </Grid>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        open={openSnackbar}
-        message={snackbarMsg}
-      />
-    </Grid>
+    </div>
   );
 }
 const mapStateToProps = (state: any) => ({
