@@ -53,7 +53,7 @@ function ProfilePic({
   };
   return (
     <>
-      <label htmlFor="upload-photo" style={{ position: "absolute" }}>
+      <label htmlFor="upload-photo" style={{ position: "absolute", top: "0", right: "33%" }}>
         <input
           style={{ display: "none" }}
           id="upload-photo"

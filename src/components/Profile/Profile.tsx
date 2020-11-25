@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       background: `url(${process.env.PUBLIC_URL}/images/bg/bg3.jpg)`,
       backgroundSize: "cover",
+      position: "relative"
     },
     cover: {
       position: "fixed",
@@ -103,9 +104,8 @@ function Profile({
 
           <ImageUpload setImgFile={setImgFile} setFileUrl={setFileUrl} />
           <h4 className={classes.header}>
-            {currentUser && currentUser.displayName}
+            {users && users.displayName}
           </h4>
-          {isAdmin && <h4>Admin</h4>}
 
           {/* <div
             style={{

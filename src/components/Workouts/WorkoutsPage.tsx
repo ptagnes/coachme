@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { fetchWorkoutsStartAsync } from "../../redux/actions/workoutActions";
-import WorkoutPageCollection from "./WorkoutPageCollection";
+import WorkoutPageCollection from "./workoutPageCollection";
 import WorkoutsOverview from "./WorkoutsOverview";
 interface WorkoutsPageProps {
   fetchWorkoutsStartAsync?: () => void;

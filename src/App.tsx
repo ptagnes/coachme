@@ -55,7 +55,7 @@ import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import WorkoutsOverview from "./components/Workouts/WorkoutsOverview";
-import WorkoutPageCollection from "./components/Workouts/WorkoutPageCollection";
+import WorkoutPageCollection from "./components/Workouts/workoutPageCollection";
 // import WorkoutsPage from "./components/Workouts/WorkoutsPage";
 import WorkoutTracker from "./components/WorkoutTracker/WorkoutTracker";
 
