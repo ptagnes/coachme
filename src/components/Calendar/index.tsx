@@ -10,10 +10,14 @@ import CalendarHead from "./calendar-head";
 import AddActivity from "../AddActivity";
 import EditActivity from "../EditActivity";
 import ActivityList from "../ActivityList";
+
+import { AuthContext } from "../../firebase/Authentication";
 import { addUserActivity } from "../../redux/actions/usersActions";
+import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+
 //addUserActivity: (id: string, activities: any) => void;
 function Calendar(props: any) {
-  const { firebase, authUser } = props;
+  const { userData, fetchUserStartAsync } = props;
   let defaultSelectedDay = {
     day: moment().format("D"),
     month: moment().month(),
@@ -52,9 +56,34 @@ function Calendar(props: any) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState(null);
   /*** ACTIVITY LIST ***/
-  const [activities, setActivities] = useState(true);
-  const [loading, setLoading] = useState([]);
+  const [activities, setActivities] = useState<{}[]>([]); //true
+  const [loading, setLoading] = useState<boolean>(); //[]
   const [activeDays, setActiveDays] = useState([]);
+  const { currentUser } = React.useContext(AuthContext);
+  let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchUserStartAsync(currentUser.uid);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      const user = userData.users;
+      if (user) {
+        if (user.activities) {
+          const ac = userData.users.activities;
+          let activities = Array.isArray(ac) ? ac : [ac];
+          const filterByQueryDate = activities.filter(function (item: any) {
+            return item.date === queryDate;
+          });
+          setActivities(filterByQueryDate);
+          setLoading(false);
+        }
+      }
+    }
+  }, [currentUser, queryDate, userData]);
 
   // const retrieveData = () => {
   //     let queryDate = `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`;
@@ -87,7 +116,6 @@ function Calendar(props: any) {
 
   // useEffect(() => retrieveData(), [selectedDay]);
 
-  console.log(props);
   /*** EDIT AN ACTIVITY ***/
   const [editing, setEditing] = useState(false);
   const [activity, setActivity] = useState(null);
@@ -155,7 +183,7 @@ function Calendar(props: any) {
           )}
         </Paper>
       </Grid>
-      <Grid item xs={12} md={7}>
+      <Grid item xs={12} md={7} style={{ paddingBottom: "4rem" }}>
         <Paper className="paper">
           <h3>
             Activities on {selectedDay.day}-{selectedDay.month + 1}
@@ -182,14 +210,12 @@ function Calendar(props: any) {
     </Grid>
   );
 }
-
-// export default Calendar;
 const mapStateToProps = (state: any) => ({
   userData: state.usersState,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addUserActivity: (id: string, activities: any) =>
     dispatch<any>(addUserActivity(id, activities)),
-  //   fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
+  fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

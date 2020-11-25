@@ -71,11 +71,9 @@ export const addUserActivity = (id: string, activities: any) => async (
     const user = usersRef.doc(id);
     if (!executed) {
       executed = true;
-      console.log("push activity");
       user.update({
         activities: activities,
       });
-      // userActivityRef.push(activities);
     }
     dispatch({
       type: UsersActionTypes.ADD_USER_ACTIVITY,

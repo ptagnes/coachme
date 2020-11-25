@@ -11,7 +11,6 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { AuthContext } from "../../firebase/Authentication";
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: "100%",
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
-
 function AddActivity(props: any) {
   const classes = useStyles();
   const {
@@ -34,20 +32,16 @@ function AddActivity(props: any) {
   if (currentUser) {
     uid = currentUser.uid;
   }
-
   // Set query date for updating database
   selectedDay.year = new Date().getFullYear();
   let queryDate = `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`;
-
   const defaultActivity = {
     name: "",
     type: 1,
     duration: 60,
     date: queryDate,
   };
-
   const [activity, setActivity] = useState(defaultActivity);
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setActivity({
@@ -56,28 +50,22 @@ function AddActivity(props: any) {
       [name]: value,
     });
   };
-
   const handleSlider = (e: any) => {
     const duration = e.target.getAttribute("aria-valuenow");
     setActivity({ ...activity, duration: duration });
   };
-
   const isValid = activity.name === "";
-
   const handleSubmit = () => {
     if (currentUser) {
       addUserActivity(uid, activity);
-      console.log("activity from submit");
-      console.log(activity);
       setActivity(defaultActivity);
       setOpenSnackbar(true);
       setSnackbarMsg("Added activity");
       setTimeout(() => {
         setOpenSnackbar(false);
-      }, 3000);
+      }, 4000);
     }
   };
-
   return (
     <form noValidate onSubmit={(e) => e.preventDefault()}>
       <FormControl className={classes.formControl}>
@@ -138,7 +126,6 @@ function AddActivity(props: any) {
     </form>
   );
 }
-
 const mapStateToProps = (state: any) => ({
   userData: state.usersState,
 });
