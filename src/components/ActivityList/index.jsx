@@ -65,10 +65,10 @@ function ActivityList(props) {
                                             type = "Lifting weights";
                                             break;
                                         case 2:
-                                            type = "Running";
+                                            type = "Cardio";
                                             break;
                                         case 3:
-                                            type = "Cycling";
+                                            type = "Weights & Cardio";
                                             break;
                                         default:
                                             type = "Not set";

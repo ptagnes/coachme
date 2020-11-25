@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,6 +11,8 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { AuthContext } from "../../firebase/Authentication";
+import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: "100%",
@@ -26,6 +28,8 @@ function AddActivity(props: any) {
     setOpenSnackbar,
     setSnackbarMsg,
     addUserActivity,
+    userData,
+    fetchUserStartAsync,
   } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
@@ -42,6 +46,27 @@ function AddActivity(props: any) {
     date: queryDate,
   };
   const [activity, setActivity] = useState(defaultActivity);
+  const [activitiesState, setActivitiesState] = useState<{}[]>([]);
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchUserStartAsync(currentUser.uid);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      const user = userData.users;
+      if (user) {
+        if (user.activities) {
+          const ac = userData.users.activities;
+          let activities = Array.isArray(ac) ? ac : [ac];
+          setActivitiesState(activities);
+        }
+      }
+    }
+  }, [currentUser, queryDate, userData, fetchUserStartAsync]);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setActivity({
@@ -57,7 +82,14 @@ function AddActivity(props: any) {
   const isValid = activity.name === "";
   const handleSubmit = () => {
     if (currentUser) {
-      addUserActivity(uid, activity);
+      console.log("activities from state");
+      console.log(activitiesState);
+      console.log(activity);
+      const mergedActivities = [...activitiesState, activity];
+      console.log(mergedActivities);
+      addUserActivity(uid, mergedActivities);
+      fetchUserStartAsync(uid);
+
       setActivity(defaultActivity);
       setOpenSnackbar(true);
       setSnackbarMsg("Added activity");
@@ -132,6 +164,6 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addUserActivity: (id: string, activities: any) =>
     dispatch<any>(addUserActivity(id, activities)),
-  //   fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
+  fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddActivity);

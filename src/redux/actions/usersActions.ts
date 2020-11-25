@@ -68,6 +68,8 @@ export const addUserActivity = (id: string, activities: any) => async (
     const payload = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
+    console.log("activities from addUserActivity action");
+    console.log(activities);
     const user = usersRef.doc(id);
     if (!executed) {
       executed = true;

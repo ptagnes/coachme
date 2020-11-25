@@ -15,7 +15,6 @@ import { AuthContext } from "../../firebase/Authentication";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 
-//addUserActivity: (id: string, activities: any) => void;
 function Calendar(props: any) {
   const { userData, fetchUserStartAsync } = props;
   let defaultSelectedDay = {
@@ -80,41 +79,25 @@ function Calendar(props: any) {
           });
           setActivities(filterByQueryDate);
           setLoading(false);
+          // setEditing(false); Add later
+          // Update active days
+          retrieveActiveDays(activities);
         }
       }
     }
   }, [currentUser, queryDate, userData]);
 
-  // const retrieveData = () => {
-  //     let queryDate = `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`;
-  //     let ref = firebase.db.ref().child(`users/${authUser.uid}/activities`);
-  //     ref.orderByChild("date").equalTo(queryDate).on("value", snapshot => {
-  //         let data = snapshot.val();
-  //         setActivities(data);
-  //         setLoading(false);
-  //         // setEditing(false); Add later
-  //     });
-  //     // Update active days
-  //     retrieveActiveDays();
-  // };
-
-  // const retrieveActiveDays = () => {
-  //     let ref = firebase.db.ref().child(`users/${authUser.uid}/activities`);
-  //     ref.on("value", snapshot => {
-  //         let data = snapshot.val();
-  //         const values = Object.values(data);
-  //         // Store all active day/month combinations in array for calendar
-  //         const arr = values.map(obj => {
-  //             return obj.date.length === 8
-  //             ? obj.date.slice(0,3)
-  //             : obj.date.slice(0,4)
-  //         });
-  //         console.log(arr);
-  //         setActiveDays(arr);
-  //     });
-  // }
-
-  // useEffect(() => retrieveData(), [selectedDay]);
+  const retrieveActiveDays = (activities: any) => {
+    console.log("activities from retrieveActiveDays");
+    console.log(activities);
+    const arr = activities.map((obj: any) => {
+      return obj.date.length === 8
+        ? obj.date.slice(0, 3)
+        : obj.date.slice(0, 4);
+    });
+    console.log(arr);
+    setActiveDays(arr);
+  };
 
   /*** EDIT AN ACTIVITY ***/
   const [editing, setEditing] = useState(false);
