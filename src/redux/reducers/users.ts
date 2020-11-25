@@ -29,6 +29,8 @@ const usersReducer = (state = INITIAL_STATE, action: any) => {
       return state;
     case UsersActionTypes.ADD_USER_ACTIVITY:
       return state;
+    case UsersActionTypes.EDIT_USER_ACTIVITY:
+      return state;
     default:
       return state;
   }

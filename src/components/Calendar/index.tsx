@@ -60,13 +60,14 @@ function Calendar(props: any) {
   const [activeDays, setActiveDays] = useState([]);
   const { currentUser } = React.useContext(AuthContext);
   let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
+  const [uid, setUid] = useState<string>();
 
   useEffect(() => {
     if (currentUser) {
+      setUid(currentUser.uid);
       fetchUserStartAsync(currentUser.uid);
     }
   }, []);
-
   useEffect(() => {
     if (currentUser) {
       const user = userData.users;
@@ -149,6 +150,7 @@ function Calendar(props: any) {
                 setEditing={setEditing}
                 setOpenSnackbar={setOpenSnackbar}
                 setSnackbarMsg={setSnackbarMsg}
+                id={uid}
               />
             </>
           ) : (
@@ -179,6 +181,7 @@ function Calendar(props: any) {
             setSnackbarMsg={setSnackbarMsg}
             editActivity={editActivity}
             setEditing={setEditing}
+            id={uid}
           />
         </Paper>
       </Grid>

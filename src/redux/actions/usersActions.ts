@@ -47,7 +47,6 @@ export const editUser = (id: string, updates: any) => async (
     const [userParam] = Object.keys(updates);
     const userVal = updates[Object.keys(updates)[0]];
     const user = usersRef.doc(id);
-    console.log(user);
     if (!executed) {
       executed = true;
       user.update({
@@ -58,7 +57,7 @@ export const editUser = (id: string, updates: any) => async (
       type: UsersActionTypes.EDIT_USERS,
       payload: payload,
     });
-  }); //onSnapshot end
+  });
 };
 export const addUserActivity = (id: string, activities: any) => async (
   dispatch: Dispatch
@@ -68,8 +67,6 @@ export const addUserActivity = (id: string, activities: any) => async (
     const payload = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log("activities from addUserActivity action");
-    console.log(activities);
     const user = usersRef.doc(id);
     if (!executed) {
       executed = true;
@@ -79,6 +76,34 @@ export const addUserActivity = (id: string, activities: any) => async (
     }
     dispatch({
       type: UsersActionTypes.ADD_USER_ACTIVITY,
+      payload: payload,
+    });
+  });
+};
+export const editUserActivity = (
+  id: string,
+  activities: any,
+  activityKey: any
+) => async (dispatch: Dispatch) => {
+  var executed = false;
+  usersRef.onSnapshot((snapshot: any) => {
+    const payload = snapshot.docs.map((doc: any) => {
+      return { id: doc.id, ...doc.data() };
+    });
+    console.log("activities from editUserActivity action");
+    console.log(activities);
+    console.log("activityKey from editUserActivity action");
+    console.log(activityKey);
+
+    const user = usersRef.doc(id);
+    if (!executed) {
+      executed = true;
+      user.update({
+        activities: activities,
+      });
+    }
+    dispatch({
+      type: UsersActionTypes.EDIT_USER_ACTIVITY,
       payload: payload,
     });
   });
