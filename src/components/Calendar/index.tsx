@@ -106,8 +106,12 @@ function Calendar(props: any) {
   const [activity, setActivity] = useState(null);
   const [activityKey, setActivityKey] = useState<string>();
 
-  const editActivity = (activity: any, i: any) => {
-    setActivityKey(Object.keys(activities)[i]);
+  const editActivity = (activity: any) => {
+    //, i: any
+    console.log("editActivity");
+    console.log(activity.id);
+    // console.log(i);
+    setActivityKey(activity.id); //Object.keys(activities)[i]
     setEditing(true);
     setActivity(activity);
   };

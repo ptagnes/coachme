@@ -42,6 +42,7 @@ function EditActivity(props: any) {
     type: activity.type,
     duration: activity.duration,
     date: activity.date,
+    id: activity.id,
   };
 
   const [newActivity, setNewActivity] = useState(defaultActivity);
@@ -64,13 +65,7 @@ function EditActivity(props: any) {
   // Add the activity to firebase via the API made in this app
   const handleSubmit = (action: any) => {
     if (authUser) {
-      //////////////////////////////////////////////////////////////////////////
-      console.log("activityKey");
-      console.log(activityKey);
-      console.log("newActivity from handleSubmit in EditActivity");
-      console.log(newActivity);
       editUserActivity(id, newActivity, activityKey);
-
       setEditing(false);
       // Show alert and hide after 3sec
       setOpenSnackbar(true);

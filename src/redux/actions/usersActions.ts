@@ -87,26 +87,50 @@ export const editUserActivity = (
 ) => async (dispatch: Dispatch) => {
   var executed = false;
   usersRef.onSnapshot((snapshot: any) => {
-    const payload = snapshot.docs.map((doc: any) => {
+    const users = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
-
-    console.log("activities from editUserActivity action");
-    console.log(activities);
-    console.log("activityKey from editUserActivity action");
-    console.log(activityKey);
-
-    const user = usersRef.doc(id);
-
-    if (!executed) {
-      executed = true;
-      // user.update({
-      //   activities: activities,
-      // });
+    const user = usersRef.doc(id); //the user in firestore
+    const userdata = users.find((x: any) => x.id === id); //the user
+    const userActivities = userdata.activities; //the activities of the user
+    //index of updated activity
+    const objIndex = userActivities.findIndex(
+      (obj: any) => obj.id == activityKey
+    );
+    ///////// if activities object is empty --> remove object, otherwise update array of activities
+    ///Object.keys(activities).length === 0 && activities.constructor === Object
+    if (activities.date === null) {
+      console.log("object is null");
+      const removedArray = userActivities.splice(objIndex, 1);
+      console.log(removedArray);
+      console.log(userActivities);
+      if (!executed) {
+        executed = true;
+        user.update({
+          activities: userActivities,
+        });
+      }
+    } else {
+      userActivities[objIndex] = activities; //updating activities array at the index position of the activityKey
+      console.log("updated activity array");
+      console.log(userActivities);
+      if (!executed) {
+        executed = true;
+        user.update({
+          activities: userActivities,
+        });
+      }
     }
+
+    // if (!executed) {
+    //   executed = true;
+    //   // user.update({
+    //   //   activities: activities,
+    //   // });
+    // }
     dispatch({
       type: UsersActionTypes.EDIT_USER_ACTIVITY,
-      payload: payload,
+      payload: users,
     });
   });
 };

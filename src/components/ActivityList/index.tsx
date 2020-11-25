@@ -29,24 +29,17 @@ function ActivityList(props: any) {
     editUserActivity,
   } = props;
 
-  //   console.log("activities from ActivityList");
-  //   console.log(activities);
-  /////////////////////////////////////////////////////////////////////////////////////
-
-  const deleteActivity = (i: any) => {
+  const deleteActivity = (activity: any) => {
     // Get key of activity in firebase
-    const activityKey = Object.keys(activities)[i];
-
-    console.log("activityKey");
-    console.log(activityKey);
-    ///////////////////////////////////////////////////////////////////////////
+    const activityKey = activity.id;
 
     // Connect to our firebase API
     const emptyActivity = {
       date: null,
-      duration: null,
-      type: null,
-      name: null,
+      //   duration: null,
+      //   type: null,
+      //   name: null,
+      //   id: null,
     };
     editUserActivity(id, emptyActivity, activityKey);
     // Show notification
@@ -97,9 +90,9 @@ function ActivityList(props: any) {
                     <TableCell>{type}</TableCell>
                     <TableCell>{duration}</TableCell>
                     <TableCell>
-                      <DeleteIcon onClick={(e) => deleteActivity(i)} />
+                      <DeleteIcon onClick={(e) => deleteActivity(activity)} />
                       <EditIcon
-                        onClick={(e) => editActivity(activity, i)}
+                        onClick={(e: any) => editActivity(activity)}
                         style={{ marginLeft: "20px" }}
                       />
                     </TableCell>

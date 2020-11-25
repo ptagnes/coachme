@@ -45,6 +45,7 @@ function AddActivity(props: any) {
     type: 1,
     duration: 60,
     date: queryDate,
+    id: "nid" + Math.random().toString(36).substr(2, 9),
   };
   const [activity, setActivity] = useState(defaultActivity);
   const [activitiesState, setActivitiesState] = useState<{}[]>([]);
