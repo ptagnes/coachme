@@ -90,17 +90,19 @@ export const editUserActivity = (
     const payload = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
+
     console.log("activities from editUserActivity action");
     console.log(activities);
     console.log("activityKey from editUserActivity action");
     console.log(activityKey);
 
     const user = usersRef.doc(id);
+
     if (!executed) {
       executed = true;
-      user.update({
-        activities: activities,
-      });
+      // user.update({
+      //   activities: activities,
+      // });
     }
     dispatch({
       type: UsersActionTypes.EDIT_USER_ACTIVITY,

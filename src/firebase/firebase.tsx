@@ -101,6 +101,7 @@ export class Firebase {
     //await this.auth.signOut();
     await app.auth().signOut();
     history.push("/");
+    window.location.reload();
   }
   async resetPassword(email: string) {
     //await this.auth.sendPasswordResetEmail(email);

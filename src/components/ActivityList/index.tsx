@@ -26,6 +26,7 @@ function ActivityList(props: any) {
     setSnackbarMsg,
     setEditing,
     id,
+    editUserActivity,
   } = props;
 
   //   console.log("activities from ActivityList");
@@ -35,6 +36,7 @@ function ActivityList(props: any) {
   const deleteActivity = (i: any) => {
     // Get key of activity in firebase
     const activityKey = Object.keys(activities)[i];
+
     console.log("activityKey");
     console.log(activityKey);
     ///////////////////////////////////////////////////////////////////////////
@@ -46,7 +48,7 @@ function ActivityList(props: any) {
       type: null,
       name: null,
     };
-    // editUserActivity(id, emptyActivity, activityKey);
+    editUserActivity(id, emptyActivity, activityKey);
     // Show notification
     setOpenSnackbar(true);
     setSnackbarMsg("Deleted activity");

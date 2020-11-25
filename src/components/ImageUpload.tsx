@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase from "../firebase/firebase";
 import AddIcon from "@material-ui/icons/Add";
-import { Fab, Button } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
 
 function ProfilePic({
   setImgFile,

@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +10,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
+
+import { editUserActivity } from "../../redux/actions/usersActions";
+import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -27,6 +33,7 @@ function EditActivity(props: any) {
     setOpenSnackbar,
     setSnackbarMsg,
     id,
+    editUserActivity,
   } = props;
 
   // Set default activity object
@@ -57,7 +64,13 @@ function EditActivity(props: any) {
   // Add the activity to firebase via the API made in this app
   const handleSubmit = (action: any) => {
     if (authUser) {
-      //   firebase.updateActivity(id, newActivity, activityKey);
+      //////////////////////////////////////////////////////////////////////////
+      console.log("activityKey");
+      console.log(activityKey);
+      console.log("newActivity from handleSubmit in EditActivity");
+      console.log(newActivity);
+      editUserActivity(id, newActivity, activityKey);
+
       setEditing(false);
       // Show alert and hide after 3sec
       setOpenSnackbar(true);
@@ -129,4 +142,12 @@ function EditActivity(props: any) {
   );
 }
 
-export default EditActivity;
+const mapStateToProps = (state: any) => ({
+  userData: state.usersState,
+});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  editUserActivity: (id: string, activities: any, activityKey: any) =>
+    dispatch<any>(editUserActivity(id, activities, activityKey)),
+  fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(EditActivity);
