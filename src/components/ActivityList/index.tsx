@@ -27,6 +27,8 @@ function ActivityList(props: any) {
     setEditing,
     id,
     editUserActivity,
+    updateActivities,
+    todaysActivity,
   } = props;
   const deleteActivity = (activity: any) => {
     const activityKey = activity.id;
@@ -34,8 +36,12 @@ function ActivityList(props: any) {
       date: null,
     };
     editUserActivity(id, emptyActivity, activityKey);
-    // window.location.reload(false);
-    setTimeout(function(){ window.location.reload(false); }, 1000);
+    // const updatedActivities =
+    // setTimeout(function () {
+    //   window.location.reload(false);
+    //   updateActivities(updatedActivities)
+    //   updateActivities()
+    // }, 1000);
 
     setOpenSnackbar(true);
     setSnackbarMsg("Deleted activity");
@@ -45,6 +51,18 @@ function ActivityList(props: any) {
     // stop editing
     setEditing(false);
   };
+
+  let activityOfTheDay: {}[];
+  if (activities.length > 1) {
+    console.log(activities.length);
+    activityOfTheDay = todaysActivity;
+  } else {
+    activityOfTheDay = activities;
+  }
+
+  console.log("activityOfTheDay");
+  console.log(activityOfTheDay);
+
   return (
     <>
       {loading === true ? <img src={loader} alt={loader}></img> : ""}

@@ -98,10 +98,8 @@ export const editUserActivity = (
       (obj: any) => obj.id == activityKey
     );
     if (activities.date === null) {
-      console.log("object is null");
       const removedArray = userActivities.splice(objIndex, 1);
       console.log(removedArray);
-      // console.log(userActivities);
       if (!executed) {
         executed = true;
         user.update({

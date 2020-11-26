@@ -31,6 +31,8 @@ function AddActivity(props: any) {
     userData,
     fetchUserStartAsync,
     authUser,
+    updateActivities,
+    retrieveTodaysActivity,
   } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
@@ -91,9 +93,10 @@ function AddActivity(props: any) {
     if (authUser) {
       const mergedActivities = [...activitiesState, activity];
       addUserActivity(uid, mergedActivities);
-      // window.location.reload(false);
-      setTimeout(function(){ window.location.reload(false); }, 1000);
-
+      setTimeout(function () {
+        updateActivities(mergedActivities);
+        retrieveTodaysActivity(activity);
+      }, 1000);
       setActivity(defaultActivity);
       setOpenSnackbar(true);
       setSnackbarMsg("Added activity");

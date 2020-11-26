@@ -55,8 +55,9 @@ function Calendar(props: any) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState(null);
   /*** ACTIVITY LIST ***/
-  const [activities, setActivities] = useState<{}[]>([]); //true
-  const [loading, setLoading] = useState<boolean>(); //[]
+  const [activities, setActivities] = useState<{}[]>([]);
+  const [todaysActivity, setTodaysActivity] = useState<{}[]>([]);
+  const [loading, setLoading] = useState<boolean>();
   const [activeDays, setActiveDays] = useState([]);
   const { currentUser } = React.useContext(AuthContext);
   let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
@@ -92,6 +93,16 @@ function Calendar(props: any) {
     }
   }, [currentUser, queryDate, userData]);
 
+  const updateActivities = (updatedActivities: any) => {
+    setActivities(updatedActivities);
+    retrieveActiveDays(updatedActivities);
+  };
+
+  const retrieveTodaysActivity = (todaysactivity: any) => {
+    console.log("todaysactivity");
+    setTodaysActivity(todaysactivity);
+  };
+
   const retrieveActiveDays = (activities: any) => {
     const arr = activities.map((obj: any) => {
       return obj.date.length === 9
@@ -107,11 +118,7 @@ function Calendar(props: any) {
   const [activityKey, setActivityKey] = useState<string>();
 
   const editActivity = (activity: any) => {
-    //, i: any
-    console.log("editActivity");
-    console.log(activity.id);
-    // console.log(i);
-    setActivityKey(activity.id); //Object.keys(activities)[i]
+    setActivityKey(activity.id);
     setEditing(true);
     setActivity(activity);
   };
@@ -156,6 +163,7 @@ function Calendar(props: any) {
                   setEditing={setEditing}
                   setOpenSnackbar={setOpenSnackbar}
                   setSnackbarMsg={setSnackbarMsg}
+                  updateActivities={updateActivities}
                   id={uid}
                 />
               </>
@@ -169,6 +177,8 @@ function Calendar(props: any) {
                   setOpenSnackbar={setOpenSnackbar}
                   setSnackbarMsg={setSnackbarMsg}
                   authUser={props.authUser}
+                  updateActivities={updateActivities}
+                  retrieveTodaysActivity={retrieveTodaysActivity}
                 />
               </>
             )}
@@ -182,11 +192,13 @@ function Calendar(props: any) {
             <ActivityList
               loading={loading}
               activities={activities}
+              todaysActivity={todaysActivity}
               authUser={props.authUser}
               setOpenSnackbar={setOpenSnackbar}
               setSnackbarMsg={setSnackbarMsg}
               editActivity={editActivity}
               setEditing={setEditing}
+              updateActivities={updateActivities}
               id={uid}
             />
           </Paper>

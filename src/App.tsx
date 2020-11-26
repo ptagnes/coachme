@@ -45,11 +45,11 @@ import {
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import EventIcon from '@material-ui/icons/Event';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Link } from "react-router-dom";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -269,6 +269,13 @@ function App() {
                       />
                       <Route
                         exact
+                        path="/workouttracker"
+                        render={() =>
+                          user ? <WorkoutTracker /> : <Redirect to="/" />
+                        }
+                      />
+                      <Route
+                        exact
                         path="/profiletoanimatein"
                         render={() =>
                           user ? <ProfileAnimateIn /> : <Redirect to="/" />
@@ -344,10 +351,10 @@ function App() {
                       >
                         <BottomNavigationAction
                           component={Link}
-                          value="signal"
-                          to="/signal"
-                          label="Another"
-                          icon={<RestoreIcon />}
+                          value="tracker"
+                          to="/workouttracker"
+                          label="Tracker"
+                          icon={<EventIcon />}
                         />
                         <BottomNavigationAction
                           component={Link}
