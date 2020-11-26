@@ -97,8 +97,6 @@ export const editUserActivity = (
     const objIndex = userActivities.findIndex(
       (obj: any) => obj.id == activityKey
     );
-    ///////// if activities object is empty --> remove object, otherwise update array of activities
-    ///Object.keys(activities).length === 0 && activities.constructor === Object
     if (activities.date === null) {
       console.log("object is null");
       const removedArray = userActivities.splice(objIndex, 1);
@@ -121,13 +119,6 @@ export const editUserActivity = (
         });
       }
     }
-
-    // if (!executed) {
-    //   executed = true;
-    //   // user.update({
-    //   //   activities: activities,
-    //   // });
-    // }
     dispatch({
       type: UsersActionTypes.EDIT_USER_ACTIVITY,
       payload: users,

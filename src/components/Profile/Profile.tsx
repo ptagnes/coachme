@@ -64,10 +64,10 @@ function Profile({
   fetchUserStartAsync: (id: string) => void;
   userData?: any;
 }) {
-  const { currentUser, isAdmin } = React.useContext(AuthContext);
+  const { currentUser } = React.useContext(AuthContext);
   const [file, setImgFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>();
-  let id: string;
+  let id: string; 
   if (currentUser) {
     id = currentUser.uid;
   }
@@ -86,7 +86,7 @@ function Profile({
       editUser(id, update);
       fetchUserStartAsync(id);
     }
-  }, [fileUrl, fetchUserStartAsync]);
+  }, [fileUrl, fetchUserStartAsync, editUser]);
 
   return (
     <div className={`${classes.root} bp`}>

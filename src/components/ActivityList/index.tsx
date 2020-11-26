@@ -28,21 +28,14 @@ function ActivityList(props: any) {
     id,
     editUserActivity,
   } = props;
-
+console.log('activities')
+console.log(activities)
   const deleteActivity = (activity: any) => {
-    // Get key of activity in firebase
     const activityKey = activity.id;
-
-    // Connect to our firebase API
     const emptyActivity = {
       date: null,
-      //   duration: null,
-      //   type: null,
-      //   name: null,
-      //   id: null,
     };
     editUserActivity(id, emptyActivity, activityKey);
-    // Show notification
     setOpenSnackbar(true);
     setSnackbarMsg("Deleted activity");
     setTimeout(() => {

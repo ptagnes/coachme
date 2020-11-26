@@ -30,6 +30,7 @@ function AddActivity(props: any) {
     addUserActivity,
     userData,
     fetchUserStartAsync,
+    authUser,
   } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
@@ -67,7 +68,7 @@ function AddActivity(props: any) {
         }
       }
     }
-  }, [currentUser, queryDate, userData, fetchUserStartAsync]);
+  }, [currentUser, queryDate, userData]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -87,10 +88,10 @@ function AddActivity(props: any) {
   };
   const isValid = activity.name === "";
   const handleSubmit = () => {
-    if (currentUser) {
+    if (authUser) {
       const mergedActivities = [...activitiesState, activity];
       addUserActivity(uid, mergedActivities);
-      fetchUserStartAsync(uid); //TODO see if this updates global state in parent/related components
+
       setActivity(defaultActivity);
       setOpenSnackbar(true);
       setSnackbarMsg("Added activity");

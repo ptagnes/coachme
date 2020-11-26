@@ -94,8 +94,8 @@ function Calendar(props: any) {
 
   const retrieveActiveDays = (activities: any) => {
     const arr = activities.map((obj: any) => {
-      return obj.date.length === 8
-        ? obj.date.slice(0, 3)
+      return obj.date.length === 9
+        ? obj.date.slice(0, 4) //was 0.3
         : obj.date.slice(0, 5); //was 0, 4
     });
     setActiveDays(arr);
@@ -166,9 +166,9 @@ function Calendar(props: any) {
                 </h3>
                 <AddActivity
                   selectedDay={selectedDay}
-                  authUser={props.authUser}
                   setOpenSnackbar={setOpenSnackbar}
                   setSnackbarMsg={setSnackbarMsg}
+                  authUser={props.authUser}
                 />
               </>
             )}
