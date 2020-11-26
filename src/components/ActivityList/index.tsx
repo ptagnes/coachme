@@ -28,6 +28,7 @@ function ActivityList(props: any) {
     id,
     editUserActivity,
     authUser,
+    handleReRender,
   } = props;
 
   const deleteActivity = (activity: any) => {
@@ -38,7 +39,8 @@ function ActivityList(props: any) {
       };
       editUserActivity(id, emptyActivity, activityKey);
       fetchUserStartAsync(id);
-      alert("Activity deleted!");
+      handleReRender();
+
       setOpenSnackbar(true);
       setSnackbarMsg("Deleted activity");
       setTimeout(() => {

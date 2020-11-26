@@ -90,7 +90,13 @@ function Calendar(props: any) {
         }
       }
     }
-  }, [currentUser, queryDate, userData]);
+  }, [currentUser, queryDate, userData, render]);
+
+  const handleReRender = () => {
+    console.log("handleReRender");
+    setRender(!render);
+    fetchUserStartAsync(currentUser.uid);
+  };
 
   const retrieveActiveDays = (activities: any) => {
     const arr = activities.map((obj: any) => {
@@ -184,6 +190,7 @@ function Calendar(props: any) {
               editActivity={editActivity}
               setEditing={setEditing}
               id={uid}
+              handleReRender={handleReRender}
             />
           </Paper>
         </Grid>
