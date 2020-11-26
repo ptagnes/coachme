@@ -27,41 +27,27 @@ function ActivityList(props: any) {
     setEditing,
     id,
     editUserActivity,
-    updateActivities,
-    todaysActivity,
+    authUser,
   } = props;
+
   const deleteActivity = (activity: any) => {
-    const activityKey = activity.id;
-    const emptyActivity = {
-      date: null,
-    };
-    editUserActivity(id, emptyActivity, activityKey);
-    // const updatedActivities =
-    // setTimeout(function () {
-    //   window.location.reload(false);
-    //   updateActivities(updatedActivities)
-    //   updateActivities()
-    // }, 1000);
-
-    setOpenSnackbar(true);
-    setSnackbarMsg("Deleted activity");
-    setTimeout(() => {
-      setOpenSnackbar(false);
-    }, 3000);
-    // stop editing
-    setEditing(false);
+    if (authUser) {
+      const activityKey = activity.id;
+      const emptyActivity = {
+        date: null,
+      };
+      editUserActivity(id, emptyActivity, activityKey);
+      fetchUserStartAsync(id);
+      alert("Activity deleted!");
+      setOpenSnackbar(true);
+      setSnackbarMsg("Deleted activity");
+      setTimeout(() => {
+        setOpenSnackbar(false);
+      }, 3000);
+      // stop editing
+      setEditing(false);
+    }
   };
-
-  let activityOfTheDay: {}[];
-  if (activities.length > 1) {
-    console.log(activities.length);
-    activityOfTheDay = todaysActivity;
-  } else {
-    activityOfTheDay = activities;
-  }
-
-  console.log("activityOfTheDay");
-  console.log(activityOfTheDay);
 
   return (
     <>

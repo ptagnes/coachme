@@ -99,7 +99,7 @@ export const editUserActivity = (
     );
     if (activities.date === null) {
       const removedArray = userActivities.splice(objIndex, 1);
-      console.log(removedArray);
+      console.log(removedArray)
       if (!executed) {
         executed = true;
         user.update({

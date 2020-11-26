@@ -10,7 +10,6 @@ import CalendarHead from "./calendar-head";
 import AddActivity from "../AddActivity";
 import EditActivity from "../EditActivity";
 import ActivityList from "../ActivityList";
-
 import { AuthContext } from "../../firebase/Authentication";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
@@ -58,6 +57,7 @@ function Calendar(props: any) {
   const [activities, setActivities] = useState<{}[]>([]);
   const [todaysActivity, setTodaysActivity] = useState<{}[]>([]);
   const [loading, setLoading] = useState<boolean>();
+  const [render, setRender] = useState<boolean>(false);
   const [activeDays, setActiveDays] = useState([]);
   const { currentUser } = React.useContext(AuthContext);
   let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
@@ -68,7 +68,7 @@ function Calendar(props: any) {
       setUid(currentUser.uid);
       fetchUserStartAsync(currentUser.uid);
     }
-  }, [currentUser, fetchUserStartAsync]);
+  }, [currentUser]);
 
   useEffect(() => {
     if (currentUser) {
@@ -80,38 +80,26 @@ function Calendar(props: any) {
           const filterByQueryDate = activities.filter(function (item: any) {
             return item.date === queryDate;
           });
-          setActivities(filterByQueryDate);
+          setActivities(ac);
+          setTodaysActivity(filterByQueryDate);
           setLoading(false);
           // setEditing(false); Add later
-          // Update active days
           retrieveActiveDays(activities);
-          ///////////////////////////////////////////////////////////////////
-          console.log("activities from Calendar useEffect"); //TODO see that this updates after AddActivity action
+          console.log("activities from Calendar useEffect");
           console.log(activities);
         }
       }
     }
   }, [currentUser, queryDate, userData]);
 
-  const updateActivities = (updatedActivities: any) => {
-    setActivities(updatedActivities);
-    retrieveActiveDays(updatedActivities);
-  };
-
-  const retrieveTodaysActivity = (todaysactivity: any) => {
-    console.log("todaysactivity");
-    setTodaysActivity(todaysactivity);
-  };
-
   const retrieveActiveDays = (activities: any) => {
     const arr = activities.map((obj: any) => {
       return obj.date.length === 9
-        ? obj.date.slice(0, 4) //was 0.3
-        : obj.date.slice(0, 5); //was 0, 4
+        ? obj.date.slice(0, 4)
+        : obj.date.slice(0, 5);
     });
     setActiveDays(arr);
   };
-
   /*** EDIT AN ACTIVITY ***/
   const [editing, setEditing] = useState(false);
   const [activity, setActivity] = useState(null);
@@ -158,12 +146,12 @@ function Calendar(props: any) {
                 <EditActivity
                   activity={activity}
                   activityKey={activityKey}
+                  activities={activities}
                   selectedDay={selectedDay}
                   authUser={props.authUser}
                   setEditing={setEditing}
                   setOpenSnackbar={setOpenSnackbar}
                   setSnackbarMsg={setSnackbarMsg}
-                  updateActivities={updateActivities}
                   id={uid}
                 />
               </>
@@ -177,8 +165,6 @@ function Calendar(props: any) {
                   setOpenSnackbar={setOpenSnackbar}
                   setSnackbarMsg={setSnackbarMsg}
                   authUser={props.authUser}
-                  updateActivities={updateActivities}
-                  retrieveTodaysActivity={retrieveTodaysActivity}
                 />
               </>
             )}
@@ -191,14 +177,12 @@ function Calendar(props: any) {
             </h3>
             <ActivityList
               loading={loading}
-              activities={activities}
-              todaysActivity={todaysActivity}
+              activities={todaysActivity}
               authUser={props.authUser}
               setOpenSnackbar={setOpenSnackbar}
               setSnackbarMsg={setSnackbarMsg}
               editActivity={editActivity}
               setEditing={setEditing}
-              updateActivities={updateActivities}
               id={uid}
             />
           </Paper>

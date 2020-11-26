@@ -10,7 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
-
 import { editUserActivity } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 
@@ -34,7 +33,7 @@ function EditActivity(props: any) {
     setSnackbarMsg,
     id,
     editUserActivity,
-    updateActivities,
+    fetchUserStartAsync,
   } = props;
 
   // Set default activity object
@@ -45,9 +44,7 @@ function EditActivity(props: any) {
     date: activity.date,
     id: activity.id,
   };
-
   const [newActivity, setNewActivity] = useState(defaultActivity);
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setNewActivity({
@@ -55,25 +52,16 @@ function EditActivity(props: any) {
       [name]: value,
     });
   };
-
   const handleSlider = (e: any) => {
     const duration = e.target.getAttribute("aria-valuenow");
     setNewActivity({ ...newActivity, duration: duration });
   };
-
   const isValid = newActivity.name === "";
 
-  // Add the activity to firebase via the API made in this app
   const handleSubmit = (action: any) => {
     if (authUser) {
       editUserActivity(id, newActivity, activityKey);
-      // const updatedActivities = 
-      // setTimeout(function () {
-      //   window.location.reload(false);
-      //   updateActivities(updatedActivities)
-      //   updateActivities()
-      // }, 1000);
-
+      fetchUserStartAsync(id); //TODO updates state only after second edit
       setEditing(false);
       // Show alert and hide after 3sec
       setOpenSnackbar(true);

@@ -31,8 +31,6 @@ function AddActivity(props: any) {
     userData,
     fetchUserStartAsync,
     authUser,
-    updateActivities,
-    retrieveTodaysActivity,
   } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
@@ -89,14 +87,12 @@ function AddActivity(props: any) {
     }
   };
   const isValid = activity.name === "";
+
   const handleSubmit = () => {
     if (authUser) {
       const mergedActivities = [...activitiesState, activity];
       addUserActivity(uid, mergedActivities);
-      setTimeout(function () {
-        updateActivities(mergedActivities);
-        retrieveTodaysActivity(activity);
-      }, 1000);
+      fetchUserStartAsync(uid); //TODO updates state only after second time of adding activity
       setActivity(defaultActivity);
       setOpenSnackbar(true);
       setSnackbarMsg("Added activity");
@@ -105,6 +101,7 @@ function AddActivity(props: any) {
       }, 4000);
     }
   };
+
   return (
     <form noValidate onSubmit={(e) => e.preventDefault()}>
       <FormControl className={classes.formControl}>
