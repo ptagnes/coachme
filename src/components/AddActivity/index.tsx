@@ -91,6 +91,8 @@ function AddActivity(props: any) {
     if (authUser) {
       const mergedActivities = [...activitiesState, activity];
       addUserActivity(uid, mergedActivities);
+      // window.location.reload(false);
+      setTimeout(function(){ window.location.reload(false); }, 1000);
 
       setActivity(defaultActivity);
       setOpenSnackbar(true);

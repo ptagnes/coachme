@@ -101,7 +101,7 @@ export const editUserActivity = (
       console.log("object is null");
       const removedArray = userActivities.splice(objIndex, 1);
       console.log(removedArray);
-      console.log(userActivities);
+      // console.log(userActivities);
       if (!executed) {
         executed = true;
         user.update({
@@ -110,8 +110,6 @@ export const editUserActivity = (
       }
     } else {
       userActivities[objIndex] = activities; //updating activities array at the index position of the activityKey
-      console.log("updated activity array");
-      console.log(userActivities);
       if (!executed) {
         executed = true;
         user.update({

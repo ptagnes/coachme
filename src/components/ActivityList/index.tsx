@@ -28,14 +28,15 @@ function ActivityList(props: any) {
     id,
     editUserActivity,
   } = props;
-console.log('activities')
-console.log(activities)
   const deleteActivity = (activity: any) => {
     const activityKey = activity.id;
     const emptyActivity = {
       date: null,
     };
     editUserActivity(id, emptyActivity, activityKey);
+    // window.location.reload(false);
+    setTimeout(function(){ window.location.reload(false); }, 1000);
+
     setOpenSnackbar(true);
     setSnackbarMsg("Deleted activity");
     setTimeout(() => {

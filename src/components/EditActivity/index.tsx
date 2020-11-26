@@ -66,6 +66,9 @@ function EditActivity(props: any) {
   const handleSubmit = (action: any) => {
     if (authUser) {
       editUserActivity(id, newActivity, activityKey);
+      // window.location.reload(false);
+      setTimeout(function(){ window.location.reload(false); }, 1000);
+
       setEditing(false);
       // Show alert and hide after 3sec
       setOpenSnackbar(true);
