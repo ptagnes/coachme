@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       background: `url(${process.env.PUBLIC_URL}/images/bg/bg3.jpg)`,
       backgroundSize: "cover",
-      position: "relative"
+      position: "relative",
     },
     cover: {
       position: "fixed",
@@ -27,15 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     container: {
       textAlign: "center",
-      background: "#dddddd4a",
-      padding: "1rem",
+      background: "#dddddd36",
       borderRadius: "20px",
       zIndex: 0,
       position: "relative",
       width: "89vw",
+      margin: "0 auto",
       [theme.breakpoints.up("sm")]: {
         maxWidth: "500px",
-        margin: "0 auto",
       },
     },
     header: {
@@ -67,7 +66,7 @@ function Profile({
   const { currentUser } = React.useContext(AuthContext);
   const [file, setImgFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>();
-  let id: string; 
+  let id: string;
   if (currentUser) {
     id = currentUser.uid;
   }
@@ -103,9 +102,7 @@ function Profile({
           )}
 
           <ImageUpload setImgFile={setImgFile} setFileUrl={setFileUrl} />
-          <h4 className={classes.header}>
-            {users && users.displayName}
-          </h4>
+          <h4 className={classes.header}>{users && users.displayName}</h4>
 
           {/* <div
             style={{
