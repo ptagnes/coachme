@@ -19,6 +19,7 @@ function WorkoutTrackerEdit(props: any) {
   const handleClick = () => {
     history.goBack();
   };
+  //TODO 1 update delay fix
   return (
     <div className="bp">
       <Button

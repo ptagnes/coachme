@@ -123,7 +123,11 @@ function Calendar(props: any) {
       setOpenSnackbar(false);
     }, 3000);
   };
-
+  moment.updateLocale("en", {
+    week: {
+      dow: 1,
+    },
+  });
   return (
     <div className="calendarWrapper">
       <Grid container className="calendarGrid">
@@ -145,11 +149,10 @@ function Calendar(props: any) {
             actualMonth={actualMonth}
             setSelectedDay={setSelectedDay}
             selectedDay={selectedDay}
-            weekdays={moment.weekdays()}
+            weekdays={moment.weekdays(true)} //moment.weekdays(true)
             activeDays={activeDays}
             activities={activities}
             id={uid}
-            // activityKey={activityKey}
           />
         </Grid>
         <Snackbar

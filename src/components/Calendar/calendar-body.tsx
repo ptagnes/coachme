@@ -26,7 +26,6 @@ const CalendarBody = (props: any) => {
     activities,
     id,
   } = props;
-
   let history = useHistory();
   const handleClick = (d: any) => {
     setSelectedDay(d);
@@ -48,7 +47,6 @@ const CalendarBody = (props: any) => {
       },
     });
   };
-
   let blanks = [];
   for (let i = 0; i < firstDayOfMonth(); i++) {
     blanks.push(<TableCell key={nextId()}>{""}</TableCell>);
@@ -74,11 +72,18 @@ const CalendarBody = (props: any) => {
       </TableCell>
     );
   }
+  if (firstDayOfMonth() == 0) {
+    console.log("dflklsdkf");
+    for (let i = 0; i < 7; i++) {
+      blanks.push(<TableCell key={nextId()}>{""}</TableCell>);
+    }
+  }
   let totalSlots = [...blanks, ...monthDays];
   let rows: any[] = [];
   let cells: any[] = [];
+  //1 was 0 (Sunday)
   totalSlots.forEach((row, i) => {
-    if (i % 7 !== 0) {
+    if (i % 7 !== 1) {
       cells.push(row);
     } else {
       rows.push(cells);
@@ -89,6 +94,10 @@ const CalendarBody = (props: any) => {
       rows.push(cells);
     }
   });
+  console.log(blanks);
+  console.log(firstDayOfMonth());
+  console.log(rows);
+  console.log(weekdays);
   return (
     <TableContainer component={Paper}>
       <Table className="calendar">
