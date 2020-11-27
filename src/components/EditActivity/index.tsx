@@ -12,6 +12,8 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import { editUserActivity } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+import { useHistory } from "react-router";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,16 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 function EditActivity(props: any) {
   const classes = useStyles();
+  let history = useHistory();
   const {
-    authUser,
     activity,
     activityKey,
-    setEditing,
-    setOpenSnackbar,
-    setSnackbarMsg,
     id,
     editUserActivity,
-    fetchUserStartAsync,
+    // fetchUserStartAsync,
   } = props;
 
   // Set default activity object
@@ -45,6 +44,7 @@ function EditActivity(props: any) {
     id: activity.id,
   };
   const [newActivity, setNewActivity] = useState(defaultActivity);
+  const isValid = newActivity.name === "";
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setNewActivity({
@@ -56,20 +56,29 @@ function EditActivity(props: any) {
     const duration = e.target.getAttribute("aria-valuenow");
     setNewActivity({ ...newActivity, duration: duration });
   };
-  const isValid = newActivity.name === "";
+  const deleteActivity = () => {
+    const emptyActivity = {
+      date: null,
+    };
+    editUserActivity(id, emptyActivity, activityKey);
+    // fetchUserStartAsync(id);
+    history.push({
+      pathname: "/workouttracker",
+      state: {
+        action: "deleted",
+      },
+    });
+  };
 
   const handleSubmit = (action: any) => {
-    if (authUser) {
-      editUserActivity(id, newActivity, activityKey);
-      fetchUserStartAsync(id); //TODO updates state only after second edit
-      setEditing(false);
-      // Show alert and hide after 3sec
-      setOpenSnackbar(true);
-      setSnackbarMsg("Updated activity");
-      setTimeout(() => {
-        setOpenSnackbar(false);
-      }, 3000);
-    }
+    editUserActivity(id, newActivity, activityKey);
+    // fetchUserStartAsync(id);
+    history.push({
+      pathname: "/workouttracker",
+      state: {
+        action: "edited",
+      },
+    });
   };
 
   return (
@@ -128,6 +137,16 @@ function EditActivity(props: any) {
         disabled={isValid}
       >
         Save activity
+      </Button>
+
+      <Button
+        style={{ marginTop: "20px" }}
+        onClick={(e) => deleteActivity()}
+        variant="contained"
+        color="primary"
+        startIcon={<DeleteIcon />}
+      >
+        Delete
       </Button>
     </form>
   );

@@ -3,19 +3,18 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import moment from "moment";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import CalendarBody from "./calendar-body";
 import CalendarHead from "./calendar-head";
-import AddActivity from "../AddActivity";
-import EditActivity from "../EditActivity";
-import ActivityList from "../ActivityList";
 import { AuthContext } from "../../firebase/Authentication";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+import { useLocation } from "react-router-dom";
 
 function Calendar(props: any) {
   const { userData, fetchUserStartAsync } = props;
+  const location = useLocation();
+  const params = location.state;
   let defaultSelectedDay = {
     day: moment().format("D"),
     month: moment().month(),
@@ -52,12 +51,9 @@ function Calendar(props: any) {
   const firstDayOfMonth = () => moment(dateObject).startOf("month").format("d");
   /*** ADDING AN ACTIVITY ***/
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMsg, setSnackbarMsg] = useState(null);
+  const [snackbarMsg, setSnackbarMsg] = useState<string>("");
   /*** ACTIVITY LIST ***/
   const [activities, setActivities] = useState<{}[]>([]);
-  const [todaysActivity, setTodaysActivity] = useState<{}[]>([]);
-  const [loading, setLoading] = useState<boolean>();
-  const [render, setRender] = useState<boolean>(false);
   const [activeDays, setActiveDays] = useState([]);
   const { currentUser } = React.useContext(AuthContext);
   let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
@@ -68,7 +64,7 @@ function Calendar(props: any) {
       setUid(currentUser.uid);
       fetchUserStartAsync(currentUser.uid);
     }
-  }, [currentUser]);
+  }, [currentUser, fetchUserStartAsync]);
 
   useEffect(() => {
     if (currentUser) {
@@ -80,23 +76,22 @@ function Calendar(props: any) {
           const filterByQueryDate = activities.filter(function (item: any) {
             return item.date === queryDate;
           });
+          console.log(filterByQueryDate);
           setActivities(ac);
-          setTodaysActivity(filterByQueryDate);
-          setLoading(false);
           // setEditing(false); Add later
           retrieveActiveDays(activities);
           console.log("activities from Calendar useEffect");
           console.log(activities);
+          //TODO clear params if no action was done
+          //@ts-ignore
+          const action = params ? params.action : "";
+          if (action) {
+            setNotifications(action);
+          }
         }
       }
     }
-  }, [currentUser, queryDate, userData, render]);
-
-  const handleReRender = () => {
-    console.log("handleReRender");
-    setRender(!render);
-    fetchUserStartAsync(currentUser.uid);
-  };
+  }, [currentUser, queryDate, userData, params]);
 
   const retrieveActiveDays = (activities: any) => {
     const arr = activities.map((obj: any) => {
@@ -106,21 +101,33 @@ function Calendar(props: any) {
     });
     setActiveDays(arr);
   };
-  /*** EDIT AN ACTIVITY ***/
-  const [editing, setEditing] = useState(false);
-  const [activity, setActivity] = useState(null);
-  const [activityKey, setActivityKey] = useState<string>();
-
-  const editActivity = (activity: any) => {
-    setActivityKey(activity.id);
-    setEditing(true);
-    setActivity(activity);
+  //TODO set setOpenSnackbar open and setSnackbarMsg
+  const setNotifications = (action: any) => {
+    let msg: string = "";
+    switch (action) {
+      case "added":
+        msg = "Added activity.";
+        break;
+      case "edited":
+        msg = "Updated activity.";
+        break;
+      case "deleted":
+        msg = "Deleted activity.";
+        break;
+      default:
+        msg = "Updated activity.";
+    }
+    setOpenSnackbar(true);
+    setSnackbarMsg(msg);
+    setTimeout(() => {
+      setOpenSnackbar(false);
+    }, 3000);
   };
 
   return (
     <div className="calendarWrapper">
-      <Grid container spacing={3} className="calendarGrid">
-        <Grid item xs={12} md={8} lg={9}>
+      <Grid container className="calendarGrid">
+        <Grid item xs={12} md={12} lg={12}>
           <CalendarHead
             allMonths={allMonths}
             currentMonth={currentMonth}
@@ -140,59 +147,10 @@ function Calendar(props: any) {
             selectedDay={selectedDay}
             weekdays={moment.weekdays()}
             activeDays={activeDays}
+            activities={activities}
+            id={uid}
+            // activityKey={activityKey}
           />
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className="paper">
-            {editing ? (
-              <>
-                <h3>
-                  Edit activity on {selectedDay.day}-{selectedDay.month + 1}{" "}
-                </h3>
-                <EditActivity
-                  activity={activity}
-                  activityKey={activityKey}
-                  activities={activities}
-                  selectedDay={selectedDay}
-                  authUser={props.authUser}
-                  setEditing={setEditing}
-                  setOpenSnackbar={setOpenSnackbar}
-                  setSnackbarMsg={setSnackbarMsg}
-                  id={uid}
-                />
-              </>
-            ) : (
-              <>
-                <h3 style={{ marginBottom: "0" }}>
-                  Add activity on {selectedDay.day}-{selectedDay.month + 1}{" "}
-                </h3>
-                <AddActivity
-                  selectedDay={selectedDay}
-                  setOpenSnackbar={setOpenSnackbar}
-                  setSnackbarMsg={setSnackbarMsg}
-                  authUser={props.authUser}
-                />
-              </>
-            )}
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={7} style={{ paddingBottom: "4rem" }}>
-          <Paper className="paper">
-            <h3>
-              Activities on {selectedDay.day}-{selectedDay.month + 1}
-            </h3>
-            <ActivityList
-              loading={loading}
-              activities={todaysActivity}
-              authUser={props.authUser}
-              setOpenSnackbar={setOpenSnackbar}
-              setSnackbarMsg={setSnackbarMsg}
-              editActivity={editActivity}
-              setEditing={setEditing}
-              id={uid}
-              handleReRender={handleReRender}
-            />
-          </Paper>
         </Grid>
         <Snackbar
           anchorOrigin={{

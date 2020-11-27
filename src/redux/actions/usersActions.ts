@@ -92,8 +92,9 @@ export const editUserActivity = (
     });
     const user = usersRef.doc(id); //the user in firestore
     const userdata = users.find((x: any) => x.id === id); //the user
-    const userActivities = userdata.activities; //the activities of the user
+    const userActivities = userdata.activities; //the activities of the user from firestore
     //index of updated activity
+    console.log('edit called')
     const objIndex = userActivities.findIndex(
       (obj: any) => obj.id == activityKey
     );
@@ -101,6 +102,7 @@ export const editUserActivity = (
       const removedArray = userActivities.splice(objIndex, 1);
       console.log(removedArray)
       if (!executed) {
+        console.log('edit for real')
         executed = true;
         user.update({
           activities: userActivities,
@@ -108,6 +110,7 @@ export const editUserActivity = (
       }
     } else {
       userActivities[objIndex] = activities; //updating activities array at the index position of the activityKey
+      console.log(userActivities)
       if (!executed) {
         executed = true;
         user.update({

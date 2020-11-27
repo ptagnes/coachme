@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { AuthContext } from "../../firebase/Authentication";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,23 +24,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 function AddActivity(props: any) {
   const classes = useStyles();
-  const {
-    selectedDay,
-    setOpenSnackbar,
-    setSnackbarMsg,
-    addUserActivity,
-    userData,
-    fetchUserStartAsync,
-    authUser,
-  } = props;
+  let history = useHistory();
+  const { queryDate, addUserActivity, userData, fetchUserStartAsync } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
   if (currentUser) {
     uid = currentUser.uid;
   }
-  // Set query date for updating database
-  selectedDay.year = new Date().getFullYear();
-  let queryDate = `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`;
 
   const defaultActivity = {
     name: "",
@@ -55,7 +46,7 @@ function AddActivity(props: any) {
     if (currentUser) {
       fetchUserStartAsync(currentUser.uid);
     }
-  }, []);
+  }, [currentUser, fetchUserStartAsync]);
 
   useEffect(() => {
     if (currentUser) {
@@ -89,17 +80,23 @@ function AddActivity(props: any) {
   const isValid = activity.name === "";
 
   const handleSubmit = () => {
-    if (authUser) {
-      const mergedActivities = [...activitiesState, activity];
-      addUserActivity(uid, mergedActivities);
-      fetchUserStartAsync(uid); //TODO updates state only after second time of adding activity
-      setActivity(defaultActivity);
-      setOpenSnackbar(true);
-      setSnackbarMsg("Added activity");
-      setTimeout(() => {
-        setOpenSnackbar(false);
-      }, 4000);
-    }
+    // if (authUser) {
+    const mergedActivities = [...activitiesState, activity];
+    addUserActivity(uid, mergedActivities);
+    fetchUserStartAsync(uid); //TODO updates state only after second time of adding activity
+    setActivity(defaultActivity);
+    // setOpenSnackbar(true);
+    // setSnackbarMsg("Added activity");
+    // setTimeout(() => {
+    //   setOpenSnackbar(false);
+    // }, 4000);
+    // }
+    history.push({
+      pathname: "/workouttracker",
+      state: {
+        action: "added",
+      },
+    });
   };
 
   return (

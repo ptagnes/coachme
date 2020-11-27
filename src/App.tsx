@@ -45,7 +45,7 @@ import {
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import EventIcon from '@material-ui/icons/Event';
+import EventIcon from "@material-ui/icons/Event";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Link } from "react-router-dom";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -58,6 +58,7 @@ import WorkoutsOverview from "./components/Workouts/WorkoutsOverview";
 import WorkoutPageCollection from "./components/Workouts/workoutPageCollection";
 // import WorkoutsPage from "./components/Workouts/WorkoutsPage";
 import WorkoutTracker from "./components/WorkoutTracker/WorkoutTracker";
+import WorkoutTrackerEdit from "./components/WorkoutTracker/WorkoutTrackerEdit";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -274,6 +275,14 @@ function App() {
                           user ? <WorkoutTracker /> : <Redirect to="/" />
                         }
                       />
+                      <Route
+                        exact
+                        path="/workouttrackeredit"
+                        render={() =>
+                          user ? <WorkoutTrackerEdit /> : <Redirect to="/" />
+                        }
+                      />
+
                       <Route
                         exact
                         path="/profiletoanimatein"
