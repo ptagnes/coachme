@@ -25,23 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "rgb(27 27 64 / 52%)",
       zIndex: 0,
     },
-    container: {
-      textAlign: "center",
-      background: "#dddddd26",
-      borderRadius: "20px",
-      zIndex: 0,
-      position: "relative",
-      width: "89vw",
-      margin: "0 auto",
-      [theme.breakpoints.up("sm")]: {
-        maxWidth: "500px",
-      },
-    },
     header: {
       fontFamily: "Lobster",
       fontSize: "1.9rem",
       lineHeight: "1",
       marginTop: "0.5rem",
+      marginBottom: "1.5rem",
     },
     user: {
       width: "110px",
@@ -74,7 +63,7 @@ function Profile({
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
   const classes = useStyles();
   const { users } = userData;
-  console.log(users.activities);
+  // console.log(users.activities);
 
   React.useEffect(() => {
     fetchUserStartAsync(id);
@@ -90,7 +79,7 @@ function Profile({
   return (
     <div className={`${classes.root} bp`}>
       <div className={classes.cover}></div>
-      <div className={classes.container}>
+      <div className="profile-container">
         <div>
           {users && users.userImage ? (
             <div
