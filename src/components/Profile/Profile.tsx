@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     container: {
       textAlign: "center",
-      background: "#dddddd36",
+      background: "#dddddd26",
       borderRadius: "20px",
       zIndex: 0,
       position: "relative",
@@ -74,7 +74,7 @@ function Profile({
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
   const classes = useStyles();
   const { users } = userData;
-  console.log(users);
+  console.log(users.activities);
 
   React.useEffect(() => {
     fetchUserStartAsync(id);

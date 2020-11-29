@@ -11,12 +11,20 @@ import CardContent from "@material-ui/core/CardContent";
 // import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
+
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import TimelineIcon from "@material-ui/icons/Timeline";
+import TimeAndDate from "./TimeAndDate";
+import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
+import KitchenIcon from "@material-ui/icons/Kitchen";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      background: "#32335bad",
+      background: "#28294ad9",
+      height: "100%",
     },
     details: {
       display: "flex",
@@ -26,13 +34,18 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       // flex: "1 0 auto",
       display: "flex",
-      flexDirection: "column-reverse",
+      flexDirection: "column",
     },
     cover: {
       // width: 238,
     },
     profileh5: {
       fontSize: "0.7rem",
+    },
+    subtitle1: {
+      fontSize: "1.1rem",
+      lineHeight: "1.2",
+      marginBottom: "0.4rem",
     },
   })
 );
@@ -48,16 +61,25 @@ export default function ProfileContentItem1() {
           <Card className={classes.root}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
-                <Typography
-                  className={classes.profileh5}
-                  component="h5"
-                  variant="h5"
-                >
-                  Today's workout
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  Cardio
-                </Typography>
+                <span>
+                  <AccessibilityNewIcon />
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    className={classes.subtitle1}
+                  >
+                    Weights & Cardio
+                  </Typography>
+                </span>
+                <span>
+                  <Typography
+                    className={classes.profileh5}
+                    component="h5"
+                    variant="h5"
+                  >
+                    Today's workout
+                  </Typography>
+                </span>
               </CardContent>
             </div>
           </Card>
@@ -66,16 +88,7 @@ export default function ProfileContentItem1() {
           <Card className={classes.root}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
-                <Typography
-                  className={classes.profileh5}
-                  component="h5"
-                  variant="h5"
-                >
-                  Friday, 27-11-2020
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  17:35
-                </Typography>
+                <TimeAndDate />
               </CardContent>
             </div>
           </Card>
@@ -84,6 +97,17 @@ export default function ProfileContentItem1() {
           <Card className={classes.root}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
+                <span>
+                  <TrendingUpIcon />
+
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    className={classes.subtitle1}
+                  >
+                    4
+                  </Typography>
+                </span>
                 <Typography
                   className={classes.profileh5}
                   component="h5"
@@ -91,9 +115,6 @@ export default function ProfileContentItem1() {
                 >
                   WO this week
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  3
-                </Typography>
               </CardContent>
             </div>
           </Card>
@@ -102,6 +123,17 @@ export default function ProfileContentItem1() {
           <Card className={classes.root}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
+                <span>
+                  <TimelineIcon />
+
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    className={classes.subtitle1}
+                  >
+                    23
+                  </Typography>
+                </span>
                 <Typography
                   className={classes.profileh5}
                   component="h5"
@@ -109,9 +141,6 @@ export default function ProfileContentItem1() {
                 >
                   WO this month
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  22
-                </Typography>
               </CardContent>
             </div>
           </Card>
@@ -120,6 +149,16 @@ export default function ProfileContentItem1() {
           <Card className={classes.root}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
+                <span>
+                  <DirectionsWalkIcon />
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    className={classes.subtitle1}
+                  >
+                    2500
+                  </Typography>
+                </span>
                 <Typography
                   className={classes.profileh5}
                   component="h5"
@@ -127,9 +166,6 @@ export default function ProfileContentItem1() {
                 >
                   Steps today
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  2500
-                </Typography>
               </CardContent>
             </div>
           </Card>
@@ -138,15 +174,22 @@ export default function ProfileContentItem1() {
           <Card className={classes.root}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
+                <span>
+                  <KitchenIcon />
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    className={classes.subtitle1}
+                  >
+                    57.2kg
+                  </Typography>
+                </span>
                 <Typography
                   className={classes.profileh5}
                   component="h5"
                   variant="h5"
                 >
                   Weight
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  57.2kg
                 </Typography>
               </CardContent>
             </div>
