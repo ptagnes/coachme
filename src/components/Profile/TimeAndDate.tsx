@@ -17,7 +17,7 @@ export default function TimeAndDate() {
   return (
     <div>
       <span>
-        <ScheduleIcon />
+        <ScheduleIcon style={{ color: "#5b5cc3" }} />
         <Typography
           id="time"
           component="h5"

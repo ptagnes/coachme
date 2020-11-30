@@ -49,6 +49,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     // backgroundColor: theme.palette.background.paper,
   },
+  tabs: {
+    minHeight: "50px",
+    padding: "6px 10px 3px",
+  },
 }));
 
 export default function ProfileContent() {
@@ -73,12 +77,28 @@ export default function ProfileContent() {
         >
           <Tab
             label="Workout stats"
-            icon={<EqualizerIcon />}
+            icon={<EqualizerIcon style={{ marginBottom: "0px" }} />}
             {...a11yProps(0)}
+            className={classes.tabs}
           />
-          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
-          <Tab label="Item Four" icon={<HelpIcon />} {...a11yProps(3)} />
+          <Tab
+            label="Item Two"
+            className={classes.tabs}
+            icon={<FavoriteIcon style={{ marginBottom: "0px" }} />}
+            {...a11yProps(1)}
+          />
+          <Tab
+            label="Item Three"
+            className={classes.tabs}
+            icon={<PersonPinIcon style={{ marginBottom: "0px" }} />}
+            {...a11yProps(2)}
+          />
+          <Tab
+            label="Item Four"
+            className={classes.tabs}
+            icon={<HelpIcon style={{ marginBottom: "0px" }} />}
+            {...a11yProps(3)}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

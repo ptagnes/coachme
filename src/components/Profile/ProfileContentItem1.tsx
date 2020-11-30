@@ -13,11 +13,10 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 
-import TrendingUpIcon from "@material-ui/icons/TrendingUp";
-import TimelineIcon from "@material-ui/icons/Timeline";
 import TimeAndDate from "./TimeAndDate";
 import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
-import KitchenIcon from "@material-ui/icons/Kitchen";
+// import KitchenIcon from "@material-ui/icons/Kitchen";
+import TrendingDownIcon from "@material-ui/icons/TrendingDown";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +61,10 @@ export default function ProfileContentItem1() {
             <div className={classes.details}>
               <CardContent className={classes.content}>
                 <span>
-                  <AccessibilityNewIcon />
+                  <AccessibilityNewIcon
+                    className="iconanimation"
+                    style={{ color: "#5b5cc3" }}
+                  />
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"
@@ -98,8 +100,10 @@ export default function ProfileContentItem1() {
             <div className={classes.details}>
               <CardContent className={classes.content}>
                 <span>
-                  <TrendingUpIcon />
-
+                  <img
+                    src={process.env.PUBLIC_URL + "/images/icon2.svg"}
+                    alt=""
+                  />
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"
@@ -124,8 +128,10 @@ export default function ProfileContentItem1() {
             <div className={classes.details}>
               <CardContent className={classes.content}>
                 <span>
-                  <TimelineIcon />
-
+                  <img
+                    src={process.env.PUBLIC_URL + "/images/icon.svg"}
+                    alt=""
+                  />
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"
@@ -150,7 +156,10 @@ export default function ProfileContentItem1() {
             <div className={classes.details}>
               <CardContent className={classes.content}>
                 <span>
-                  <DirectionsWalkIcon />
+                  <DirectionsWalkIcon
+                    style={{ color: "#5b5cc3" }}
+                    className="iconanimation"
+                  />
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"
@@ -175,7 +184,10 @@ export default function ProfileContentItem1() {
             <div className={classes.details}>
               <CardContent className={classes.content}>
                 <span>
-                  <KitchenIcon />
+                  <TrendingDownIcon
+                    style={{ color: "#5b5cc3" }}
+                    className="iconanimation"
+                  />
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"

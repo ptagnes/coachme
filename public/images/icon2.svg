@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: transparent; display: block;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<g transform="rotate(180 50 50)"><rect x="15" y="15" width="10" height="40" fill="#886cdb">
+<animate attributeName="height" values="50;30;30;50" keyTimes="0;0.33;0.66;1" dur="2.1739130434782608s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.8695652173913043s"></animate>
+</rect><rect x="35" y="15" width="10" height="40" fill="#5e60cd">
+<animate attributeName="height" values="50;30;30;50" keyTimes="0;0.33;0.66;1" dur="2.1739130434782608s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.43478260869565216s"></animate>
+</rect><rect x="55" y="15" width="10" height="40" fill="#6a68c5">
+<animate attributeName="height" values="50;30;30;50" keyTimes="0;0.33;0.66;1" dur="2.1739130434782608s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-1.3043478260869563s"></animate>
+</rect><rect x="75" y="15" width="10" height="40" fill="#7e85d5">
+<animate attributeName="height" values="50;30;30;50" keyTimes="0;0.33;0.66;1" dur="2.1739130434782608s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-2.1739130434782608s"></animate>
+</rect></g>
+</svg>

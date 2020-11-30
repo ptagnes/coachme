@@ -29,6 +29,21 @@
   filter: blur(10px);
   z-index: -1;
 }
+.iconanimation {
+  animation: zoomin 6s ease-in infinite;
+  transition: all 0.5s ease-in-out;
+}
+@keyframes zoomin {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 /* [theme.breakpoints.up(sm)]: {
         maxWidth: 500px;
       }, */
