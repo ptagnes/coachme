@@ -4,7 +4,6 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,6 +13,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import Exercise from "./Exercise";
+
+import AccessibilityIcon from "@material-ui/icons/Accessibility";
+import DirectionsRunIcon from "@material-ui/icons/DirectionsRun"; //cardio
+import AirlineSeatLegroomReducedIcon from "@material-ui/icons/AirlineSeatLegroomReduced"; //Lower body
+import AirlineSeatReclineExtraIcon from "@material-ui/icons/AirlineSeatReclineExtra";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import RowingIcon from "@material-ui/icons/Rowing";
+import AirlineSeatLegroomExtraIcon from "@material-ui/icons/AirlineSeatLegroomExtra";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(1),
       cursor: "pointer",
-      // backgroundColor: "#af00ff",
-      // background:
-      //   "linear-gradient(90deg, rgba(128,0,255,1) 0%, rgba(175,0,255,1) 35%, rgba(145,0,255,1) 100%)",
       background: "#3a3c6d",
     },
     details: {
@@ -48,6 +52,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
       fontSize: "0.9rem",
       flex: 1,
+    },
+    avatar: {
+      color: "#af00ff",
+      backgroundColor: "#75757512",
     },
   })
 );
@@ -82,14 +90,33 @@ const ExerciseCard = ({
     setOpen(false);
     clearFilters();
   };
+  console.log(title);
+  const renderSwitch = (param: string) => {
+    switch (param) {
+      case "Cardio":
+        return <DirectionsRunIcon />;
+      case "Upper body":
+        return <EmojiPeopleIcon />;
+      case "Lower body":
+        return <AirlineSeatLegroomReducedIcon />;
+      case "Abs & Core":
+        return <AirlineSeatReclineExtraIcon />;
+      case "Back":
+        return <RowingIcon />;
+      case "Glutes":
+        return <AirlineSeatLegroomExtraIcon />;
+      case "Wholebody":
+        return <AccessibilityIcon />;
+      default:
+        return <DirectionsRunIcon />;
+    }
+  };
   return (
     <>
       <Paper className={classes.paper} onClick={handleClickOpen}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            <Avatar>
-              <AccessibilityIcon />
-            </Avatar>
+            <Avatar className={classes.avatar}>{renderSwitch(title)}</Avatar>
           </Grid>
           <Grid item xs zeroMinWidth className={classes.details}>
             <Typography noWrap className={classes.detailsp}>

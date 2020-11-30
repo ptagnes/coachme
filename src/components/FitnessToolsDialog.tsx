@@ -17,7 +17,6 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
-import FolderIcon from "@material-ui/icons/Folder";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import {
@@ -25,6 +24,12 @@ import {
   removeFitnessTool,
   getFitnessTools,
 } from "../redux/actions";
+import SportsBaseballIcon from "@material-ui/icons/SportsBaseball";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter"; //dumbbell
+import SwapCallsIcon from "@material-ui/icons/SwapCalls"; //rope
+import SpaceBarIcon from "@material-ui/icons/SpaceBar"; //bar
+import RoomServiceIcon from "@material-ui/icons/RoomService"; //bosu ball
+
 // import ExercisesContext from "../context/exercises-context";
 // const context = React.useContext(ExercisesContext);
 // React.useEffect(() => {
@@ -135,8 +140,13 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
                 <List key={key}>
                   <ListItem>
                     <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
+                      <Avatar
+                        style={{
+                          color: "#af00ff",
+                          backgroundColor: "#75757512",
+                        }}
+                      >
+                        <SportsBaseballIcon />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={prop} />

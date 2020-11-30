@@ -75,7 +75,6 @@ class DashboardExerciseCategories extends Component<ExercisesProps> {
             filterFilteredExercise={this.props.filterFilteredExerciseByValue}
             clearFilters={this.props.clearFilters}
             clearFilteredFilters={this.props.clearFilteredFilters}
-            data={this.props.exercisesState.filteredExercises}
             filteredData={this.props.exercisesState.nFilteredExercises}
           />
         ))}

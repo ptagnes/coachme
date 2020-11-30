@@ -4,7 +4,6 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,6 +13,12 @@ import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import ExerciseCard from "./ExerciseCard";
+import SportsBaseballIcon from "@material-ui/icons/SportsBaseball";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter"; //dumbbell
+import SwapCallsIcon from "@material-ui/icons/SwapCalls"; //rope
+import SpaceBarIcon from "@material-ui/icons/SpaceBar"; //bar
+import RoomServiceIcon from "@material-ui/icons/RoomService"; //bosu ball
+import EnhancedEncryptionIcon from "@material-ui/icons/EnhancedEncryption"; //kettlebell
 
 const Musclegroups = [
   "Upper body",
@@ -31,14 +36,16 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "hidden",
       padding: theme.spacing(0, 3),
     },
+    avatar: {
+      color: "#af00ff",
+      backgroundColor: "#75757512",
+    },
     paper: {
       margin: `${theme.spacing(1)}px auto`,
       padding: theme.spacing(1),
       cursor: "pointer",
       width: "100%",
       background: "#3a3c6d",
-      // background:
-      //   "linear-gradient(90deg, rgba(128,0,255,1) 0%, rgba(175,0,255,1) 35%, rgba(145,0,255,1) 100%)",
     },
     details: {
       alignSelf: "center",
@@ -75,7 +82,6 @@ const ExerciseCardTopCategories = ({
   filterFilteredExercise,
   clearFilters,
   clearFilteredFilters,
-  data,
   filteredData,
 }: {
   title: string;
@@ -84,7 +90,6 @@ const ExerciseCardTopCategories = ({
   filterFilteredExercise: (query: string, filter: string) => void;
   clearFilters: () => void;
   clearFilteredFilters: () => void;
-  data: any;
   filteredData: any;
 }) => {
   const classes = useStyles();
@@ -97,14 +102,31 @@ const ExerciseCardTopCategories = ({
     setOpenCat(false);
     clearFilters();
   };
+  console.log(title);
+  const renderSwitch = (param: string) => {
+    switch (param) {
+      case "Medicine Ball":
+        return <SportsBaseballIcon />;
+      case "Barbell":
+        return <SpaceBarIcon />;
+      case "Dumbbell":
+        return <FitnessCenterIcon />;
+      case "Resistance Band":
+        return <SwapCallsIcon />;
+      case "Bosu":
+        return <RoomServiceIcon />;
+      case "Kettlebell":
+        return <EnhancedEncryptionIcon />;
+      default:
+        return <SportsBaseballIcon />;
+    }
+  };
   return (
     <>
       <Paper className={classes.paper} onClick={handleClickOpenCat}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            <Avatar>
-              <AccessibilityIcon />
-            </Avatar>
+            <Avatar className={classes.avatar}>{renderSwitch(title)}</Avatar>
           </Grid>
           <Grid item xs zeroMinWidth className={classes.details}>
             <Typography noWrap className={classes.detailsp}>
