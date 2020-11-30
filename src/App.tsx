@@ -155,6 +155,10 @@ function App() {
     fetchData();
   }, []);
 
+  React.useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   const FitnessTools = [
     "Bosu",
     "Barbell",

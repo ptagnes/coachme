@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Typography from "@material-ui/core/Typography";
-import ReactDOM from "react-dom";
 
 export default function TimeAndDate() {
-  function date() {
-    const element = <span>{new Date().toLocaleDateString()}</span>;
-    ReactDOM.render(element, document.getElementById("date"));
-  }
-  function time() {
-    const element = <span>{new Date().toLocaleTimeString()}</span>;
-    ReactDOM.render(element, document.getElementById("time"));
-  }
-  setInterval(date, 1000);
-  setInterval(time, 1000);
+  const [time, setTime] = useState<any>();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const time = new Date().toLocaleTimeString();
+      setTime(time);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <span>
@@ -27,12 +25,12 @@ export default function TimeAndDate() {
             lineHeight: "1.2",
             marginBottom: "0.4rem",
           }}
-        ></Typography>
-        <Typography
-          variant="subtitle1"
-          color="textSecondary"
-          id="date"
-        ></Typography>
+        >
+          {new Date().toLocaleTimeString()}
+        </Typography>
+        <Typography variant="subtitle1" color="textSecondary" id="date">
+          {new Date().toLocaleDateString()}
+        </Typography>
       </span>
     </div>
   );

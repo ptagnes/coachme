@@ -1,4 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { createStructuredSelector } from "reselect";
+import {
+  selectUsers,
+  // selectUserActivities,
+  selectTodayActivity,
+  selectUserActivitiesThisMWeek,
+  selectUserActivitiesThisMonth,
+} from "../../redux/selectors/usersSelectors";
+import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 import {
   Theme,
   createStyles,
@@ -15,8 +26,8 @@ import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 
 import TimeAndDate from "./TimeAndDate";
 import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
-// import KitchenIcon from "@material-ui/icons/Kitchen";
 import TrendingDownIcon from "@material-ui/icons/TrendingDown";
+import { AuthContext } from "../../firebase/Authentication";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,10 +60,29 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ProfileContentItem1() {
+function ProfileContentItem1({
+  users,
+  // activities,
+  todaysactivity,
+  allActivities,
+  activitiesThisWeek,
+}: {
+  users: any;
+  // activities: any;
+  todaysactivity: any;
+  allActivities: any;
+  activitiesThisWeek: any;
+}) {
   const classes = useStyles();
   const theme = useTheme();
-
+  const { currentUser } = React.useContext(AuthContext);
+  let id: string;
+  if (currentUser) {
+    id = currentUser.uid;
+  }
+  React.useEffect(() => {
+    fetchUserStartAsync(id);
+  }, [fetchUserStartAsync]);
   return (
     <>
       <Grid container spacing={1}>
@@ -70,7 +100,7 @@ export default function ProfileContentItem1() {
                     color="textSecondary"
                     className={classes.subtitle1}
                   >
-                    Weights & Cardio
+                    {todaysactivity ? todaysactivity.name : "Restday"}
                   </Typography>
                 </span>
                 <span>
@@ -109,7 +139,7 @@ export default function ProfileContentItem1() {
                     color="textSecondary"
                     className={classes.subtitle1}
                   >
-                    4
+                    {activitiesThisWeek}
                   </Typography>
                 </span>
                 <Typography
@@ -137,7 +167,7 @@ export default function ProfileContentItem1() {
                     color="textSecondary"
                     className={classes.subtitle1}
                   >
-                    23
+                    {allActivities}
                   </Typography>
                 </span>
                 <Typography
@@ -193,7 +223,7 @@ export default function ProfileContentItem1() {
                     color="textSecondary"
                     className={classes.subtitle1}
                   >
-                    57.2kg
+                    {users && users.weight}kg
                   </Typography>
                 </span>
                 <Typography
@@ -208,23 +238,22 @@ export default function ProfileContentItem1() {
           </Card>
         </Grid>
       </Grid>
-      {/* <Card className={classes.root}>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography className={classes.profileh5} component="h5" variant="h5">
-              Today is Friday
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              27-11-2020, 16:31
-            </Typography>
-          </CardContent>
-        </div>
-        <CardMedia
-          className={classes.cover}
-          image={`${process.env.PUBLIC_URL}/images/img5.jpg`}
-          title="Second card"
-        />
-      </Card> */}
     </>
   );
 }
+
+const mapStateToProps = (state: any) => ({
+  users: selectUsers(state),
+  // activities: selectUserActivities(state),
+  todaysactivity: selectTodayActivity(state),
+  allActivities: selectUserActivitiesThisMonth(state),
+  activitiesThisWeek: selectUserActivitiesThisMWeek(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileContentItem1);

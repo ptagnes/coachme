@@ -73,7 +73,6 @@ const CalendarBody = (props: any) => {
     );
   }
   if (firstDayOfMonth() == 0) {
-    console.log("dflklsdkf");
     for (let i = 0; i < 7; i++) {
       blanks.push(<TableCell key={nextId()}>{""}</TableCell>);
     }
@@ -94,10 +93,6 @@ const CalendarBody = (props: any) => {
       rows.push(cells);
     }
   });
-  console.log(blanks);
-  console.log(firstDayOfMonth());
-  console.log(rows);
-  console.log(weekdays);
   return (
     <TableContainer component={Paper}>
       <Table className="calendar">
