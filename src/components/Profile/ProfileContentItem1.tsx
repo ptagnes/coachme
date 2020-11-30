@@ -223,7 +223,7 @@ function ProfileContentItem1({
                     color="textSecondary"
                     className={classes.subtitle1}
                   >
-                    {users && users.weight}kg
+                    {users && users.weight && <span>{users.weight}kg</span>}
                   </Typography>
                 </span>
                 <Typography

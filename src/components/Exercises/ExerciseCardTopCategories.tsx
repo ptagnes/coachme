@@ -102,7 +102,6 @@ const ExerciseCardTopCategories = ({
     setOpenCat(false);
     clearFilters();
   };
-  console.log(title);
   const renderSwitch = (param: string) => {
     switch (param) {
       case "Medicine Ball":

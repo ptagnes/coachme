@@ -17,9 +17,6 @@ class WorkoutsPage extends React.Component<WorkoutsPageProps> {
     }
   }
   render() {
-    // const { match } = this.props;
-    console.log(window.location.pathname);
-    console.log(this.props);
     const match = window.location.pathname;
     return (
       <div className="bp">

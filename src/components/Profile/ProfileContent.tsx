@@ -93,25 +93,21 @@ export default function ProfileContent() {
             icon={<PersonPinIcon style={{ marginBottom: "0px" }} />}
             {...a11yProps(2)}
           />
-          <Tab
-            label="Item Four"
-            className={classes.tabs}
-            icon={<HelpIcon style={{ marginBottom: "0px" }} />}
-            {...a11yProps(3)}
-          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <ProfileContentItem1 />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProfileContentItem1 />
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt.
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
       </TabPanel>
     </div>
   );

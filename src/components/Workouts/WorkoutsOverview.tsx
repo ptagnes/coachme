@@ -24,7 +24,6 @@ class WorkoutOverview extends React.Component<WorkoutOverviewProps> {
     }
   }
   render() {
-    console.log(this.props.collections);
     return (
       <div className="bp">
         <h1>Workout routines</h1>

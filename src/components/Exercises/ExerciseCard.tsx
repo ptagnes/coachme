@@ -90,7 +90,6 @@ const ExerciseCard = ({
     setOpen(false);
     clearFilters();
   };
-  console.log(title);
   const renderSwitch = (param: string) => {
     switch (param) {
       case "Cardio":
