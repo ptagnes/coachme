@@ -75,7 +75,7 @@ export interface Exercise {
   title: string;
   description: string;
   url: string;
-  image: string;
+  fileUrl: string;
   level: string;
   equipment: string;
   mechanics: string;

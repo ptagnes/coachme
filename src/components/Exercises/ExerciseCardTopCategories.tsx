@@ -19,6 +19,7 @@ import SwapCallsIcon from "@material-ui/icons/SwapCalls"; //rope
 import SpaceBarIcon from "@material-ui/icons/SpaceBar"; //bar
 import RoomServiceIcon from "@material-ui/icons/RoomService"; //bosu ball
 import EnhancedEncryptionIcon from "@material-ui/icons/EnhancedEncryption"; //kettlebell
+import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 
 const Musclegroups = [
   "Upper body",
@@ -26,8 +27,7 @@ const Musclegroups = [
   "Abs & Core",
   "Back",
   "Glutes",
-  "Wholebody",
-  "Cardio",
+  "Whole body",
 ];
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -112,10 +112,14 @@ const ExerciseCardTopCategories = ({
         return <FitnessCenterIcon />;
       case "Resistance Band":
         return <SwapCallsIcon />;
+      case "Pull Up Bar":
+        return <SwapCallsIcon />;
       case "Bosu":
         return <RoomServiceIcon />;
       case "Kettlebell":
         return <EnhancedEncryptionIcon />;
+      case "Body Weight":
+        return <AccessibilityNewIcon />;
       default:
         return <SportsBaseballIcon />;
     }

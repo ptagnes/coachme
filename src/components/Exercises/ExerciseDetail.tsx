@@ -10,7 +10,7 @@ const ExerciseDetail = (props: any) => {
   const [exercise, setExercise] = React.useState<{} | undefined>();
   const [title, setTitle] = React.useState<string>();
   const [description, setDescription] = React.useState<string>();
-  const [image, setImage] = React.useState<string>();
+  const [fileUrl, setFileUrl] = React.useState<string>();
   const [videourl, setVideoUrl] = React.useState<string>();
   const context = React.useContext(ExercisesContext);
 
@@ -23,7 +23,7 @@ const ExerciseDetail = (props: any) => {
       setExercise(exer);
       setTitle(exer.title);
       setDescription(exer.description);
-      setImage(exer.image);
+      setFileUrl(exer.fileUrl);
       setVideoUrl(exer.videourl);
     }
   }, [context, id]);
@@ -66,8 +66,8 @@ const ExerciseDetail = (props: any) => {
               </>
             ) : (
               <div>
-                {image && (
-                  <img style={{ width: "100%" }} src={image} alt={image} />
+                {fileUrl && (
+                  <img style={{ width: "100%" }} src={fileUrl} alt={fileUrl} />
                 )}
                 {/* <img
                   style={{ width: "100%" }}
@@ -76,7 +76,7 @@ const ExerciseDetail = (props: any) => {
                 /> */}
               </div>
             )}
-            {/* {image && <img style={{ width: "100%" }} src={image} alt={image} />} */}
+            {/* {fileUrl && <img style={{ width: "100%" }} src={fileUrl} alt={fileUrl} />} */}
             {description && <p>{description}</p>}
           </div>
         ) : (

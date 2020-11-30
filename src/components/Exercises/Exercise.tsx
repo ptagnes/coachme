@@ -42,11 +42,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Exercise = ({
   title,
-  image,
+  fileUrl,
   id,
 }: {
   title: string;
-  image: string;
+  fileUrl: string;
   id: string;
 }) => {
   const classes = useStyles();
@@ -61,7 +61,7 @@ const Exercise = ({
       >
         <Grid item>
           <Avatar className={classes.avatar}>
-            <LazyLoadImage alt={image} src={image} width={100} />
+            <LazyLoadImage alt={fileUrl} src={fileUrl} width={100} />
           </Avatar>
         </Grid>
         <Grid item xs zeroMinWidth className={classes.details}>

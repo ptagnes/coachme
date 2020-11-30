@@ -73,7 +73,7 @@ function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
               key={item.id}
               id={item.id}
               title={item.name}
-              image={item.imageUrl}
+              fileUrl={item.imageUrl}
             />
           ))}
       </div>

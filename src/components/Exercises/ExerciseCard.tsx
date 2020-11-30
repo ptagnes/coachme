@@ -92,8 +92,6 @@ const ExerciseCard = ({
   };
   const renderSwitch = (param: string) => {
     switch (param) {
-      case "Cardio":
-        return <DirectionsRunIcon />;
       case "Upper body":
         return <EmojiPeopleIcon />;
       case "Lower body":
@@ -104,7 +102,7 @@ const ExerciseCard = ({
         return <RowingIcon />;
       case "Glutes":
         return <AirlineSeatLegroomExtraIcon />;
-      case "Wholebody":
+      case "Whole body":
         return <AccessibilityIcon />;
       default:
         return <DirectionsRunIcon />;
@@ -154,7 +152,7 @@ const ExerciseCard = ({
               <Exercise
                 key={key}
                 title={prop.title}
-                image={prop.image}
+                fileUrl={prop.fileUrl}
                 id={prop.id}
               />
             ))}

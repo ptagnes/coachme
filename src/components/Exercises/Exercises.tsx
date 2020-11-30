@@ -31,7 +31,7 @@ const Exercises = (props: any) => {
           <Exercise
             key={key}
             title={prop.title}
-            image={prop.image}
+            fileUrl={prop.fileUrl}
             id={prop.id}
           />
         ))

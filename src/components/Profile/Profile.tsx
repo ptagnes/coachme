@@ -53,7 +53,6 @@ function Profile({
   userData?: any;
 }) {
   const { currentUser } = React.useContext(AuthContext);
-  const [file, setImgFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>();
   let id: string;
   if (currentUser) {
@@ -63,7 +62,6 @@ function Profile({
     "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
   const classes = useStyles();
   const { users } = userData;
-  // console.log(users.activities);
 
   React.useEffect(() => {
     fetchUserStartAsync(id);
@@ -89,26 +87,8 @@ function Profile({
           ) : (
             <AccountCircleIcon style={{ fontSize: "90px" }} />
           )}
-
-          <ImageUpload setImgFile={setImgFile} setFileUrl={setFileUrl} />
+          <ImageUpload setFileUrl={setFileUrl} />
           <h4 className={classes.header}>{users && users.displayName}</h4>
-
-          {/* <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              background: "#fff",
-              color: "#333",
-              padding: "0.6rem 1rem 0px",
-            }}
-          >
-            <div>
-              <small>Last summit</small> <p>Basecamp</p>
-            </div>
-            <div>
-              <small>Next challenge</small> <p>Kirkjufell</p>
-            </div>
-          </div> */}
         </div>
         <div className="middle">
           <ProfileContent />

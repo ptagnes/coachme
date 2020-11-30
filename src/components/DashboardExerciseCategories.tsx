@@ -19,11 +19,10 @@ import FitnessToolsDialog from "./FitnessToolsDialog";
 const Musclegroups = [
   "Upper body",
   "Lower body",
+  "Whole body",
   "Abs & Core",
   "Back",
   "Glutes",
-  "Wholebody",
-  "Cardio",
 ];
 interface ExercisesProps {
   exercisesState: any;

@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import "./ExerciseForm.css";
-
+import ImageUpload from "../ImageUpload";
 interface ExerciseFormProps {
   exercise?: any;
   onSubmit: any;
@@ -22,7 +22,7 @@ interface ExerciseFormState {
   equipment: string;
   mechanics: string;
   musclegroup: string;
-  image: string;
+  fileUrl: string;
   createdAt: Date;
 }
 export default class ExerciseForm extends React.Component<
@@ -40,8 +40,8 @@ export default class ExerciseForm extends React.Component<
       equipment: props.exercise ? props.exercise.equipment : "",
       mechanics: props.exercise ? props.exercise.mechanics : "",
       musclegroup: props.exercise ? props.exercise.musclegroup : "",
-      image: props.exercise
-        ? props.exercise.image
+      fileUrl: props.exercise
+        ? props.exercise.fileUrl
         : "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defaultImage.jpg?alt=media&token=352cd091-29e7-4ba2-af89-ce9ff0094d97",
       createdAt: new Date(),
       error: "",
@@ -63,7 +63,7 @@ export default class ExerciseForm extends React.Component<
   onSubmit = (e: any) => {
     e.preventDefault();
     if (!this.state.title) {
-      this.setState(() => ({ error: "Vänligen ange ett namn." }));
+      this.setState(() => ({ error: "Please insert a title." }));
     } else {
       this.setState(() => ({ error: "" }));
       this.props.onSubmit({
@@ -71,7 +71,7 @@ export default class ExerciseForm extends React.Component<
         title: this.state.title,
         description: this.state.description,
         level: this.state.level,
-        image: this.state.image,
+        fileUrl: this.state.fileUrl,
         url: this.state.url,
         videourl: this.state.videourl,
         equipment: this.state.equipment,
@@ -81,13 +81,28 @@ export default class ExerciseForm extends React.Component<
       });
     }
   };
+  setFileUrl = () => {
+    console.log("set file url");
+  };
   render() {
+    console.log(this.state);
     return (
       <div>
-        <form className="form" onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} style={{ position: "relative" }}>
           {this.state.error && (
             <p className="form__error">{this.state.error}</p>
           )}
+          <ImageUpload setFileUrl={this.setFileUrl} exForm={this} />
+          {this.state.fileUrl && (
+            <div>
+              <img
+                src={this.state.fileUrl}
+                alt={this.state.fileUrl}
+                style={{ width: "100%", marginTop: "1rem" }}
+              />
+            </div>
+          )}
+          <span>Upload image</span>
           <TextField
             required
             id="title"
@@ -112,7 +127,6 @@ export default class ExerciseForm extends React.Component<
             value={this.state.videourl}
             name="videourl"
           />
-
           <TextareaAutosize
             placeholder="Add a description"
             rowsMax={10}
@@ -121,7 +135,6 @@ export default class ExerciseForm extends React.Component<
             name="description"
             onChange={this.handleOnChange}
           />
-
           <FormControl className="formselect">
             <InputLabel htmlFor="mechanics">Mechanics</InputLabel>
             <Select
@@ -167,9 +180,14 @@ export default class ExerciseForm extends React.Component<
               }}
             >
               <option aria-label="None" value="" />
-              <option value="Dumbbells">Dumbbells</option>
-              <option value="Barbells">Barbells</option>
-              <option value="Kettlebells">Kettlebells</option>
+              <option value="Bosu">Bosu</option>
+              <option value="Barbell">Barbell</option>
+              <option value="Dumbbell">Dumbbell</option>
+              <option value="Kettlebell">Kettlebell</option>
+              <option value="Medicine Ball">Medicine Ball</option>
+              <option value="Pull Up Bar">Pull Up Bar</option>
+              <option value="Resistance Band">Resistance Band</option>
+              <option value="Body Weight">Body Weight</option>
             </Select>
           </FormControl>
           <FormControl className="formselect">
@@ -184,12 +202,14 @@ export default class ExerciseForm extends React.Component<
               }}
             >
               <option aria-label="None" value="" />
-              <option value="Upperbody">Upperbody</option>
-              <option value="Lowerbody">Lowerbody</option>
-              <option value="Core">Core</option>
+              <option value="Upper body">Upper body</option>
+              <option value="Lower body">Lower body</option>
+              <option value="Lower body">Whole body</option>
+              <option value="Core">Abs & Core</option>
+              <option value="Core">Back</option>
+              <option value="Core">Glutes</option>
             </Select>
           </FormControl>
-          {/**image upload, sets and reps */}
           <Button
             style={{ marginTop: "20px", display: "flex", marginLeft: "auto" }}
             variant="contained"
@@ -203,9 +223,3 @@ export default class ExerciseForm extends React.Component<
     );
   }
 }
-
-/**
-createdAt: new Date(),
-id: uid,
-image: "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/jrp.jpg?alt=media&token=8ffe40ae-7f40-439f-85e6-2da8cd175368",
- */

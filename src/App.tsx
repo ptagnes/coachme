@@ -167,6 +167,7 @@ function App() {
     "Medicine Ball",
     "Pull Up Bar",
     "Resistance Band",
+    "Body Weight",
   ];
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);

@@ -4,11 +4,11 @@ import AddIcon from "@material-ui/icons/Add";
 import { Fab } from "@material-ui/core";
 
 function ProfilePic({
-  setImgFile,
   setFileUrl,
+  exForm,
 }: {
-  setImgFile: (file: any) => void;
   setFileUrl: (fileUrl: any) => void;
+  exForm?: any;
 }) {
   const [progress, setProgress] = useState(0);
   const [file, setFile] = useState<File | null>(null);
@@ -24,7 +24,6 @@ function ProfilePic({
     if (selectedFile) {
       if (types.includes(selectedFile.type)) {
         setFile(selectedFile);
-        setImgFile(selectedFile);
         setFileError(null);
         const storageRef = firebase.firebaseStorage().ref(selectedFile.name);
         storageRef.put(selectedFile).on(
@@ -42,21 +41,23 @@ function ProfilePic({
             const downloadUrl = await storageRef.getDownloadURL();
             setUrl(downloadUrl);
             setFileUrl(downloadUrl);
+            if (exForm) {
+              console.log("exForm");
+              console.log(exForm);
+              exForm.setState({ fileUrl: downloadUrl });
+            }
           }
         );
       } else {
         setFile(null);
-        setImgFile(null);
         setFileError("Please select an image file (png or jpg)");
       }
     }
   };
+
   return (
     <>
-      <label
-        htmlFor="upload-photo"
-        style={{ position: "absolute", top: "0", right: "29%" }}
-      >
+      <label htmlFor="upload-photo">
         <input
           style={{ display: "none" }}
           id="upload-photo"
@@ -64,17 +65,6 @@ function ProfilePic({
           type="file"
           onChange={handleChangeUpload}
         />
-        {/* <Fab
-          color="secondary"
-          size="small"
-          component="span"
-          aria-label="add"
-          variant="extended"
-        >
-          <AddIcon /> Upload photo
-        </Fab>
-        <br />
-        <br /> */}
         <Fab
           color="primary"
           size="small"
@@ -84,14 +74,6 @@ function ProfilePic({
         >
           <AddIcon />
         </Fab>
-        {/* <Button
-          color="secondary"
-          variant="contained"
-          component="span"
-          onChange={handleChangeUpload}
-        >
-          Upload button
-        </Button>{" "} */}
       </label>
       {/* {url && <div>{url}</div>} */}
       {fileError && <div>{fileError}</div>}
