@@ -24,7 +24,7 @@ import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 const Musclegroups = [
   "Upper body",
   "Lower body",
-  "Abs & Core",
+  "Abs",
   "Back",
   "Glutes",
   "Whole body",

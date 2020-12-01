@@ -89,7 +89,7 @@ export default function Workouts() {
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <h2>Abs & Core: #1</h2>
+          <h2>Abs: #1</h2>
           <Card>
             <Link
               className={classes.root}

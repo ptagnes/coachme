@@ -94,7 +94,7 @@ const WORKOUT_DATA = {
         title: "Intense Six Pack",
         routeName: "sixpack",
         imageUrl: "img7.jpg",
-        category: "Abs & Core",
+        category: "Abs",
         exerciseitems: [
           {
             id: 1558740,

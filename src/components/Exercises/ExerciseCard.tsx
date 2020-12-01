@@ -96,7 +96,7 @@ const ExerciseCard = ({
         return <EmojiPeopleIcon />;
       case "Lower body":
         return <AirlineSeatLegroomReducedIcon />;
-      case "Abs & Core":
+      case "Abs":
         return <AirlineSeatReclineExtraIcon />;
       case "Back":
         return <RowingIcon />;

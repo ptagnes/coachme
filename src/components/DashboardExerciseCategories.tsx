@@ -20,7 +20,7 @@ const Musclegroups = [
   "Upper body",
   "Lower body",
   "Whole body",
-  "Abs & Core",
+  "Abs",
   "Back",
   "Glutes",
 ];

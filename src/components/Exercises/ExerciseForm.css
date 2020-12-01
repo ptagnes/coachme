@@ -11,6 +11,9 @@ textarea {
   width: 533px;
   margin: 0 auto;
 }
+.formelem {
+  margin: 0.6rem 0 !important;
+}
 @media (max-width: 450px) {
   .video-container {
     width: 300px;

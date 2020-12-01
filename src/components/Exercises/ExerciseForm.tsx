@@ -110,6 +110,7 @@ export default class ExerciseForm extends React.Component<
             onChange={this.handleOnChange}
             value={this.state.title}
             name="title"
+            className="formelem"
           />
           <TextField
             required
@@ -118,6 +119,7 @@ export default class ExerciseForm extends React.Component<
             onChange={this.handleOnChange}
             value={this.state.url}
             name="url"
+            className="formelem"
           />
           <TextField
             required
@@ -126,6 +128,7 @@ export default class ExerciseForm extends React.Component<
             onChange={this.handleOnChange}
             value={this.state.videourl}
             name="videourl"
+            className="formelem"
           />
           <TextareaAutosize
             placeholder="Add a description"
@@ -134,8 +137,9 @@ export default class ExerciseForm extends React.Component<
             value={this.state.description}
             name="description"
             onChange={this.handleOnChange}
+            className="formelem"
           />
-          <FormControl className="formselect">
+          <FormControl className="formelem">
             <InputLabel htmlFor="mechanics">Mechanics</InputLabel>
             <Select
               native
@@ -151,7 +155,7 @@ export default class ExerciseForm extends React.Component<
               <option value="Isolation">Isolation</option>
             </Select>
           </FormControl>
-          <FormControl className="formselect">
+          <FormControl className="formelem">
             <InputLabel htmlFor="level">Level</InputLabel>
             <Select
               native
@@ -168,7 +172,7 @@ export default class ExerciseForm extends React.Component<
               <option value="Advanced">Advanced</option>
             </Select>
           </FormControl>
-          <FormControl className="formselect">
+          <FormControl className="formelem">
             <InputLabel htmlFor="equipment">Equipment</InputLabel>
             <Select
               native
@@ -190,7 +194,7 @@ export default class ExerciseForm extends React.Component<
               <option value="Body Weight">Body Weight</option>
             </Select>
           </FormControl>
-          <FormControl className="formselect">
+          <FormControl className="formelem">
             <InputLabel htmlFor="musclegroup">Musclegroup</InputLabel>
             <Select
               native
@@ -204,10 +208,10 @@ export default class ExerciseForm extends React.Component<
               <option aria-label="None" value="" />
               <option value="Upper body">Upper body</option>
               <option value="Lower body">Lower body</option>
-              <option value="Lower body">Whole body</option>
-              <option value="Core">Abs & Core</option>
-              <option value="Core">Back</option>
-              <option value="Core">Glutes</option>
+              <option value="Whole body">Whole body</option>
+              <option value="Abs">Abs</option>
+              <option value="Back">Back</option>
+              <option value="Glutes">Glutes</option>
             </Select>
           </FormControl>
           <Button

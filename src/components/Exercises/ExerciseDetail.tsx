@@ -4,12 +4,33 @@ import ExercisesContext from "../../context/exercises-context";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import StarIcon from "@material-ui/icons/Star";
+import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+    },
+  })
+);
 
 const ExerciseDetail = (props: any) => {
+  const classes = useStyles();
   const id = props.match.params.id;
   const [exercise, setExercise] = React.useState<{} | undefined>();
   const [title, setTitle] = React.useState<string>();
   const [description, setDescription] = React.useState<string>();
+  const [musclegroup, setMusclegroup] = React.useState<string>();
+  const [level, setLevel] = React.useState<string>();
+  const [equipment, setEquipment] = React.useState<string>();
+  const [mechanics, setMechanics] = React.useState<string>();
   const [fileUrl, setFileUrl] = React.useState<string>();
   const [videourl, setVideoUrl] = React.useState<string>();
   const context = React.useContext(ExercisesContext);
@@ -23,6 +44,10 @@ const ExerciseDetail = (props: any) => {
       setExercise(exer);
       setTitle(exer.title);
       setDescription(exer.description);
+      setMusclegroup(exer.musclegroup);
+      setLevel(exer.level);
+      setEquipment(exer.equipment);
+      setMechanics(exer.mechanics);
       setFileUrl(exer.fileUrl);
       setVideoUrl(exer.videourl);
     }
@@ -78,6 +103,39 @@ const ExerciseDetail = (props: any) => {
             )}
             {/* {fileUrl && <img style={{ width: "100%" }} src={fileUrl} alt={fileUrl} />} */}
             {description && <p>{description}</p>}
+
+            {musclegroup && (
+              <List
+                component="nav"
+                className={classes.root}
+                aria-label="contacts"
+              >
+                <ListItem button>
+                  <ListItemIcon>
+                    <StarIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={musclegroup} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <StarIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={equipment} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <StarIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={mechanics} />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <StarIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={level} />
+                </ListItem>
+              </List>
+            )}
           </div>
         ) : (
           <div
