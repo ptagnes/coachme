@@ -40,7 +40,13 @@ const ExerciseDetail = (props: any) => {
   React.useEffect(() => {
     if (context.exercises) {
       const allExerc = context.exercises;
-      const exer = allExerc.find((exercise: any) => exercise.id === id);
+      // const exer = allExerc.find((exercise: any) => exercise.id === id);
+      const exer = allExerc.find((exercise: any) => {
+        console.log(exercise);
+        return exercise.id === id;
+      });
+      console.log("exere");
+      console.log(id);
       setExercise(exer);
       setTitle(exer.title);
       setDescription(exer.description);
@@ -114,25 +120,25 @@ const ExerciseDetail = (props: any) => {
                   <ListItemIcon>
                     <StarIcon />
                   </ListItemIcon>
-                  <ListItemText primary={musclegroup} />
+                  <ListItemText primary={musclegroup && musclegroup} />
                 </ListItem>
                 <ListItem button>
                   <ListItemIcon>
                     <StarIcon />
                   </ListItemIcon>
-                  <ListItemText primary={equipment} />
+                  <ListItemText primary={equipment && equipment} />
                 </ListItem>
                 <ListItem button>
                   <ListItemIcon>
                     <StarIcon />
                   </ListItemIcon>
-                  <ListItemText primary={mechanics} />
+                  <ListItemText primary={mechanics && mechanics} />
                 </ListItem>
                 <ListItem button>
                   <ListItemIcon>
                     <StarIcon />
                   </ListItemIcon>
-                  <ListItemText primary={level} />
+                  <ListItemText primary={level && level} />
                 </ListItem>
               </List>
             )}

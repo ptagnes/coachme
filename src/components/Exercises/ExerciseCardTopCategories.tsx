@@ -20,6 +20,7 @@ import SpaceBarIcon from "@material-ui/icons/SpaceBar"; //bar
 import RoomServiceIcon from "@material-ui/icons/RoomService"; //bosu ball
 import EnhancedEncryptionIcon from "@material-ui/icons/EnhancedEncryption"; //kettlebell
 import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
+import EventSeatIcon from "@material-ui/icons/EventSeat";
 
 const Musclegroups = [
   "Upper body",
@@ -120,6 +121,8 @@ const ExerciseCardTopCategories = ({
         return <EnhancedEncryptionIcon />;
       case "Body Weight":
         return <AccessibilityNewIcon />;
+      case "Machine":
+        return <EventSeatIcon />;
       default:
         return <SportsBaseballIcon />;
     }

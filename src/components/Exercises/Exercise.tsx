@@ -44,10 +44,12 @@ const Exercise = ({
   title,
   fileUrl,
   id,
+  setsReps,
 }: {
   title: string;
   fileUrl: string;
   id: string;
+  setsReps?: string;
 }) => {
   const classes = useStyles();
   const { currentUser } = React.useContext(AuthContext);
@@ -65,18 +67,27 @@ const Exercise = ({
           </Avatar>
         </Grid>
         <Grid item xs zeroMinWidth className={classes.details}>
-          <Typography noWrap className={classes.detailsp}>
+          <Typography className={classes.detailsp}>
             <Link
-              to={`/exercisedetail/${id}`}
+              to={{
+                pathname: `/exercisedetail/${id}`,
+                // state: {
+                //   id: "xxx",
+                // },
+              }}
               style={{
                 color: "#fff",
                 textDecoration: "none",
-                padding: "18px 0",
                 width: "95%",
                 overflow: "hidden",
               }}
             >
               <span>{title}</span>
+              {setsReps && (
+                <span style={{ marginLeft: "1rem", color: "#878ad8" }}>
+                  {setsReps}
+                </span>
+              )}
             </Link>
             {currentUser && currentUser.uid === "2xT2T9CqfjgU5TQGn06VL920Tkp2" && (
               <IconButton aria-label="edit" style={{ padding: "7px" }}>

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       left: "0",
       top: "59px",
       zIndex: 0,
-      opacity: "0.5",
+      opacity: "0.1",
     },
     imageStyle: {
       flexDirection: "column",
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
   const classes = useStyles();
-  const { exerciseitems, imageUrl } = workoutItem;
+  const { exerciseitems, imageUrl, setsReps } = workoutItem;
   let history = useHistory();
   const handleClick = () => {
     history.goBack();
@@ -74,6 +74,7 @@ function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
               id={item.id}
               title={item.name}
               fileUrl={item.imageUrl}
+              setsReps={item.setsReps}
             />
           ))}
       </div>

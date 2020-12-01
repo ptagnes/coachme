@@ -41,6 +41,7 @@ const FitnessTools = [
   "Pull Up Bar",
   "Resistance Band",
   "Body Weight",
+  "Machine",
 ];
 
 interface FitnessToolsDialogProps {

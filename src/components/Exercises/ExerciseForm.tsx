@@ -192,6 +192,7 @@ export default class ExerciseForm extends React.Component<
               <option value="Pull Up Bar">Pull Up Bar</option>
               <option value="Resistance Band">Resistance Band</option>
               <option value="Body Weight">Body Weight</option>
+              <option value="Machine">Machine</option>
             </Select>
           </FormControl>
           <FormControl className="formelem">

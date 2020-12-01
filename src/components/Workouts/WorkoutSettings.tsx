@@ -133,8 +133,21 @@ function WorkoutSettings(props: Props) {
           className={classes.root}
         >
           <ListItem>
+            <Link
+              style={{
+                color: "white",
+                border: "1px solid white",
+                padding: "1rem",
+                textDecoration: "none",
+              }}
+              to={`/workoutdetails/${route}/${itemKey}`}
+            >
+              Go to Workout
+            </Link>
+          </ListItem>
+          <ListItem>
             <ListItemIcon>
-              <TimerIcon />
+              <TimerIcon style={{ color: "#757575" }} />
             </ListItemIcon>
             <ListItemText
               id="switch-list-label-wifi"
@@ -148,7 +161,7 @@ function WorkoutSettings(props: Props) {
           <Divider />
           <ListItem>
             <ListItemIcon>
-              <OpacityIcon />
+              <OpacityIcon style={{ color: "#757575" }} />
             </ListItemIcon>
             <ListItemText
               id="switch-list-label-warmup"
@@ -158,6 +171,7 @@ function WorkoutSettings(props: Props) {
             <ListItemSecondaryAction>
               <Switch
                 edge="end"
+                disabled
                 onChange={handleToggle("Warmup")}
                 checked={checked.indexOf("Warmup") !== -1}
                 inputProps={{ "aria-labelledby": "switch-list-label-warmup" }}
@@ -167,7 +181,7 @@ function WorkoutSettings(props: Props) {
           <Divider />
           <ListItem>
             <ListItemIcon>
-              <FitnessCenterIcon />
+              <FitnessCenterIcon style={{ color: "#757575" }} />
             </ListItemIcon>
             <ListItemText
               id="switch-list-label-bluetooth"
@@ -185,7 +199,7 @@ function WorkoutSettings(props: Props) {
                 <ListItemIcon
                   style={{ transform: "rotate(45deg)", marginTop: "20px" }}
                 >
-                  <FitnessCenterIcon />
+                  <FitnessCenterIcon style={{ color: "#757575" }} />
                 </ListItemIcon>
                 <ListItemText
                   id="switch-list-label-dumbbell"
@@ -194,6 +208,7 @@ function WorkoutSettings(props: Props) {
                 <ListItemSecondaryAction>
                   <Switch
                     edge="end"
+                    disabled
                     onChange={handleToggle("dumbbell")}
                     checked={checked.indexOf("dumbbell") !== -1}
                     inputProps={{
@@ -204,7 +219,7 @@ function WorkoutSettings(props: Props) {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <WifiTetheringIcon />
+                  <WifiTetheringIcon style={{ color: "#757575" }} />
                 </ListItemIcon>
                 <ListItemText
                   id="switch-list-label-kettlebell"
@@ -213,6 +228,7 @@ function WorkoutSettings(props: Props) {
                 <ListItemSecondaryAction>
                   <Switch
                     edge="end"
+                    disabled
                     onChange={handleToggle("kettlebell")}
                     checked={checked.indexOf("kettlebell") !== -1}
                     inputProps={{
@@ -223,7 +239,7 @@ function WorkoutSettings(props: Props) {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <WifiTetheringIcon />
+                  <WifiTetheringIcon style={{ color: "#757575" }} />
                 </ListItemIcon>
                 <ListItemText
                   id="switch-list-label-kettlebell"
@@ -232,6 +248,7 @@ function WorkoutSettings(props: Props) {
                 <ListItemSecondaryAction>
                   <Switch
                     edge="end"
+                    disabled
                     onChange={handleToggle("kettlebell")}
                     checked={checked.indexOf("kettlebell") !== -1}
                     inputProps={{
