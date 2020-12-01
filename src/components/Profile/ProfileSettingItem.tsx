@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-// import { StoreState } from "../redux/reducers/index";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
@@ -20,7 +19,23 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ProfileSettingItemToEdit from "./ProfileSettingItemToEdit";
 import { AuthContext } from "../../firebase/Authentication";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    avatar: {
+      color: "#af00ff",
+      backgroundColor: "#75757512",
+    },
+    editVal: {
+      marginLeft: "2rem",
+    },
+    listItem: {
+      paddingLeft: "0",
+      cursor: "pointer",
+    },
+  })
+);
 function ProfileSettingsItem({
   text,
   fetchUserStartAsync,
@@ -34,6 +49,7 @@ function ProfileSettingsItem({
   const { currentUser } = React.useContext(AuthContext);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const classes = useStyles();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -49,9 +65,9 @@ function ProfileSettingsItem({
   const { users } = userData;
   return (
     <>
-      <ListItem onClick={handleClickOpen} style={{ cursor: "pointer" }}>
+      <ListItem onClick={handleClickOpen} className={classes.listItem}>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <EditIcon />
           </Avatar>
         </ListItemAvatar>
@@ -75,16 +91,18 @@ function ProfileSettingsItem({
         <DialogContent>
           <DialogContentText>Update your settings bellow.</DialogContentText>
           <List>
-            <ListItem>
+            <ListItem className={classes.listItem}>
               <ProfileSettingItemToEdit
                 itemToEdit="displayName"
                 itemType="text"
                 placeholderText="Update display name"
               />
-              {users && users.displayName}
+              {users && (
+                <span className={classes.editVal}>{users.displayName}</span>
+              )}
             </ListItem>
             <Divider />
-            <ListItem>
+            <ListItem className={classes.listItem}>
               <ProfileSettingItemToEdit
                 itemToEdit="gender"
                 itemType="radio"
@@ -93,7 +111,7 @@ function ProfileSettingsItem({
               {users && users.gender}
             </ListItem>
             <Divider />
-            <ListItem>
+            <ListItem className={classes.listItem}>
               <ProfileSettingItemToEdit
                 itemToEdit="birthday"
                 itemType="timePicker"
@@ -102,7 +120,7 @@ function ProfileSettingsItem({
               {users && users.birthday}
             </ListItem>
             <Divider />
-            <ListItem>
+            <ListItem className={classes.listItem}>
               <ProfileSettingItemToEdit
                 itemToEdit="height"
                 itemType="text"
@@ -112,7 +130,7 @@ function ProfileSettingsItem({
               <span>cm</span>
             </ListItem>
             <Divider />
-            <ListItem>
+            <ListItem className={classes.listItem}>
               <ProfileSettingItemToEdit
                 itemToEdit="weight"
                 itemType="text"
@@ -122,7 +140,7 @@ function ProfileSettingsItem({
               <span>kg</span>
             </ListItem>
             <Divider />
-            <ListItem>
+            <ListItem className={classes.listItem}>
               <ProfileSettingItemToEdit
                 itemToEdit="goal"
                 itemType="radio"

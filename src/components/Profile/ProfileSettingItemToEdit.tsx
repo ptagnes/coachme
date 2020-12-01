@@ -16,10 +16,20 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import EditIcon from "@material-ui/icons/Edit";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import { AuthContext } from "../../firebase/Authentication";
 import { editUser } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    avatar: {
+      color: "#af00ff",
+      backgroundColor: "#75757512",
+    },
+  })
+);
 
 function ProfileSettingItemToEdit({
   editUser,
@@ -43,6 +53,7 @@ function ProfileSettingItemToEdit({
   const [update, setUpdate] = React.useState<{}>();
   const { users } = userData;
   const [value, setValue] = React.useState(users[itemToEdit]);
+  const classes = useStyles();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -84,7 +95,7 @@ function ProfileSettingItemToEdit({
   return (
     <>
       <ListItemAvatar>
-        <Avatar>
+        <Avatar className={classes.avatar}>
           <EditIcon style={{ cursor: "pointer" }} onClick={handleClickOpen} />
         </Avatar>
       </ListItemAvatar>

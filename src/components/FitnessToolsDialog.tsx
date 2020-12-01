@@ -29,13 +29,8 @@ import FitnessCenterIcon from "@material-ui/icons/FitnessCenter"; //dumbbell
 import SwapCallsIcon from "@material-ui/icons/SwapCalls"; //rope
 import SpaceBarIcon from "@material-ui/icons/SpaceBar"; //bar
 import RoomServiceIcon from "@material-ui/icons/RoomService"; //bosu ball
-
-// import ExercisesContext from "../context/exercises-context";
-// const context = React.useContext(ExercisesContext);
-// React.useEffect(() => {
-//   //@ts-ignore
-//   setExercises(context.exercises);
-// }, [context]);
+import EnhancedEncryptionIcon from "@material-ui/icons/EnhancedEncryption"; //kettlebell
+import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 
 const FitnessTools = [
   "Bosu",
@@ -101,6 +96,28 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
         removeFitnessTool(id, name);
       }
     };
+    const renderSwitch = (param: string) => {
+      switch (param) {
+        case "Medicine Ball":
+          return <SportsBaseballIcon />;
+        case "Barbell":
+          return <SpaceBarIcon />;
+        case "Dumbbell":
+          return <FitnessCenterIcon />;
+        case "Resistance Band":
+          return <SwapCallsIcon />;
+        case "Pull Up Bar":
+          return <SwapCallsIcon />;
+        case "Bosu":
+          return <RoomServiceIcon />;
+        case "Kettlebell":
+          return <EnhancedEncryptionIcon />;
+        case "Body Weight":
+          return <AccessibilityNewIcon />;
+        default:
+          return <SportsBaseballIcon />;
+      }
+    };
     return (
       <div>
         <Button
@@ -147,7 +164,7 @@ class FitnessToolsDialog extends React.Component<FitnessToolsDialogProps> {
                           backgroundColor: "#75757512",
                         }}
                       >
-                        <SportsBaseballIcon />
+                        {renderSwitch(prop)}
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={prop} />

@@ -75,10 +75,10 @@ const WorkoutItems = ({ item, route }: { item: any; route: string }) => {
               component="img"
               alt="training"
               className={classes.media}
-              style={{
-                filter: blur ? "blur(20px)" : "none",
-                transition: blur ? "none" : "filter 0.3s ease-out",
-              }}
+              // style={{
+              //   filter: blur ? "blur(20px)" : "none",
+              //   transition: blur ? "none" : "filter 0.3s ease-out",
+              // }}
               image={`${process.env.PUBLIC_URL}/images/${imageUrl}`}
               title="training"
             />
