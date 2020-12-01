@@ -36,6 +36,7 @@ import AppBarNav from "./components/AppBar/AppBarNav";
 import EditExercise from "./components/Exercises/EditExercise";
 import ExerciseDetail from "./components/Exercises/ExerciseDetail";
 import AddExercise from "./components/Exercises/AddExercise";
+import CoachMeStart from "./components/CoachmeStart";
 import {
   mainListItems,
   adminListItems,
@@ -256,11 +257,13 @@ function App() {
                   >
                     {/* <div className={classes.drawerHeader} /> */}
                     <Switch>
-                      <PrivateRoute
+                      {/* <PrivateRoute
                         exact
                         path="/"
                         component={DashboardExercises}
-                      />
+                      /> */}
+                      <PrivateRoute exact path="/" component={CoachMeStart} />
+                      {/* <Route exact path="/" component={CoachMeStart} /> */}
                       <Route exact path="/login" component={Login} />
                       <Route exact path="/signup" component={Signup} />
                       <Route exact path="/forgot" component={Forgot} />
@@ -283,6 +286,13 @@ function App() {
                         path="/workouttracker"
                         render={() =>
                           user ? <WorkoutTracker /> : <Redirect to="/" />
+                        }
+                      />
+                      <Route
+                        exact
+                        path="/exercisebank"
+                        render={() =>
+                          user ? <DashboardExercises /> : <Redirect to="/" />
                         }
                       />
                       <Route

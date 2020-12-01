@@ -13,6 +13,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import WorkoutTracker from "./WorkoutTracker/WorkoutTracker";
+import DashboardExercises from "./DashboardExercises";
 var routes = [
   {
     path: "/exercisecategories",
@@ -38,7 +39,13 @@ var routes = [
     icon: { PeopleIcon },
     component: WorkoutTracker,
   },
-]; //workoutpage
+  {
+    path: "/exercisebank",
+    name: "Exercise bank",
+    icon: { PeopleIcon },
+    component: DashboardExercises,
+  },
+];
 
 const createLinks = (routes: any) => {
   return routes.map((prop: any, key: any) => {
@@ -65,6 +72,12 @@ export const adminListItems = (
         <LibraryAddIcon />
       </ListItemIcon>
       <ListItemText primary="Add Exercise" />
+    </ListItem>
+    <ListItem button component={NavLink} to="/exercisebank">
+      <ListItemIcon>
+        <LibraryAddIcon />
+      </ListItemIcon>
+      <ListItemText primary="Exercise bank" />
     </ListItem>
   </>
 );
