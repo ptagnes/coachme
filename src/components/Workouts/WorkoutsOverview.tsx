@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import { fetchWorkoutsStartAsync } from "../../redux/actions/workoutActions";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 // import useProgressiveImg from "../useProgressiveImg ";
 interface WorkoutOverviewProps {
   fetchWorkoutsStartAsync?: () => void;
@@ -59,8 +60,14 @@ class WorkoutOverview extends React.Component<WorkoutOverviewProps> {
                         title={title}
                       />
                       <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {title}
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                          style={{ display: "flex", alignItems: "center" }}
+                        >
+                          <ArrowForwardIosIcon />
+                          <span style={{ marginLeft: "0.6rem" }}>{title}</span>
                         </Typography>
                       </CardContent>
                     </CardActionArea>

@@ -72,7 +72,7 @@ function ProfilePic({
           aria-label="add"
           onChange={handleChangeUpload}
         >
-          <AddIcon />
+          <AddIcon style={{ color: "#fff" }} />
         </Fab>
       </label>
       {/* {url && <div>{url}</div>} */}

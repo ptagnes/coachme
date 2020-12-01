@@ -124,7 +124,6 @@ const theme = createMuiTheme({
     },
     secondary: {
       light: blueGrey[300],
-      // main: blueGrey[500],
       main: "#28294a",
       dark: blueGrey[700],
     },
@@ -132,6 +131,11 @@ const theme = createMuiTheme({
       paper: "#32335b",
     },
     type: "dark",
+  },
+  props: {
+    MuiSvgIcon: {
+      htmlColor: "#af00ff",
+    },
   },
 });
 const exerciseListRef = firebase

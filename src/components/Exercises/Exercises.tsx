@@ -23,7 +23,7 @@ const Exercises = (props: any) => {
     <div className={classes.root}>
       <Fab color="primary" aria-label="add">
         <Link to={`/addexercise`} style={{ color: "#fff", lineHeight: 1 }}>
-          <AddIcon />
+          <AddIcon style={{ color: "#fff" }} />
         </Link>
       </Fab>
       {data && data.length ? (
