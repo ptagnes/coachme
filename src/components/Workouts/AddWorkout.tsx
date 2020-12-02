@@ -1,5 +1,5 @@
 import React from "react";
-// import ExerciseForm from "./ExerciseForm";
+import WorkoutForm from "./WorkoutForm";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { addWorkout } from "../../redux/actions";
@@ -30,13 +30,13 @@ const AddWorkout = (props: any) => {
         </div>
       </div>
       <div className="content-container">
-        {/* <ExerciseForm
+        <WorkoutForm
           action="add"
-          onSubmit={(exercise: any) => {
-            props.addWorkout(exercise);
-            history.push("/");
+          onSubmit={(workout: any) => {
+            props.addWorkout(workout);
+            // history.push("/");
           }}
-        /> */}
+        />
       </div>
     </div>
   );
@@ -49,10 +49,11 @@ export interface Workout {
   routeName: string;
   level: string;
   category: string;
-  equipment: [];
-  items: [];
+  workoutCategory: string;
+  equipment: any; //string[]
+  exerciseitems: [];
 }
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addWorkout: (exercise: Workout) => dispatch<any>(addWorkout(exercise)),
+  addWorkout: (workout: Workout) => dispatch<any>(addWorkout(workout)),
 });
 export default connect(null, mapDispatchToProps)(AddWorkout);

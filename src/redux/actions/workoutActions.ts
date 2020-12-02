@@ -35,23 +35,38 @@ export const addWorkout = ({
   level = "beginner",
   equipment = [],
   category = "",
-  items = [],
+  workoutCategory = "",
+  exerciseitems = [],
 } = {}) => async (dispatch: Dispatch) => {
-  workoutsRef
-    .add({
-      id: id,
-      title: title,
-      description: description,
-      routeName: routeName,
-      imageUrl: imageUrl,
-      level: level,
-      equipment: equipment,
-      category: category,
-      items: items,
-    })
-    .then(() => {
-      dispatch({
-        type: WorkoutActionTypes.ADD_WORKOUT,
-      });
-    });
+  console.log("add workout to firestore");
+  console.log(
+    id,
+    title,
+    description,
+    routeName,
+    imageUrl,
+    level,
+    equipment,
+    category,
+    workoutCategory,
+    exerciseitems
+  );
+  // workoutsRef
+  //   .add({
+  //     id: id,
+  //     title: title,
+  //     description: description,
+  //     routeName: routeName,
+  //     imageUrl: imageUrl,
+  //     level: level,
+  //     equipment: equipment,
+  //     category: category,
+  //    workoutCategory: workoutCategory,
+  //     exerciseitems: exerciseitems,
+  //   })
+  //   .then(() => {
+  //     dispatch({
+  //       type: WorkoutActionTypes.ADD_WORKOUT,
+  //     });
+  //   });
 };
