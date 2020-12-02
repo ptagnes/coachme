@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   users: null,
   isFetching: false,
   errorMessage: undefined,
-  activities: []
+  activities: [],
 };
 
 const usersReducer = (state = INITIAL_STATE, action: any) => {
@@ -19,7 +19,7 @@ const usersReducer = (state = INITIAL_STATE, action: any) => {
         ...state,
         isFetching: false,
         users: action.payload,
-        activities: action.payload.activities
+        activities: action.payload.activities,
       };
     case UsersActionTypes.FETCH_USERS_FAILURE:
       return {
@@ -28,17 +28,20 @@ const usersReducer = (state = INITIAL_STATE, action: any) => {
         errorMessage: action.payload,
       };
     case UsersActionTypes.EDIT_USERS:
-      return state;
+      return {
+        ...state,
+        users: action.payload,
+      };
     case UsersActionTypes.ADD_USER_ACTIVITY:
       return {
         ...state,
-        activities: action.activities
-      }
+        activities: action.activities,
+      };
     case UsersActionTypes.EDIT_USER_ACTIVITY:
       return {
         ...state,
-        activities: action.activities
-      }
+        activities: action.activities,
+      };
     default:
       return state;
   }

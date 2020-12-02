@@ -63,6 +63,7 @@ function ProfileSettingsItem({
   }, [currentUser, fetchUserStartAsync]);
 
   const { users } = userData;
+
   return (
     <>
       <ListItem onClick={handleClickOpen} className={classes.listItem}>
