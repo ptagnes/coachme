@@ -23,6 +23,7 @@ import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
 import WorkoutSettings from "./components/Workouts/WorkoutSettings";
 import WorkoutDetails from "./components/Workouts/WorkoutDetails";
+import AddWorkout from "./components/Workouts/AddWorkout";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Forgot from "./components/Auth/Forgot";
@@ -359,6 +360,13 @@ function App() {
                         path="/addexercise"
                         render={() =>
                           admin ? <AddExercise /> : <Redirect to="/" />
+                        }
+                      />
+                      <Route
+                        exakt
+                        path="/addworkout"
+                        render={() =>
+                          admin ? <AddWorkout /> : <Redirect to="/" />
                         }
                       />
                       {admin && (

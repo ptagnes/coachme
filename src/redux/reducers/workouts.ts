@@ -25,6 +25,13 @@ const workoutReducer = (state = INITIAL_STATE, action: any) => {
         isFetching: false,
         errorMessage: action.payload,
       };
+    case WorkoutActionTypes.ADD_WORKOUT:
+      console.log("add workout reducer");
+      console.log(action.payload);
+      return {
+        ...state,
+        collections: action.payload,
+      };
     default:
       return state;
   }

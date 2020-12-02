@@ -13,6 +13,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import WorkoutTracker from "./WorkoutTracker/WorkoutTracker";
+import AddWorkout from "./Workouts/AddWorkout";
 import DashboardExercises from "./DashboardExercises";
 var routes = [
   {
@@ -72,6 +73,12 @@ export const adminListItems = (
         <LibraryAddIcon />
       </ListItemIcon>
       <ListItemText primary="Add Exercise" />
+    </ListItem>
+    <ListItem button component={NavLink} to="/addworkout">
+      <ListItemIcon>
+        <LibraryAddIcon />
+      </ListItemIcon>
+      <ListItemText primary="Add Workout" />
     </ListItem>
     <ListItem button component={NavLink} to="/exercisebank">
       <ListItemIcon>
