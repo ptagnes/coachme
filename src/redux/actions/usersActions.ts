@@ -26,7 +26,6 @@ export const fetchUserStartAsync = (id: string) => {
           // console.log("Document data:", doc.data());
           dispatch(fetchUserSuccess(doc.data()));
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       })
@@ -64,7 +63,7 @@ export const addUserActivity = (id: string, activities: any) => async (
 ) => {
   var executed = false;
   const user = usersRef.doc(id);
-  usersRef.onSnapshot((snapshot: any) => {
+  usersRef.onSnapshot(() => {
     if (!executed) {
       executed = true;
       user.update({
@@ -90,34 +89,38 @@ export const editUserActivity = (
     const user = usersRef.doc(id); //the user in firestore
     const userdata = users.find((x: any) => x.id === id); //the user
     const userActivities = userdata.activities; //the activities of the user from firestore
-    //index of updated activity
-    console.log("edit called");
     const objIndex = userActivities.findIndex(
       (obj: any) => obj.id == activityKey
     );
     if (activities.date === null) {
       const removedArray = userActivities.splice(objIndex, 1);
-      console.log(removedArray);
       if (!executed) {
-        console.log("edit for real");
-        executed = true;
+        console.log(removedArray);
         user.update({
           activities: userActivities,
-        });
+        }).then(() => {
+            dispatch({
+              type: UsersActionTypes.EDIT_USER_ACTIVITY,
+              activities: userActivities,
+            });
+          });
+        executed = true;
       }
     } else {
       userActivities[objIndex] = activities; //updating activities array at the index position of the activityKey
-      console.log(userActivities);
       if (!executed) {
+        user
+          .update({
+            activities: userActivities,
+          })
+          .then(() => {
+            dispatch({
+              type: UsersActionTypes.EDIT_USER_ACTIVITY,
+              activities: userActivities,
+            });
+          });
         executed = true;
-        user.update({
-          activities: userActivities,
-        });
       }
     }
-    dispatch({
-      type: UsersActionTypes.EDIT_USER_ACTIVITY,
-      payload: users,
-    });
   });
 };

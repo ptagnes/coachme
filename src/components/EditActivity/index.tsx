@@ -27,13 +27,7 @@ const useStyles = makeStyles((theme) => ({
 function EditActivity(props: any) {
   const classes = useStyles();
   let history = useHistory();
-  const {
-    activity,
-    activityKey,
-    id,
-    editUserActivity,
-    // fetchUserStartAsync,
-  } = props;
+  const { activity, activityKey, id, editUserActivity } = props;
 
   // Set default activity object
   const defaultActivity = {
@@ -61,7 +55,6 @@ function EditActivity(props: any) {
       date: null,
     };
     editUserActivity(id, emptyActivity, activityKey);
-    // fetchUserStartAsync(id);
     history.push({
       pathname: "/workouttracker",
       state: {
@@ -70,9 +63,8 @@ function EditActivity(props: any) {
     });
   };
 
-  const handleSubmit = (action: any) => {
+  const handleSubmit = () => {
     editUserActivity(id, newActivity, activityKey);
-    // fetchUserStartAsync(id);
     history.push({
       pathname: "/workouttracker",
       state: {
@@ -133,14 +125,18 @@ function EditActivity(props: any) {
         fullWidth
         variant="contained"
         color="primary"
-        onClick={() => handleSubmit("add")}
+        onClick={() => handleSubmit()}
         disabled={isValid}
       >
         Save activity
       </Button>
 
       <Button
-        style={{ marginTop: "20px" }}
+        style={{
+          marginTop: "20px",
+          backgroundColor: "#0c0202bf",
+          float: "right",
+        }}
         onClick={(e) => deleteActivity()}
         variant="contained"
         color="primary"

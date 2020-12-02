@@ -56,39 +56,29 @@ function Calendar(props: any) {
   const [activities, setActivities] = useState<{}[]>([]);
   const [activeDays, setActiveDays] = useState([]);
   const { currentUser } = React.useContext(AuthContext);
-  let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
+  // let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
   const [uid, setUid] = useState<string>();
 
   useEffect(() => {
-    if (currentUser) {
-      setUid(currentUser.uid);
-      fetchUserStartAsync(currentUser.uid);
-    }
-  }, [currentUser, fetchUserStartAsync]);
+    setUid(currentUser.uid);
+    fetchUserStartAsync(currentUser.uid);
+  }, []);
 
   useEffect(() => {
-    if (currentUser) {
-      if (userData.users) {
-        if (userData.activities) {
-          const ac = userData.activities;
-          let activities = Array.isArray(ac) ? ac : [ac];
-          const filterByQueryDate = activities.filter(function (item: any) {
-            return item.date === queryDate;
-          });
-          setActivities(ac);
-          retrieveActiveDays(activities);
-          // setEditing(false); Add later
+    if (userData.users) {
+      if (userData.activities) {
+        setActivities(userData.activities);
+        retrieveActiveDays(userData.activities);
 
-          //TODO clear params if no action was done
-          //@ts-ignore
-          const action = params ? params.action : "";
-          if (action) {
-            setNotifications(action);
-          }
+        //TODO clear params if no action was done
+        //@ts-ignore
+        const action = params ? params.action : "";
+        if (action) {
+          setNotifications(action);
         }
       }
     }
-  }, [currentUser, queryDate, userData, params]);
+  }, [userData, params]);
 
   const retrieveActiveDays = (activities: any) => {
     const arr = activities.map((obj: any) => {

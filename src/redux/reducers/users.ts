@@ -15,8 +15,6 @@ const usersReducer = (state = INITIAL_STATE, action: any) => {
         isFetching: true,
       };
     case UsersActionTypes.FETCH_USERS_SUCCESS:
-      console.log('fetch success and data bellow')
-      console.log(action.payload.activities)
       return {
         ...state,
         isFetching: false,
@@ -32,13 +30,15 @@ const usersReducer = (state = INITIAL_STATE, action: any) => {
     case UsersActionTypes.EDIT_USERS:
       return state;
     case UsersActionTypes.ADD_USER_ACTIVITY:
-      const activities = action.activities;
       return {
         ...state,
         activities: action.activities
       }
     case UsersActionTypes.EDIT_USER_ACTIVITY:
-      return state;
+      return {
+        ...state,
+        activities: action.activities
+      }
     default:
       return state;
   }

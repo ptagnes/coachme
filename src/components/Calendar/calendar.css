@@ -44,6 +44,7 @@
 .calendar .today {
   font-weight: bold;
   background-image: linear-gradient(to top, #393a67 0%, #3f4275 100%);
+  color: #292b4f !important;
 }
 
 .calendar .week-day span {

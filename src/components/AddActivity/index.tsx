@@ -77,11 +77,6 @@ function AddActivity(props: any) {
     const mergedActivities = [...activitiesState, activity];
     addUserActivity(uid, mergedActivities);
     setActivity(defaultActivity);
-    // setOpenSnackbar(true);
-    // setSnackbarMsg("Added activity");
-    // setTimeout(() => {
-    //   setOpenSnackbar(false);
-    // }, 4000);
     history.push({
       pathname: "/workouttracker",
       state: {
