@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Workouts() {
   const classes = useStyles();
   /* eslint-disable */
-  const [src, { blur }] = useProgressiveImg(
-    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
-    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
-  );
+  // const [src, { blur }] = useProgressiveImg(
+  //   "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
+  //   "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
+  // );
   /* eslint-enable */
   return (
     <div className="bp">

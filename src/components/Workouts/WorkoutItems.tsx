@@ -35,23 +35,32 @@ const useStyles = makeStyles(() =>
       height: "5px",
       background: "#292b4f",
     },
+    subtitle: {
+      color: "#7677a3",
+    },
+    h2header: {
+      textTransform: "uppercase",
+      color: "#4f5391",
+      marginBottom: "0.5rem",
+      fontSize: "1rem",
+      fontWeight: 100,
+    },
   })
 );
 
 const WorkoutItems = ({ item, route }: { item: any; route: string }) => {
   const classes = useStyles();
   /* eslint-disable */
-  const [src, { blur }] = useProgressiveImg(
-    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
-    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
-  );
+  // const [src, { blur }] = useProgressiveImg(
+  //   "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/small.jpg?alt=media&token=f5234a59-cedc-426d-8336-e1272f1afb38",
+  //   "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agi.jpg?alt=media&token=42a7bfad-641f-460e-8da6-46e56504c2e6"
+  // );
   /* eslint-enable */
   const { title, id, imageUrl, category } = item;
-
   return (
     <>
       <Grid item xs={12} sm={12} md={12} lg={12}>
-        <h2> {category} </h2>
+        <h2 className={classes.h2header}> {category} </h2>
         <Link
           to={`/workoutsettings/${route}/${id}`}
           style={{ textDecoration: "none" }}
@@ -66,8 +75,12 @@ const WorkoutItems = ({ item, route }: { item: any; route: string }) => {
                 >
                   {title}
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {id}
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  className={classes.subtitle}
+                >
+                  {category}
                 </Typography>
               </CardContent>
             </div>

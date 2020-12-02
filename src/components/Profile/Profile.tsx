@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: "1",
       marginTop: "0.5rem",
       marginBottom: "1.5rem",
+      color: "#28294a9e",
     },
     user: {
       width: "110px",
