@@ -44,16 +44,10 @@ function AddActivity(props: any) {
 
   useEffect(() => {
     if (currentUser) {
-      fetchUserStartAsync(currentUser.uid);
-    }
-  }, [currentUser, fetchUserStartAsync]);
-
-  useEffect(() => {
-    if (currentUser) {
       const user = userData.users;
       if (user) {
         if (user.activities) {
-          const ac = userData.users.activities;
+          const ac = userData.activities;
           let activities = Array.isArray(ac) ? ac : [ac];
           setActivitiesState(activities);
         }
@@ -80,17 +74,14 @@ function AddActivity(props: any) {
   const isValid = activity.name === "";
 
   const handleSubmit = () => {
-    // if (authUser) {
     const mergedActivities = [...activitiesState, activity];
     addUserActivity(uid, mergedActivities);
-    fetchUserStartAsync(uid); //TODO updates state only after second time of adding activity
     setActivity(defaultActivity);
     // setOpenSnackbar(true);
     // setSnackbarMsg("Added activity");
     // setTimeout(() => {
     //   setOpenSnackbar(false);
     // }, 4000);
-    // }
     history.push({
       pathname: "/workouttracker",
       state: {

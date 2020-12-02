@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "0.7rem",
     },
     subtitle1: {
-      fontSize: "1.1rem",
+      fontSize: "0.9rem",
       lineHeight: "1.2",
       marginBottom: "0.4rem",
     },
@@ -83,6 +83,22 @@ function ProfileContentItem1({
   React.useEffect(() => {
     fetchUserStartAsync(id);
   }, [fetchUserStartAsync]);
+  console.log(todaysactivity);
+  console.log(allActivities);
+  let type: string;
+  switch (todaysactivity.type) {
+    case 1:
+      type = "Lifting weights";
+      break;
+    case 2:
+      type = "Cardio";
+      break;
+    case 3:
+      type = "Weights & Cardio";
+      break;
+    default:
+      type = "Not set";
+  }
   return (
     <>
       <Grid container spacing={1}>
@@ -101,6 +117,16 @@ function ProfileContentItem1({
                     className={classes.subtitle1}
                   >
                     {todaysactivity ? todaysactivity.name : "Restday"}
+                    <small
+                      style={{
+                        fontSize: "0.7rem",
+                        display: "block",
+                        color: "#bdbdbd94",
+                        marginTop: "5px",
+                      }}
+                    >
+                      {todaysactivity ? type : "Restday"}
+                    </small>
                   </Typography>
                 </span>
                 <span>
@@ -175,7 +201,7 @@ function ProfileContentItem1({
                   component="h5"
                   variant="h5"
                 >
-                  WO this month
+                  All WOs so far
                 </Typography>
               </CardContent>
             </div>

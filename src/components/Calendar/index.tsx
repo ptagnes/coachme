@@ -68,20 +68,17 @@ function Calendar(props: any) {
 
   useEffect(() => {
     if (currentUser) {
-      const user = userData.users;
-      if (user) {
-        if (user.activities) {
-          const ac = userData.users.activities;
+      if (userData.users) {
+        if (userData.activities) {
+          const ac = userData.activities;
           let activities = Array.isArray(ac) ? ac : [ac];
           const filterByQueryDate = activities.filter(function (item: any) {
             return item.date === queryDate;
           });
-          console.log(filterByQueryDate);
           setActivities(ac);
-          // setEditing(false); Add later
           retrieveActiveDays(activities);
-          console.log("activities from Calendar useEffect");
-          console.log(activities);
+          // setEditing(false); Add later
+
           //TODO clear params if no action was done
           //@ts-ignore
           const action = params ? params.action : "";
@@ -121,7 +118,7 @@ function Calendar(props: any) {
     setSnackbarMsg(msg);
     setTimeout(() => {
       setOpenSnackbar(false);
-    }, 3000);
+    }, 2000);
   };
   moment.updateLocale("en", {
     week: {

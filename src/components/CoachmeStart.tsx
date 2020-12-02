@@ -65,9 +65,7 @@ export default function CustomizedTimeline() {
               >
                 Eat
               </Typography>
-              <Typography style={{ fontSize: "0.8rem", lineHeight: "1.4" }}>
-                Because you need strength
-              </Typography>
+              <Typography>Because you need strength</Typography>
             </Paper>
           </TimelineContent>
         </TimelineItem>
@@ -92,11 +90,9 @@ export default function CustomizedTimeline() {
                   fontFamily: "Lobster",
                 }}
               >
-                Code
+                Work out
               </Typography>
-              <Typography style={{ fontSize: "0.8rem", lineHeight: "1.4" }}>
-                Because it&apos;s awesome!
-              </Typography>
+              <Typography>Because it&apos;s awesome!</Typography>
             </Paper>
           </TimelineContent>
         </TimelineItem>
@@ -118,9 +114,7 @@ export default function CustomizedTimeline() {
               >
                 Sleep
               </Typography>
-              <Typography style={{ fontSize: "0.8rem", lineHeight: "1.4" }}>
-                Because you need rest
-              </Typography>
+              <Typography>Because you need rest</Typography>
             </Paper>
           </TimelineContent>
         </TimelineItem>
@@ -141,9 +135,7 @@ export default function CustomizedTimeline() {
               >
                 Repeat
               </Typography>
-              <Typography style={{ fontSize: "0.8rem", lineHeight: "1.4" }}>
-                Because this is the life you love!
-              </Typography>
+              <Typography>Because this is the life you love!</Typography>
             </Paper>
           </TimelineContent>
         </TimelineItem>

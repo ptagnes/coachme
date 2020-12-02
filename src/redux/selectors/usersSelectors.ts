@@ -1,7 +1,8 @@
 import { createSelector } from "reselect";
 const selectUser = (state: any) => state.usersState;
 var today = new Date();
-var dd = String(today.getDate()).padStart(2, "0");
+// var dd = String(today.getDate()).padStart(2, "0");
+var dd = String(today.getDate()).padStart(2, );
 var mm = String(today.getMonth()).padStart(2, "0");
 var yyyy = today.getFullYear();
 const todaysDate = dd + "-" + mm + "-" + yyyy;
@@ -36,7 +37,7 @@ export const selectUserActivitiesThisMWeek = createSelector(
   (usersState) => {
     if (usersState.users && usersState.users.activities) {
       const act = usersState.users.activities;
-      console.log(act);
+     
       var result = act.filter(function (ac: any) {
         return thisWeek.some(function (weekday: any) {
           // let weekdayDate = new Date(weekday)
@@ -66,13 +67,9 @@ export const selectTodayActivity = createSelector(
     const todaysAct =
       usersState && usersState.activities
         ? usersState.activities.find((activity: any) => {
-            return activity.date === todaysDate;
+            return activity.date.replace(/ /g,'') === todaysDate.replace(/ /g,'');
           })
         : "";
-    return usersState && usersState.activities
-      ? usersState.activities.find(
-          (activity: any) => activity.date === todaysDate
-        )
-      : null;
+    return todaysAct;
   }
 );

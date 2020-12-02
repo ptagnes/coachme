@@ -63,11 +63,8 @@ export const addUserActivity = (id: string, activities: any) => async (
   dispatch: Dispatch
 ) => {
   var executed = false;
+  const user = usersRef.doc(id);
   usersRef.onSnapshot((snapshot: any) => {
-    const payload = snapshot.docs.map((doc: any) => {
-      return { id: doc.id, ...doc.data() };
-    });
-    const user = usersRef.doc(id);
     if (!executed) {
       executed = true;
       user.update({
@@ -76,7 +73,7 @@ export const addUserActivity = (id: string, activities: any) => async (
     }
     dispatch({
       type: UsersActionTypes.ADD_USER_ACTIVITY,
-      payload: payload,
+      activities: activities,
     });
   });
 };
@@ -94,15 +91,15 @@ export const editUserActivity = (
     const userdata = users.find((x: any) => x.id === id); //the user
     const userActivities = userdata.activities; //the activities of the user from firestore
     //index of updated activity
-    console.log('edit called')
+    console.log("edit called");
     const objIndex = userActivities.findIndex(
       (obj: any) => obj.id == activityKey
     );
     if (activities.date === null) {
       const removedArray = userActivities.splice(objIndex, 1);
-      console.log(removedArray)
+      console.log(removedArray);
       if (!executed) {
-        console.log('edit for real')
+        console.log("edit for real");
         executed = true;
         user.update({
           activities: userActivities,
@@ -110,7 +107,7 @@ export const editUserActivity = (
       }
     } else {
       userActivities[objIndex] = activities; //updating activities array at the index position of the activityKey
-      console.log(userActivities)
+      console.log(userActivities);
       if (!executed) {
         executed = true;
         user.update({
