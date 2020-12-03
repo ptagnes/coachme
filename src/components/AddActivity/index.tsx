@@ -85,14 +85,17 @@ function AddActivity(props: any) {
     });
   };
 
-  let calDate = new Date(activity.date);
-  const calEvent = {
-    name: activity.name,
-    details: "Workout",
-    location: "Friskis",
-    startsAt: calDate.toISOString(),
-    endsAt: calDate.toISOString(),
-  };
+  // let calDate = new Date(activity.date);
+  // let calEvent: {};
+  // // if(calDate.toISOString())
+  // console.log(new Date(activity.date));
+  // calEvent = {
+  //   name: activity.name,
+  //   details: "Workout",
+  //   location: "Friskis",
+  //   // startsAt: calDate.toISOString(),
+  //   // endsAt: calDate.toISOString(),
+  // };
 
   return (
     <form noValidate onSubmit={(e) => e.preventDefault()}>
@@ -142,7 +145,7 @@ function AddActivity(props: any) {
         />
       </FormControl>
 
-      <AddEventToGoogleCalendar event={calEvent} />
+      {/* <AddEventToGoogleCalendar event={calEvent} /> */}
 
       <Button
         type="submit"
