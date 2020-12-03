@@ -62,7 +62,7 @@ function Calendar(props: any) {
   useEffect(() => {
     setUid(currentUser.uid);
     fetchUserStartAsync(currentUser.uid);
-  }, []);
+  }, []); //fetchUserStartAsync
 
   useEffect(() => {
     if (userData.users) {
