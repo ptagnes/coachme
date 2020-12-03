@@ -44,7 +44,9 @@
 .calendar .today {
   font-weight: bold;
   background-image: linear-gradient(to top, #393a67 0%, #3f4275 100%);
-  color: #292b4f !important;
+}
+.calendar .selected-day.today {
+  color: #f6869b;
 }
 
 .calendar .week-day span {

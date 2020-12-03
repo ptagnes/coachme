@@ -34,7 +34,7 @@ const AddWorkout = (props: any) => {
           action="add"
           onSubmit={(workout: any) => {
             props.addWorkout(workout);
-            // history.push("/");
+            history.push("/");
           }}
         />
       </div>

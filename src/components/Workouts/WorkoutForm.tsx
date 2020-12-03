@@ -61,7 +61,6 @@ interface WorkoutFormProps {
   action: string;
 }
 interface WorkoutFormState {
-  //   id?: string;
   title: string;
   description: string;
   level: string;
@@ -178,10 +177,11 @@ export default class WorkoutForm extends React.Component<
       );
     }
   };
-  //TODO exerciseitems? id - nextid, category
-  // exerciseitems id fileUrl name setsReps
-  // visualize added exercises
+  //TODO
+  // exerciseitems  setsReps
   // ability to remove exercises
+  // validation - all fields
+  // editing, removing workout / exercises
   /**
    * rxjrRA9PD6BvzzGueST5 - strength, id: 17
    * irwxy8GZWMfU62Svs59t - hiit, id: 11241
@@ -337,7 +337,7 @@ export default class WorkoutForm extends React.Component<
           />
           {Object.values(this.state.exerciseitems).map((activity: any, i) => {
             return (
-              <div style={{ padding: "0.5rem 0" }} key={i}>
+              <div style={{ paddingTop: "0.5rem", color: "#ddd" }} key={i}>
                 <span>{activity.name}</span>
               </div>
             );

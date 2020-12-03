@@ -85,19 +85,21 @@ function ProfileContentItem1({
   }, [fetchUserStartAsync]);
   console.log(todaysactivity);
   console.log(allActivities);
-  let type: string;
-  switch (todaysactivity.type) {
-    case 1:
-      type = "Lifting weights";
-      break;
-    case 2:
-      type = "Cardio";
-      break;
-    case 3:
-      type = "Weights & Cardio";
-      break;
-    default:
-      type = "Not set";
+  let type: string = "";
+  if (todaysactivity) {
+    switch (todaysactivity.type) {
+      case 1:
+        type = "Lifting weights";
+        break;
+      case 2:
+        type = "Cardio";
+        break;
+      case 3:
+        type = "Weights & Cardio";
+        break;
+      default:
+        type = "Not set";
+    }
   }
   return (
     <>
