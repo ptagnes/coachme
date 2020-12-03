@@ -14,6 +14,7 @@ import { editUserActivity } from "../../redux/actions/usersActions";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 import { useHistory } from "react-router";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddEventToGoogleCalendar from "../WorkoutTracker/AddEventToGoogleCalendar";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -62,7 +63,6 @@ function EditActivity(props: any) {
       },
     });
   };
-
   const handleSubmit = () => {
     editUserActivity(id, newActivity, activityKey);
     history.push({
@@ -71,6 +71,17 @@ function EditActivity(props: any) {
         action: "edited",
       },
     });
+  };
+  // console.log("newActivity");
+  // console.log(newActivity); //TODO fix date
+
+  let calDate = new Date(newActivity.date);
+  const calEvent = {
+    name: newActivity.name,
+    details: "Workout",
+    location: "Friskis",
+    startsAt: calDate.toISOString(),
+    endsAt: calDate.toISOString(),
   };
 
   return (
@@ -120,6 +131,8 @@ function EditActivity(props: any) {
           style={{ marginBottom: "20px" }}
         />
       </FormControl>
+
+      <AddEventToGoogleCalendar event={calEvent} />
       <Button
         type="submit"
         fullWidth

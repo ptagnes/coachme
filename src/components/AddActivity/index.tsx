@@ -13,6 +13,7 @@ import { addUserActivity } from "../../redux/actions/usersActions";
 import { AuthContext } from "../../firebase/Authentication";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 import { useHistory } from "react-router";
+import AddEventToGoogleCalendar from "../WorkoutTracker/AddEventToGoogleCalendar";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -31,7 +32,6 @@ function AddActivity(props: any) {
   if (currentUser) {
     uid = currentUser.uid;
   }
-
   const defaultActivity = {
     name: "",
     type: 1,
@@ -85,6 +85,15 @@ function AddActivity(props: any) {
     });
   };
 
+  let calDate = new Date(activity.date);
+  const calEvent = {
+    name: activity.name,
+    details: "Workout",
+    location: "Friskis",
+    startsAt: calDate.toISOString(),
+    endsAt: calDate.toISOString(),
+  };
+
   return (
     <form noValidate onSubmit={(e) => e.preventDefault()}>
       <FormControl className={classes.formControl}>
@@ -132,6 +141,9 @@ function AddActivity(props: any) {
           style={{ marginBottom: "20px" }}
         />
       </FormControl>
+
+      <AddEventToGoogleCalendar event={calEvent} />
+
       <Button
         type="submit"
         fullWidth

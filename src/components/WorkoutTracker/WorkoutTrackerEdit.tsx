@@ -10,7 +10,6 @@ function WorkoutTrackerEdit(props: any) {
   const location = useLocation();
   let history = useHistory();
   const params = location.state;
-  console.log(params);
   //@ts-ignore
   const { action, date, activity } = location.state;
   //@ts-ignore

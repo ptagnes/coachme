@@ -115,6 +115,7 @@ function Calendar(props: any) {
       dow: 1,
     },
   });
+
   return (
     <div className="calendarWrapper">
       <Grid container className="calendarGrid">

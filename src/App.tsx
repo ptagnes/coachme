@@ -18,7 +18,6 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 import PrivateRoute from "./Auth/PrivateRoute";
-import blueGrey from "@material-ui/core/colors/blueGrey";
 import DashboardExercises from "./components/DashboardExercises";
 import DashboardExerciseCategories from "./components/DashboardExerciseCategories";
 import WorkoutSettings from "./components/Workouts/WorkoutSettings";
@@ -125,9 +124,9 @@ const theme = createMuiTheme({
       main: "#af00ff",
     },
     secondary: {
-      light: blueGrey[300],
+      light: "#3c3f72",
       main: "#28294a",
-      dark: blueGrey[700],
+      dark: "#1f203b",
     },
     background: {
       paper: "#32335b",
