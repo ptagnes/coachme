@@ -1,4 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import getExercisesAction from "../../redux/actions/getExercisesAction";
+import { StoreState } from "../../redux/reducers/index";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -15,34 +19,34 @@ import nextId from "react-id-generator";
 import ImageUpload from "../ImageUpload";
 const exerciseList = [
   {
-    name: "Bent over shoulder raise",
+    title: "Bent over shoulder raise",
     fileUrl:
       "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/backr.jpg?alt=media&token=8e686f23-28f8-4f93-8d98-077ada5c6934",
     id: "0YmMGlICAeovYE7PnzpV",
   },
   {
-    name: "Sumo deadlifts",
+    title: "Sumo deadlifts",
     fileUrl:
       "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/sumodlift.jpg?alt=media&token=49c4c497-dbcd-4371-a749-bc40019cf797",
     id: "0uQvji8qFAO6kw9oBHE3",
   },
   {
-    name: "Barbell Bent-Over Row",
+    title: "Barbell Bent-Over Row",
     fileUrl:
       "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/3-2a-barbell-bent-over-row.jpg?alt=media&token=4e10565f-a878-4ee9-a12e-ba7f774af092",
     id: "2A4AwhWLqcJbVrdTmoRw",
   },
-  { name: "The Dark Knight", fileUrl: "", id: "" },
-  { name: "12 Angry Men", fileUrl: "", id: "" },
-  { name: "Schindler's List", fileUrl: "", id: "" },
-  { name: "Pulp Fiction", fileUrl: "", id: "" },
+  { title: "The Dark Knight", fileUrl: "", id: "" },
+  { title: "12 Angry Men", fileUrl: "", id: "" },
+  { title: "Schindler's List", fileUrl: "", id: "" },
+  { title: "Pulp Fiction", fileUrl: "", id: "" },
   {
-    name: "The Lord of the Rings: The Return of the King",
+    title: "The Lord of the Rings: The Return of the King",
     fileUrl: "",
     id: 2003,
   },
-  { name: "The Good, the Bad and the Ugly", fileUrl: "", id: 1966 },
-  { name: "Fight Club", fileUrl: "", id: 1999 },
+  { title: "The Good, the Bad and the Ugly", fileUrl: "", id: 1966 },
+  { title: "Fight Club", fileUrl: "", id: 1999 },
 ];
 const equipmentList = [
   "Bosu",
@@ -59,6 +63,8 @@ interface WorkoutFormProps {
   workout?: any;
   onSubmit: any;
   action: string;
+  exercisesState?: any;
+  getExercisesAction?: () => void;
 }
 interface WorkoutFormState {
   title: string;
@@ -66,6 +72,7 @@ interface WorkoutFormState {
   level: string;
   equipment: string[];
   exerciseitems: {}[];
+  // exerciseListFromFirestore: {}[];
   category: string;
   workoutCategory: string;
   imageUrl: string;
@@ -73,10 +80,7 @@ interface WorkoutFormState {
   error: string;
   fileUrl: string;
 }
-export default class WorkoutForm extends React.Component<
-  WorkoutFormProps,
-  WorkoutFormState
-> {
+class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
   constructor(props: WorkoutFormProps) {
     super(props);
     this.state = {
@@ -91,20 +95,34 @@ export default class WorkoutForm extends React.Component<
         ? props.workout.imageUrl
         : "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defaultImage.jpg?alt=media&token=352cd091-29e7-4ba2-af89-ce9ff0094d97",
       routeName: props.workout ? props.workout.routeName : "",
+      // exerciseListFromFirestore: [],
       fileUrl: "",
       error: "",
     };
   }
+  componentDidMount() {
+    if (this.props.getExercisesAction !== undefined) {
+      this.props.getExercisesAction();
+      // const data =
+      //   this.props.exercisesState && this.props.exercisesState.exercisesState;
+      // if (data) {
+      //   this.setState((previousValues) => ({
+      //     ...previousValues,
+      //     exerciseListFromFirestore: data,
+      //   }));
+      // }
+    }
+  }
   options = exerciseList.map((option: any) => {
-    const firstLetter = option.name[0].toUpperCase();
+    const firstLetter = option.title[0].toUpperCase();
     const exerciseId = option.id;
     const fileUrl = option.fileUrl;
-    const name = option.name;
+    const title = option.title;
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
       exerciseId: exerciseId,
       fileUrl: fileUrl,
-      name: name,
+      name: title,
       setsReps: "3x10",
       ...option,
     };
@@ -189,7 +207,25 @@ export default class WorkoutForm extends React.Component<
    * euQ2Csm7Zf5ooPndPItY - special, id: 342342734
    */
   render() {
-    console.log(this.state);
+    const data =
+      this.props.exercisesState && this.props.exercisesState.exercisesState;
+    console.log("data lskdflsjdflsjldfjskldjflksjdlfj");
+    console.log(data);
+
+    const options = data.map((option: any) => {
+      const firstLetter = option.title[0].toUpperCase();
+      const exerciseId = option.id;
+      const fileUrl = option.fileUrl;
+      const title = option.title;
+      return {
+        firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
+        exerciseId: exerciseId,
+        fileUrl: fileUrl,
+        name: title,
+        setsReps: "3x10",
+        ...option,
+      };
+    });
     return (
       <div>
         <form onSubmit={this.onSubmit} style={{ position: "relative" }}>
@@ -325,7 +361,7 @@ export default class WorkoutForm extends React.Component<
           </span>
           <Autocomplete
             id="grouped-exercises"
-            options={this.options.sort(
+            options={options.sort(
               (a: any, b: any) => -b.firstLetter.localeCompare(a.firstLetter)
             )}
             groupBy={(option) => option.firstLetter}
@@ -355,3 +391,11 @@ export default class WorkoutForm extends React.Component<
     );
   }
 }
+
+const mapStateToProps = (state: StoreState) => ({
+  exercisesState: state.exercisesState,
+});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  getExercisesAction: () => dispatch<any>(getExercisesAction()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutForm);
