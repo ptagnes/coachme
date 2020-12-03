@@ -10,6 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import nextId from "react-id-generator";
 // import "./WorkoutForm.css";
 import ImageUpload from "../ImageUpload";
 const exerciseList = [
@@ -130,13 +131,14 @@ export default class WorkoutForm extends React.Component<
       this.setState(() => ({ error: "" }));
       console.log(this.state);
       this.props.onSubmit({
-        id: this.state.title, //TODO nextid
+        id: nextId(),
         title: this.state.title,
         description: this.state.description,
         level: this.state.level,
         equipment: this.state.equipment,
         exerciseitems: this.state.exerciseitems,
         category: this.state.category,
+        workoutCategory: this.state.workoutCategory,
         imageUrl: this.state.fileUrl ? this.state.fileUrl : this.state.imageUrl,
         routeName: this.state.title,
       });
@@ -178,6 +180,8 @@ export default class WorkoutForm extends React.Component<
   };
   //TODO exerciseitems? id - nextid, category
   // exerciseitems id fileUrl name setsReps
+  // visualize added exercises
+  // ability to remove exercises
   /**
    * rxjrRA9PD6BvzzGueST5 - strength, id: 17
    * irwxy8GZWMfU62Svs59t - hiit, id: 11241
@@ -331,6 +335,13 @@ export default class WorkoutForm extends React.Component<
               <TextField {...params} label="Exercise bank" variant="outlined" />
             )}
           />
+          {Object.values(this.state.exerciseitems).map((activity: any, i) => {
+            return (
+              <div style={{ padding: "0.5rem 0" }} key={i}>
+                <span>{activity.name}</span>
+              </div>
+            );
+          })}
           <Button
             style={{ marginTop: "20px", display: "flex", marginLeft: "auto" }}
             variant="contained"

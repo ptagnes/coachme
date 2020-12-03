@@ -38,35 +38,42 @@ export const addWorkout = ({
   workoutCategory = "",
   exerciseitems = [],
 } = {}) => async (dispatch: Dispatch) => {
-  console.log("add workout to firestore");
-  console.log(
-    id,
-    title,
-    description,
-    routeName,
-    imageUrl,
-    level,
-    equipment,
-    category,
-    workoutCategory,
-    exerciseitems
-  );
-  // workoutsRef
-  //   .add({
-  //     id: id,
-  //     title: title,
-  //     description: description,
-  //     routeName: routeName,
-  //     imageUrl: imageUrl,
-  //     level: level,
-  //     equipment: equipment,
-  //     category: category,
-  //    workoutCategory: workoutCategory,
-  //     exerciseitems: exerciseitems,
-  //   })
-  //   .then(() => {
-  //     dispatch({
-  //       type: WorkoutActionTypes.ADD_WORKOUT,
-  //     });
-  //   });
+  var executed = false;
+  const workout = workoutsRef.doc(category);
+  const newWorkoutItem = {
+    id: id,
+    imageUrl: imageUrl,
+    routeName: routeName,
+    title: title,
+    category: workoutCategory,
+    exerciseitems: exerciseitems,
+    description: description,
+    level: level,
+    equipment: equipment,
+  };
+  workoutsRef.onSnapshot((snapshot: any) => {
+    const payload = snapshot.docs.map((doc: any) => {
+      return { id: doc.id, ...doc.data() };
+    });
+    var theWorkoutParent = payload.find((item: any) => item.id === category);
+    console.log("theWorkoutParent");
+    console.log(theWorkoutParent.items);
+    let oldWorkoutItems = theWorkoutParent.items;
+    const updatedItems = [...oldWorkoutItems, newWorkoutItem];
+    console.log("updatedItems");
+    console.log(updatedItems);
+    if (!executed) {
+      executed = true;
+      workout
+        .update({
+          items: updatedItems,
+        })
+        .then(() => {
+          dispatch({
+            type: WorkoutActionTypes.ADD_WORKOUT,
+            // payload: updatedUser,
+          });
+        });
+    }
+  });
 };

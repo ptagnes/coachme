@@ -35,13 +35,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
+function WorkoutDetails(props: any) {
+  //{ workoutItem, ...otherProps }: { workoutItem: any }
+  console.log("props");
+  console.log(props);
   const classes = useStyles();
-  const { exerciseitems, imageUrl, setsReps } = workoutItem;
+  const { exerciseitems, imageUrl, setsReps } = props.collection;
   let history = useHistory();
   const handleClick = () => {
     history.goBack();
   };
+  let workout: any;
+  if (props.workoutItem) {
+    workout = props.workoutItem;
+  } else {
+    workout = props.collection;
+  }
+
   return (
     <div className={classes.root}>
       <div
@@ -59,7 +69,7 @@ function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
           >
             <ArrowBackIcon />
           </Button>
-          <Typography variant="h6">{workoutItem.title}</Typography>
+          <Typography variant="h6">{workout.title}</Typography>
           <Chip label="60 minutes" /> <Chip label="8 exercises" />
           <Typography variant="body1"></Typography>
         </div>
@@ -67,8 +77,8 @@ function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
 
       <div className="bp">
         <Typography variant="h6">Exercise list</Typography>
-        {exerciseitems &&
-          exerciseitems.map((item: any) => (
+        {props.collection.items &&
+          props.collection.items.map((item: any) => (
             <Exercise
               key={item.id}
               id={item.id}

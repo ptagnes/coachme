@@ -101,7 +101,12 @@ function WorkoutSettings(props: Props) {
 
     setChecked(newChecked);
   };
-
+  let workout: any;
+  if (workoutItem) {
+    workout = workoutItem;
+  } else {
+    workout = props.collection;
+  }
   return (
     <div className={classes.wrapper}>
       <CssBaseline />
@@ -111,7 +116,7 @@ function WorkoutSettings(props: Props) {
             flexDirection: "column",
             height: "30vh",
             backgroundSize: "cover",
-            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${workoutItem.imageUrl})`,
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${workout.imageUrl})`,
           }}
         >
           <div className={classes.fixedDiv}></div>
@@ -123,7 +128,7 @@ function WorkoutSettings(props: Props) {
             >
               <ArrowBackIcon />
             </Button>
-            <Typography variant="h6">{workoutItem.title}</Typography>
+            <Typography variant="h6">{workout.title}</Typography>
           </div>
         </div>
       </HideOnScroll>
