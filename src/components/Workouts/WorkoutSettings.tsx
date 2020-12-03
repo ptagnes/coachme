@@ -82,6 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function WorkoutSettings(props: Props) {
   const { workoutItem, route, itemKey } = props;
+
   const classes = useStyles();
   const [checked, setChecked] = React.useState(["wifi"]);
   let history = useHistory();
@@ -101,12 +102,7 @@ function WorkoutSettings(props: Props) {
 
     setChecked(newChecked);
   };
-  let workout: any;
-  if (workoutItem) {
-    workout = workoutItem;
-  } else {
-    workout = props.collection;
-  }
+
   return (
     <div className={classes.wrapper}>
       <CssBaseline />
@@ -116,7 +112,8 @@ function WorkoutSettings(props: Props) {
             flexDirection: "column",
             height: "30vh",
             backgroundSize: "cover",
-            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${workout.imageUrl})`,
+            // backgroundImage: `url(${process.env.PUBLIC_URL}/images/${workoutItem.imageUrl})`,
+            backgroundImage: `url(${workoutItem.imageUrl})`,
           }}
         >
           <div className={classes.fixedDiv}></div>
@@ -128,7 +125,7 @@ function WorkoutSettings(props: Props) {
             >
               <ArrowBackIcon />
             </Button>
-            <Typography variant="h6">{workout.title}</Typography>
+            <Typography variant="h6">{workoutItem.title}</Typography>
           </div>
         </div>
       </HideOnScroll>
@@ -283,14 +280,25 @@ function WorkoutSettings(props: Props) {
   );
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-  collection: selectCollection(ownProps.match.params.route)(state),
-  route: ownProps.match.params.route,
-  itemKey: ownProps.match.params.id,
-  items: state.workoutState.collections[ownProps.match.params.route].items,
-  workoutItem: state.workoutState.collections[
-    ownProps.match.params.route
-  ].items.find((x: any) => x.id === parseInt(ownProps.match.params.id)),
-});
+// const mapStateToProps = (state: any, ownProps: any) => ({
+//   collection: selectCollection(ownProps.match.params.route)(state),
+//   route: ownProps.match.params.route,
+//   itemKey: ownProps.match.params.id,
+//   items: state.workoutState.collections[ownProps.match.params.route].items,
+//   workoutItem: state.workoutState.collections[
+//     ownProps.match.params.route
+//   ].items.find((x: any) => x.id === parseInt(ownProps.match.params.id)),
+// });
 
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    collection: selectCollection(ownProps.match.params.route)(state),
+    route: ownProps.match.params.route,
+    itemKey: ownProps.match.params.id,
+    items: state.workoutState.collections[ownProps.match.params.route].items,
+    workoutItem: state.workoutState.collections[
+      ownProps.match.params.route
+    ].items.find((x: any) => x.id === ownProps.match.params.id),
+  };
+};
 export default connect(mapStateToProps)(WorkoutSettings);

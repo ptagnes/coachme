@@ -92,7 +92,8 @@ const WorkoutItems = ({ item, route }: { item: any; route: string }) => {
               //   filter: blur ? "blur(20px)" : "none",
               //   transition: blur ? "none" : "filter 0.3s ease-out",
               // }}
-              image={`${process.env.PUBLIC_URL}/images/${imageUrl}`}
+              // image={`${process.env.PUBLIC_URL}/images/${imageUrl}`}
+              image={`${imageUrl}`}
               title="training"
             />
           </Card>

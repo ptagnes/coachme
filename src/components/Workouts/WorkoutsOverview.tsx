@@ -36,7 +36,7 @@ class WorkoutOverview extends React.Component<WorkoutOverviewProps> {
               imageUrl,
               routeName,
             }: {
-              id: number;
+              id: string;
               title: string;
               imageUrl: string;
               routeName: string;
@@ -57,6 +57,7 @@ class WorkoutOverview extends React.Component<WorkoutOverviewProps> {
                         //   transition: blur ? "none" : "filter 0.3s ease-out",
                         // }}
                         image={`${process.env.PUBLIC_URL}/images/${imageUrl}`}
+                        // image={imageUrl}
                         title={title}
                       />
                       <CardContent>
