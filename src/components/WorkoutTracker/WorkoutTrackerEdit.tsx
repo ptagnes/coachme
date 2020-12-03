@@ -9,7 +9,7 @@ import { useHistory } from "react-router";
 function WorkoutTrackerEdit(props: any) {
   const location = useLocation();
   let history = useHistory();
-  const params = location.state;
+  // const params = location.state;
   //@ts-ignore
   const { action, date, activity } = location.state;
   //@ts-ignore

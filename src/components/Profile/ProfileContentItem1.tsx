@@ -1,35 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { createStructuredSelector } from "reselect";
 import {
   selectUsers,
-  // selectUserActivities,
   selectTodayActivity,
   selectUserActivitiesThisMWeek,
   selectUserActivitiesThisMonth,
 } from "../../redux/selectors/usersSelectors";
 import { fetchUserStartAsync } from "../../redux/actions/usersActions";
-import {
-  Theme,
-  createStyles,
-  makeStyles,
-  useTheme,
-} from "@material-ui/core/styles";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-// import CardMedia from "@material-ui/core/CardMedia";
-// import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
-
 import TimeAndDate from "./TimeAndDate";
 import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import TrendingDownIcon from "@material-ui/icons/TrendingDown";
 import { AuthContext } from "../../firebase/Authentication";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
@@ -62,19 +52,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function ProfileContentItem1({
   users,
-  // activities,
   todaysactivity,
   allActivities,
   activitiesThisWeek,
 }: {
   users: any;
-  // activities: any;
   todaysactivity: any;
   allActivities: any;
   activitiesThisWeek: any;
 }) {
   const classes = useStyles();
-  const theme = useTheme();
   const { currentUser } = React.useContext(AuthContext);
   let id: string;
   if (currentUser) {
@@ -270,7 +257,6 @@ function ProfileContentItem1({
 
 const mapStateToProps = (state: any) => ({
   users: selectUsers(state),
-  // activities: selectUserActivities(state),
   todaysactivity: selectTodayActivity(state),
   allActivities: selectUserActivitiesThisMonth(state),
   activitiesThisWeek: selectUserActivitiesThisMWeek(state),

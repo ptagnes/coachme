@@ -190,6 +190,23 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
       );
     }
   };
+  removeExercise = (id: string) => {
+    console.log(id);
+    const exercisesInState = this.state.exerciseitems;
+    var remaining = exercisesInState.filter((exr) => {
+      //@ts-ignore
+      return exr.id !== id;
+    });
+    this.setState(
+      (previousValues) => ({
+        ...previousValues,
+        exerciseitems: remaining,
+      }),
+      () => {
+        console.log(this.state.exerciseitems);
+      }
+    );
+  };
   //TODO
   // exerciseitems  setsReps
   // ability to remove exercises
@@ -368,7 +385,11 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
                 >
                   <ListItemText primary={activity.name} />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => this.removeExercise(activity.id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>

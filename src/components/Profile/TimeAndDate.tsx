@@ -11,7 +11,7 @@ export default function TimeAndDate() {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-
+  console.log(time);
   return (
     <div>
       <span>

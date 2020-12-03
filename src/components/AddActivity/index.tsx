@@ -11,9 +11,9 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { AuthContext } from "../../firebase/Authentication";
-import { fetchUserStartAsync } from "../../redux/actions/usersActions";
+// import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 import { useHistory } from "react-router";
-import AddEventToGoogleCalendar from "../WorkoutTracker/AddEventToGoogleCalendar";
+// import AddEventToGoogleCalendar from "../WorkoutTracker/AddEventToGoogleCalendar";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 function AddActivity(props: any) {
   const classes = useStyles();
   let history = useHistory();
-  const { queryDate, addUserActivity, userData, fetchUserStartAsync } = props;
+  const { queryDate, addUserActivity, userData } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
   if (currentUser) {
@@ -166,6 +166,6 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addUserActivity: (id: string, activities: any) =>
     dispatch<any>(addUserActivity(id, activities)),
-  fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
+  // fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddActivity);

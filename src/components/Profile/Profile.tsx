@@ -59,8 +59,8 @@ function Profile({
   if (currentUser) {
     id = currentUser.uid;
   }
-  const src =
-    "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
+  // const src =
+  // "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defuserimg.png?alt=media&token=6efd3c9d-1211-4cd6-a730-fcf77bbeed0e";
   const classes = useStyles();
   const { users } = userData;
 

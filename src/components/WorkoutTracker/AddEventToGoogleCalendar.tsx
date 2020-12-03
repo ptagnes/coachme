@@ -67,6 +67,7 @@ type DropdownProps = {
 
 const Dropdown: React.FC<DropdownProps> = ({ filename, onToggle, urls }) => {
   const ref = useAutoFocus() as React.RefObject<HTMLAnchorElement>;
+  console.log(ref);
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") {
       onToggle();

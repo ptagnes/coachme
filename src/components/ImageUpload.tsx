@@ -16,6 +16,7 @@ function ProfilePic({
   const types = ["image/png", "image/jpeg", "image/jpg"];
   const [error, setError] = useState(null);
   const [url, setUrl] = useState(null);
+  console.log(progress, file, url);
   const handleChangeUpload = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement | any>
   ) => {

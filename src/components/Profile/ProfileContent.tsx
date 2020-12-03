@@ -5,7 +5,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
-import HelpIcon from "@material-ui/icons/Help";
 import Box from "@material-ui/core/Box";
 import ProfileContentItem1 from "./ProfileContentItem1";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
