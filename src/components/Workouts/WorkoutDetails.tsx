@@ -47,8 +47,6 @@ function WorkoutDetails({ workoutItem, ...otherProps }: { workoutItem: any }) {
   const handleClick = () => {
     history.goBack();
   };
-  console.log("workoutItem");
-  console.log(workoutItem);
   return (
     <div className={classes.root}>
       <div

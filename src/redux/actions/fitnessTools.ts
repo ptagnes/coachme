@@ -8,8 +8,6 @@ export const getFitnessTools = () => async (dispatch: Dispatch) => {
     const payload = snapshot.docs.map((doc: any) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log("getting fitnesstools");
-    console.log(payload);
     dispatch({
       type: "GET_FITNESS_TOOLS",
       payload: payload,

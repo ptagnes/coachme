@@ -114,7 +114,7 @@ const ExerciseCardTopCategories = ({
       case "Resistance Band":
         return <SwapCallsIcon />;
       case "Pull Up Bar":
-        return <SwapCallsIcon />;
+        return <SpaceBarIcon />;
       case "Bosu":
         return <RoomServiceIcon />;
       case "Kettlebell":

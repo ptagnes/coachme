@@ -15,6 +15,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import nextId from "react-id-generator";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
 // import "./WorkoutForm.css";
 import ImageUpload from "../ImageUpload";
 const exerciseList = [
@@ -72,7 +77,6 @@ interface WorkoutFormState {
   level: string;
   equipment: string[];
   exerciseitems: {}[];
-  // exerciseListFromFirestore: {}[];
   category: string;
   workoutCategory: string;
   imageUrl: string;
@@ -95,7 +99,6 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
         ? props.workout.imageUrl
         : "https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/defaultImage.jpg?alt=media&token=352cd091-29e7-4ba2-af89-ce9ff0094d97",
       routeName: props.workout ? props.workout.routeName : "",
-      // exerciseListFromFirestore: [],
       fileUrl: "",
       error: "",
     };
@@ -103,14 +106,6 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
   componentDidMount() {
     if (this.props.getExercisesAction !== undefined) {
       this.props.getExercisesAction();
-      // const data =
-      //   this.props.exercisesState && this.props.exercisesState.exercisesState;
-      // if (data) {
-      //   this.setState((previousValues) => ({
-      //     ...previousValues,
-      //     exerciseListFromFirestore: data,
-      //   }));
-      // }
     }
   }
   options = exerciseList.map((option: any) => {
@@ -209,8 +204,6 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
   render() {
     const data =
       this.props.exercisesState && this.props.exercisesState.exercisesState;
-    console.log("data lskdflsjdflsjldfjskldjflksjdlfj");
-    console.log(data);
 
     const options = data.map((option: any) => {
       const firstLetter = option.title[0].toUpperCase();
@@ -233,15 +226,6 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
             <p className="form__error">{this.state.error}</p>
           )}
           <ImageUpload setFileUrl={this.setFileUrl} exForm={this} />
-          {/* {this.state.imageUrl && (
-            <div>
-              <img
-                src={this.state.imageUrl}
-                alt={this.state.imageUrl}
-                style={{ width: "100%", marginTop: "1rem" }}
-              />
-            </div>
-          )} */}
           {this.state.fileUrl ? (
             <div>
               <img
@@ -371,13 +355,27 @@ class WorkoutForm extends React.Component<WorkoutFormProps, WorkoutFormState> {
               <TextField {...params} label="Exercise bank" variant="outlined" />
             )}
           />
-          {Object.values(this.state.exerciseitems).map((activity: any, i) => {
-            return (
-              <div style={{ paddingTop: "0.5rem", color: "#ddd" }} key={i}>
-                <span>{activity.name}</span>
-              </div>
-            );
-          })}
+          <List>
+            {Object.values(this.state.exerciseitems).map((activity: any, i) => {
+              return (
+                <ListItem
+                  key={i}
+                  style={{
+                    backgroundColor: "#393b6b",
+                    marginTop: "6px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  <ListItemText primary={activity.name} />
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+          </List>
           <Button
             style={{ marginTop: "20px", display: "flex", marginLeft: "auto" }}
             variant="contained"

@@ -40,13 +40,11 @@ const ExerciseDetail = (props: any) => {
   React.useEffect(() => {
     if (context.exercises) {
       const allExerc = context.exercises;
+
       // const exer = allExerc.find((exercise: any) => exercise.id === id);
       const exer = allExerc.find((exercise: any) => {
-        console.log(exercise);
         return exercise.id === id;
       });
-      console.log("exere");
-      console.log(id);
       setExercise(exer);
       setTitle(exer.title);
       setDescription(exer.description);

@@ -83,8 +83,6 @@ function ProfileContentItem1({
   React.useEffect(() => {
     fetchUserStartAsync(id);
   }, [fetchUserStartAsync]);
-  console.log(todaysactivity);
-  console.log(allActivities);
   let type: string = "";
   if (todaysactivity) {
     switch (todaysactivity.type) {
