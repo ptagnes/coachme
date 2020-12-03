@@ -16,8 +16,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   fixedBg: {
-    backgroundImage:
-      "url(https://firebasestorage.googleapis.com/v0/b/ptagnes.appspot.com/o/agnespt.jpg?alt=media&token=bbaf9c93-9631-4dcf-96ae-bdcd579ac3c4)",
+    backgroundImage: `url(${process.env.PUBLIC_URL}/images/coachmebg.jpg)`,
     backgroundSize: "cover",
     opacity: "0.1",
     position: "fixed",

@@ -53,6 +53,7 @@ const Exercise = ({
 }) => {
   const classes = useStyles();
   const { currentUser } = React.useContext(AuthContext);
+  //TODO fix setsReps
   return (
     <Paper className={classes.paper}>
       <Grid
@@ -83,11 +84,12 @@ const Exercise = ({
               }}
             >
               <span>{title}</span>
-              {setsReps && (
+              {/* {setsReps && (
                 <span style={{ marginLeft: "1rem", color: "#878ad8" }}>
                   {setsReps}
                 </span>
-              )}
+              )} */}
+              <span style={{ marginLeft: "1rem", color: "#878ad8" }}>3x10</span>
             </Link>
             {currentUser && currentUser.uid === "2xT2T9CqfjgU5TQGn06VL920Tkp2" && (
               <IconButton aria-label="edit" style={{ padding: "7px" }}>
