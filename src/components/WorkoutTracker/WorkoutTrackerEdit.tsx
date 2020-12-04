@@ -17,7 +17,6 @@ function WorkoutTrackerEdit() {
   const handleClick = () => {
     history.goBack();
   };
-
   return (
     <div className="bp">
       <Button

@@ -33,9 +33,15 @@ const CalendarBody = (props: any) => {
       day: d,
       month: currentMonthNum(),
     };
-
     let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
-    let actualDate = `2020-${selectedDay.month + 1}-${selectedDay.day}`;
+    const dy = selectedDay.day;
+    let day: string;
+    if (dy >= 10) {
+      day = dy;
+    } else {
+      day = `0${dy}`;
+    }
+    let actualDate = `2020-${selectedDay.month + 1}-${day}`; //was selectedDay.day
 
     const filterByQueryDate = activities.filter(function (item: any) {
       return item.date === queryDate;

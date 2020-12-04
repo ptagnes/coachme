@@ -82,14 +82,15 @@ function AddActivity(props: any) {
       },
     });
   };
-
+  console.log(actualDate);
   const calEvent = {
     name: activity.name,
     details: "Workout",
     location: "Friskis",
-    startsAt: "2018-12-06T17:00:00-05:00",
-    endsAt: "2018-12-06T18:00:00-05:00",
+    startsAt: actualDate,
+    endsAt: actualDate,
   };
+  //startsAt: "2018-12-06T17:00:00-05:00",
   // endsAt: calDate.toISOString(),
 
   return (
