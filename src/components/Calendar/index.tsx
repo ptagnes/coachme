@@ -23,7 +23,6 @@ function Calendar(props: any) {
   const [dateObject, setdateObject] = useState(moment());
   const [showMonthTable, setShowMonthTable] = useState(false);
   const [selectedDay, setSelected] = useState(defaultSelectedDay);
-  // Later add hook for active days from database
   /*** CALENDAR HEAD ***/
   const allMonths = moment.months();
   const currentMonth = () => dateObject.format("MMMM");
@@ -42,21 +41,19 @@ function Calendar(props: any) {
       day,
       month: currentMonthNum(),
     });
-    // Later refresh data
   };
   const currentMonthNum = () => dateObject.month();
   const daysInMonth = () => dateObject.daysInMonth();
   const currentDay = () => dateObject.format("D");
   const actualMonth = () => moment().format("MMMM");
   const firstDayOfMonth = () => moment(dateObject).startOf("month").format("d");
-  /*** ADDING AN ACTIVITY ***/
+  /*** ADDING NOTIFICATIONS ***/
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState<string>("");
   /*** ACTIVITY LIST ***/
   const [activities, setActivities] = useState<{}[]>([]);
   const [activeDays, setActiveDays] = useState([]);
   const { currentUser } = React.useContext(AuthContext);
-  // let queryDate = `${selectedDay.day}-${selectedDay.month}-2020`; //${selectedDay.year}
   const [uid, setUid] = useState<string>();
 
   useEffect(() => {
@@ -69,7 +66,6 @@ function Calendar(props: any) {
       if (userData.activities) {
         setActivities(userData.activities);
         retrieveActiveDays(userData.activities);
-
         //TODO clear params if no action was done
         //@ts-ignore
         const action = params ? params.action : "";

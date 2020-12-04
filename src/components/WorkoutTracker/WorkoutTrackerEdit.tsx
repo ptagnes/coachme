@@ -6,19 +6,18 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
 
-function WorkoutTrackerEdit(props: any) {
+function WorkoutTrackerEdit() {
   const location = useLocation();
   let history = useHistory();
-  // const params = location.state;
   //@ts-ignore
-  const { action, date, activity } = location.state;
+  const { action, actualDate, date, activity } = location.state;
   //@ts-ignore
   const { id } = location.state;
   const activityKey = activity[0] ? activity[0].id : "";
   const handleClick = () => {
     history.goBack();
   };
-  //TODO 1 update delay fix
+
   return (
     <div className="bp">
       <Button
@@ -31,19 +30,24 @@ function WorkoutTrackerEdit(props: any) {
 
       {action === "edit" ? (
         <>
-          <h3>Edit activity on {date}</h3>
+          <h3>Edit activity on {activity[0].actualDate}</h3>
           <EditActivity
             activity={activity[0]}
             activityKey={activityKey}
             activities={activity}
             selectedDay={date}
+            actualDate={actualDate}
             id={id}
           />
         </>
       ) : (
         <>
-          <h3>Add activity on {date}</h3>
-          <AddActivity selectedDay={date} queryDate={date} />
+          <h3>Add activity on {actualDate}</h3>
+          <AddActivity
+            selectedDay={date}
+            queryDate={date}
+            actualDate={actualDate}
+          />
         </>
       )}
     </div>

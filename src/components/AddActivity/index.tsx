@@ -11,9 +11,8 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import { addUserActivity } from "../../redux/actions/usersActions";
 import { AuthContext } from "../../firebase/Authentication";
-// import { fetchUserStartAsync } from "../../redux/actions/usersActions";
 import { useHistory } from "react-router";
-// import AddEventToGoogleCalendar from "../WorkoutTracker/AddEventToGoogleCalendar";
+import AddEventToGoogleCalendar from "../WorkoutTracker/AddEventToGoogleCalendar";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 function AddActivity(props: any) {
   const classes = useStyles();
   let history = useHistory();
-  const { queryDate, addUserActivity, userData } = props;
+  const { queryDate, actualDate, addUserActivity, userData } = props;
   const { currentUser } = useContext(AuthContext);
   let uid: string;
   if (currentUser) {
@@ -37,11 +36,11 @@ function AddActivity(props: any) {
     type: 1,
     duration: 60,
     date: queryDate,
+    actualDate: actualDate,
     id: "nid" + Math.random().toString(36).substr(2, 9),
   };
   const [activity, setActivity] = useState(defaultActivity);
   const [activitiesState, setActivitiesState] = useState<{}[]>([]);
-
   useEffect(() => {
     if (currentUser) {
       const user = userData.users;
@@ -72,7 +71,6 @@ function AddActivity(props: any) {
     }
   };
   const isValid = activity.name === "";
-
   const handleSubmit = () => {
     const mergedActivities = [...activitiesState, activity];
     addUserActivity(uid, mergedActivities);
@@ -85,17 +83,14 @@ function AddActivity(props: any) {
     });
   };
 
-  // let calDate = new Date(activity.date);
-  // let calEvent: {};
-  // // if(calDate.toISOString())
-  // console.log(new Date(activity.date));
-  // calEvent = {
-  //   name: activity.name,
-  //   details: "Workout",
-  //   location: "Friskis",
-  //   // startsAt: calDate.toISOString(),
-  //   // endsAt: calDate.toISOString(),
-  // };
+  const calEvent = {
+    name: activity.name,
+    details: "Workout",
+    location: "Friskis",
+    startsAt: "2018-12-06T17:00:00-05:00",
+    endsAt: "2018-12-06T18:00:00-05:00",
+  };
+  // endsAt: calDate.toISOString(),
 
   return (
     <form noValidate onSubmit={(e) => e.preventDefault()}>
@@ -145,7 +140,7 @@ function AddActivity(props: any) {
         />
       </FormControl>
 
-      {/* <AddEventToGoogleCalendar event={calEvent} /> */}
+      <AddEventToGoogleCalendar event={calEvent} />
 
       <Button
         type="submit"
@@ -166,6 +161,5 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addUserActivity: (id: string, activities: any) =>
     dispatch<any>(addUserActivity(id, activities)),
-  // fetchUserStartAsync: (id: string) => dispatch<any>(fetchUserStartAsync(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddActivity);
